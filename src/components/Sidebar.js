@@ -4,6 +4,8 @@ import {
   TbLayoutSidebarLeftExpand,
   TbLayoutSidebarRightExpand,
 } from "react-icons/tb";
+import Button from "@mui/material/Button";
+import Add from "@mui/icons-material/Add";
 
 function Sidebar() {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -12,22 +14,28 @@ function Sidebar() {
   };
 
   return (
-    <div className={isExpanded ? styles.side_bar_expanded : styles.side_bar}>
-      menu1
+    <aside className={isExpanded ? styles.side_bar_expanded : styles.side_bar}>
+      <Button
+        variant="outlined"
+        startIcon={<Add />}
+        sx={{ m: 1, color: "white", borderColor: "gray" }}
+      >
+        New Chat
+      </Button>
       {isExpanded ? (
         <TbLayoutSidebarRightExpand
           className={styles.expand_button}
           onClick={onClick}
-          size={30}
+          size={50}
         />
       ) : (
         <TbLayoutSidebarLeftExpand
           className={styles.expand_button}
           onClick={onClick}
-          size={30}
+          size={50}
         />
       )}
-    </div>
+    </aside>
   );
 }
 export default Sidebar;
