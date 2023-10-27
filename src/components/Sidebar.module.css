@@ -1,0 +1,26 @@
+.side_bar {
+  position: fixed;
+  background-color: black;
+  width: 20%;
+  min-height: 90vh;
+  margin-top: calc((100vh - 90vh) / 2);
+  color: white;
+  transition: width 0.5s ease-in-out;
+}
+
+.side_bar_expanded {
+  position: fixed;
+  background-color: black;
+  width: 40%;
+  min-height: 90vh;
+  margin-top: calc((100vh - 90vh) / 2);
+  color: white;
+  transition: width 0.5s ease-in-out;
+}
+
+.expand_button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-top: 0;
+}
