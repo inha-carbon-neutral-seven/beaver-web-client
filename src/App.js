@@ -1,6 +1,5 @@
 import Sidebar from "./components/side/Sidebar";
 import styles from "./App.module.css";
-import MainChat from "./components/main/MainChat";
 import { useEffect, useState } from "react";
 
 function App() {
