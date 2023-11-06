@@ -14,30 +14,40 @@ function Sidebar() {
   };
 
   return (
-    <aside className={isExpanded ? styles.side_bar_expanded : styles.side_bar}>
-      <div className={styles.top_container}>
-        <div className={styles.new_chat_button_container}>
-          <NewChatButton />
+    <div>
+      <aside className={isExpanded ? styles.side_bar_closed : styles.side_bar}>
+        <div className={styles.top_container}>
+          <div className={styles.new_chat_button_container}>
+            <NewChatButton isShow={isExpanded} />
+          </div>
+
+          <div className={styles.expand_button_container}>
+            {isExpanded ? (
+              <TbLayoutSidebarLeftExpand
+                className={styles.expand_button}
+                onClick={onClick}
+                size={40}
+              />
+            ) : (
+              <TbLayoutSidebarRightExpand
+                className={styles.expand_button}
+                onClick={onClick}
+                size={40}
+              />
+            )}
+          </div>
         </div>
 
-        <div className={styles.expand_button_container}>
-          {isExpanded ? (
-            <TbLayoutSidebarRightExpand
-              className={styles.expand_button}
-              onClick={onClick}
-              size={40}
-            />
-          ) : (
-            <TbLayoutSidebarLeftExpand
-              className={styles.expand_button}
-              onClick={onClick}
-              size={40}
-            />
-          )}
-        </div>
-      </div>
-      <div className="chattings"></div>
-    </aside>
+        <div className="chattings"></div>
+      </aside>
+      {isExpanded ? (
+        <TbLayoutSidebarLeftExpand
+          className={styles.expand_button2}
+          onClick={onClick}
+          size={40}
+        />
+      ) : null}
+    </div>
   );
 }
 export default Sidebar;

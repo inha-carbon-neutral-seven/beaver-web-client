@@ -10,11 +10,19 @@ const newChatButtonStyles = {
   transition: "width 0.5s ease-in-out",
 };
 
-function NewChatButton() {
+function NewChatButton({ isShow }) {
   return (
-    <Button variant="outlined" startIcon={<Add />} style={newChatButtonStyles}>
-      New Chat
-    </Button>
+    <div>
+      {isShow ? null : (
+        <Button
+          variant="outlined"
+          startIcon={<Add />}
+          style={newChatButtonStyles}
+        >
+          New Chat
+        </Button>
+      )}
+    </div>
   );
 }
 
