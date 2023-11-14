@@ -2,6 +2,7 @@ import Sidebar from "./components/left-side/Sidebar";
 import ChatScreen from "./components/main/ChatScreen";
 import Header from "./components/top-side/Header";
 import Data from "./components/details/Data";
+import Dashboard from "./components/dash/Dashboard"
 import {
   BrowserRouter as Router ,
   Routes,
@@ -13,18 +14,10 @@ function App() {
   return (
     <Router>
       <Header />
+      <Sidebar />
       <Routes>
-        <Route path="/chat">
-          {/* <div className="w-full h-screen bg-gray-50 dark:bg-gray-900 flex flex-col"> 
-            <div className="flex flex-grow mt-16">
-              <Sidebar />
-              <ChatScreen />
-            </div>
-          </div> */}
-        </Route>
-        <Route path="/dashboard">
-            
-        </Route>
+        <Route path="/" element={<ChatScreen/>}/>
+        {/* <Route path="/dashboard" element={<Dashboard/>}/> */}
         <Route path="/data" element={<Data />} />
 
       </Routes>
