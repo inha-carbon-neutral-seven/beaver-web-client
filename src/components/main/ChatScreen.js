@@ -1,6 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
 import React, { useEffect, useState } from "react";
-import styles from "./ChatScreen.module.css";
 import Loader from "./Loader";
 import Button from "@mui/material/Button";
 
@@ -34,30 +33,40 @@ function ChatScreen() {
       dispatch({ type: "SET_AIANSWER", payload: "" });
 
       try {
-        // const response = fetch("http://highcloud100.duckdns.org:10100/", {
-        //   method: "POST",
-        //   headers: {
-        //     "Content-Type": "application/json",
-        //   },
-        //   body: JSON.stringify({
-        //     message: sentMessage,
-        //   }),
-        // })
-        //   .then((res) => res.json())
-        //   .then((res) => {
-        //     console.log("서버 응답:", res);
-        //     return res;
-        //   });
         const response = await fetch(
-          "http://13.124.82.89:55461/query?query=hello"
-        );
+          "http://highcloud100.duckdns.org:10100/generate",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              message: sentMessage,
+            }),
+          }
+        )
+          .then((res) => res.json())
+          .then((res) => {
+            dispatch({ type: "SET_AIANSWER", payload: res.message });
+            dispatch({
+              type: "UPDATE_APP_STATE",
+              payload: "response_received",
+            });
+            dispatch({ type: "UPDATE_APP_STATE", payload: "message_waiting" });
+            return res;
+          });
         dispatch({ type: "UPDATE_APP_STATE", payload: "response_wait" });
 
-        if (response.ok) {
-          dispatch({ type: "SET_AIANSWER", payload: `답변 ${message}` });
-          dispatch({ type: "UPDATE_APP_STATE", payload: "response_received" });
-          dispatch({ type: "UPDATE_APP_STATE", payload: "message_waiting" });
-        }
+        // const response = await fetch(
+        //   "http://13.124.82.89:55461/query?query=hello"
+        // );
+        // dispatch({ type: "UPDATE_APP_STATE", payload: "response_wait" });
+
+        // if (response.ok) {
+        //   dispatch({ type: "SET_AIANSWER", payload: `답변 ${message}` });
+        //   dispatch({ type: "UPDATE_APP_STATE", payload: "response_received" });
+        //   dispatch({ type: "UPDATE_APP_STATE", payload: "message_waiting" });
+        // }
       } catch (error) {
         console.log("에러 발생", error);
       } finally {
@@ -110,18 +119,25 @@ function ChatScreen() {
     try {
       const formData = new FormData();
       formData.append("file", selectedFile);
+      formData.append("description", dataName);
 
       dispatch({ type: "UPDATE_APP_STATE", payload: "response_waiting" });
 
       // 서버로 FormData 전송, 응답 요청
-      const response = await fetch("http://13.124.82.89:55461/upload", {
-        method: "POST",
-        body: formData,
-      })
+      //const response = await fetch("http://13.124.82.89:55461/upload", {
+      const response = await fetch(
+        "http://highcloud100.duckdns.org:10100/upload",
+        {
+          method: "POST",
+          body: formData,
+        }
+      )
         .then((res) => {
+          console.log(res.body);
           // 응답을 받으면, 분석 요청
           dispatch({ type: "UPDATE_APP_STATE", payload: "analyzing" });
-          return fetch("http://13.124.82.89:55461/embed");
+          //return fetch("http://13.124.82.89:55461/embed");
+          return fetch("http://highcloud100.duckdns.org:10100/embed");
         })
         .then((res) => {
           // 분석이 끝났다는 요청을 받는다.
@@ -154,7 +170,6 @@ function ChatScreen() {
 
   return (
     <div className="flex-grow flex flex-col bg-white dark:bg-gray-800 p-4 ">
-      {/* <div className={styles.chat}> */}
       {isConnected && (
         <div>
           {currentState === "init" && (
@@ -230,13 +245,11 @@ function ChatScreen() {
         <div className="border-t border-gray-200 dark:border-gray-700 mt-2 pt-2">
           <div className="flex items-center space-x-2">
             <form
-              //className={styles.user_input_container}
               className="flex flex-grow"
               onSubmit={messageHandler}
               disabled={loading}
             >
               <input
-                //className={styles.user_input}
                 className="flex-grow rounded-lg w-max px-3 py-2 border border-gray-300 dark:border-gray-700 dark:bg-gray-800 dark:text-white"
                 placeholder="Type your message"
                 type="text"

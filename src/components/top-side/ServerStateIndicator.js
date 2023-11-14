@@ -11,11 +11,19 @@ const ServerStatusIndicator = () => {
     const checkServerConnection = async () => {
       try {
         // 서버에 핑 보내기
+        // const response = await fetch(
+        //   "http://13.124.82.89:55461/query?query=hello"
+        // );
         const response = await fetch(
-          "http://13.124.82.89:55461/query?query=hello"
+          "http://highcloud100.duckdns.org:10100/ping"
         );
 
-        if (response.ok) {
+        // response.status === true : 웹, 모델 살아있음
+        // response.status === false : 웹은 살고, 모델 죽음
+        // 에러 뭐 404 뭐 그런거 : 웹도 뒤짐.
+        console.log("현재 상태", response.status);
+        // if (response.ok) {
+        if (response.status) {
           // 서버로부터 응답이 오면 server state를 true로 변경
           dispatch({ type: "UPDATE_SERVER_STATE", payload: true });
         } else {
