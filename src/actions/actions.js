@@ -35,9 +35,9 @@ export function addToChatLog(chatLog) {
   };
 }
 
-export function setIsExpanded(isExpanded) {
+export function updateAppState(newState) {
   return {
-    type: actionTypes.SET_ISEXPANDED,
-    payload: isExpanded,
+    type: "UPDATE_APP_STATE",
+    payload: newState,
   };
 }

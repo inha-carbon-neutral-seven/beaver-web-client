@@ -1,38 +1,23 @@
-import { useSelector, useDispatch } from "react-redux";
-
-import styles from "./Sidebar.module.css";
-
-import NewChatButton from "./NewChatButton";
-import { TbLayoutSidebarRightExpand } from "react-icons/tb";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 function Sidebar() {
-  const isExpanded = useSelector((state) => state.isExpanded);
-  const dispatch = useDispatch();
-  const onClick = () => {
-    dispatch({ type: "SET_ISEXPANDED", payload: !isExpanded });
-  };
-  // const [isExpanded, setIsExpanded] = useState(false);
-  // const onClick = () => {
-  //   setIsExpanded(!isExpanded);
-  // };
+  const anaylizedFileDataList = useSelector(
+    (state) => state.chatScreen.anaylizedFileDataList
+  );
+  useEffect(() => {
+    console.log(anaylizedFileDataList);
+  }, [anaylizedFileDataList]);
 
   return (
-    <aside className={isExpanded ? styles.side_bar_closed : styles.side_bar}>
-      <div className={styles.top_container}>
-        <div className={styles.new_chat_button_container}>
-          <NewChatButton isShow={isExpanded} />
+    <aside className="w-64 bg-gray-200 dark:bg-gray-800 p-4 space-y-2">
+      {anaylizedFileDataList.map((anaylizedFileData, index) => (
+        <div key={index}>
+          <p>파일명: {anaylizedFileData.anaylizedFileData_name}</p>
+          <p>파일크기: {`${anaylizedFileData.anaylizedFileData_size}byte`}</p>
+          <p>사용자 지정 데이터 이름 : {anaylizedFileData.userCustomName}</p>
         </div>
-
-        <div className={styles.expand_button_container}>
-          {isExpanded ? null : (
-            <TbLayoutSidebarRightExpand
-              className={styles.expand_button}
-              onClick={onClick}
-              size={40}
-            />
-          )}
-        </div>
-      </div>
+      ))}
     </aside>
   );
 }

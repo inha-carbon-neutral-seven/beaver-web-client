@@ -1,15 +1,19 @@
-//import { combineReducers } from "redux";
+// 저장할 변수가 필요해서 만듬
+// 주로 chatscreen.js에서 사용됨
+// 다른데서 사용할수도 있고
 
 const initialState = {
   loading: false,
   message: "",
   sentMessage: "",
-  aianswer: "",
+  aiAnswer: "",
   chatlog: [],
-  isExpanded: false,
+  selectedFile: null,
+  selectedFileName: "",
+  anaylizedFileDataList: [],
 };
 
-function rootReducer(state = initialState, action) {
+function chatScreenReducer(state = initialState, action) {
   switch (action.type) {
     case "SET_LOADING":
       return {
@@ -39,14 +43,26 @@ function rootReducer(state = initialState, action) {
           { user: action.payload.user, message: action.payload.message },
         ],
       };
-    case "SET_ISEXPANDED":
+    case "SET_SELECTEDFILE":
       return {
         ...state,
-        isExpanded: action.payload,
+        selectedFile: action.payload,
+      };
+    case "SET_SELECTEDFILENAME":
+      return {
+        ...state,
+        selectedFileName: action.payload,
+      };
+    case "ADD_ANALYZED_FILE_DATA":
+      return {
+        ...state,
+        anaylizedFileDataList: [
+          ...state.anaylizedFileDataList,
+          action.payload.anaylizedFileData,
+        ],
       };
     default:
       return state;
   }
 }
-
-export default rootReducer;
+export default chatScreenReducer;

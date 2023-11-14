@@ -1,5 +1,5 @@
 .header {
-  width: 80%;
+  width: 100%;
   height: 10%;
   display: block;
   z-index: 6;
@@ -22,8 +22,10 @@
 }
 
 .tmp {
+  display: inline;
   text-align: center;
 }
+
 .expand_button2 {
   position: fixed;
   display: inline-block;
