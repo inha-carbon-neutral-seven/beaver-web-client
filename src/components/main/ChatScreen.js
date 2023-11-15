@@ -34,7 +34,7 @@ function ChatScreen() {
 
       try {
         const response = await fetch(
-          "http://highcloud100.duckdns.org:10100/generate",
+          "http://beaver7.duckdns.org:10100/generate",
           {
             method: "POST",
             headers: {
@@ -126,7 +126,7 @@ function ChatScreen() {
       // 서버로 FormData 전송, 응답 요청
       //const response = await fetch("http://13.124.82.89:55461/upload", {
       const response = await fetch(
-        "http://highcloud100.duckdns.org:10100/upload",
+        "http://beaver7.duckdns.org:10100/upload",
         {
           method: "POST",
           body: formData,
@@ -137,7 +137,7 @@ function ChatScreen() {
           // 응답을 받으면, 분석 요청
           dispatch({ type: "UPDATE_APP_STATE", payload: "analyzing" });
           //return fetch("http://13.124.82.89:55461/embed");
-          return fetch("http://highcloud100.duckdns.org:10100/embed");
+          return fetch("http://beaver7.duckdns.org:10100/embed");
         })
         .then((res) => {
           // 분석이 끝났다는 요청을 받는다.
