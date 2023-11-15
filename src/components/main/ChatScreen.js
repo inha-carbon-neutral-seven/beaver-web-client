@@ -41,7 +41,7 @@ function ChatScreen() {
               "Content-Type": "application/json",
             },
             body: JSON.stringify({
-              message: sentMessage,
+              message: message,
             }),
           }
         )
@@ -230,11 +230,10 @@ function ChatScreen() {
             {chatlog.map((message, index) => (
               <li
                 key={index}
-                className={`p-3 m-5 rounded-md ${
-                  message.user === "user"
-                    ? "bg-blue-200 text-right"
-                    : "bg-gray-200 text-left"
-                }`}
+                className={`p-3 m-5 rounded-md ${message.user === "user"
+                  ? "bg-blue-200 text-right"
+                  : "bg-gray-200 text-left"
+                  }`}
               >
                 {message.message}
               </li>
