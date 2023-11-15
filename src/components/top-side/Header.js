@@ -1,14 +1,14 @@
 import ServerStatusIndicator from "./ServerStateIndicator";
 import Button from "@mui/material/Button";
 import beaver from "../../image/logo.jpg";
-import {useNavigate } from 'react-router-dom';
+// import {useNavigate } from 'react-router-dom';
 
 function Header() {
-  let navigate = useNavigate ();
+  // let navigate = useNavigate ();
 
-  function handleClick(page) {
-    navigate(page); 
-  }
+  // function handleClick(page) {
+  //   navigate(page); 
+  // }
   return (
     //<div className={styles.header}>
     <div className="h-16 bg-indigo-500 flex justify-between items-center px-4 fixed w-full">
@@ -22,13 +22,13 @@ function Header() {
           </a>
         </div>
 
-        <Button className="text-white btn" variant="ghost" onClick={()=>handleClick('/')}>
+        <Button className="text-white btn" variant="ghost">
           대화하기
         </Button>
-        <Button className="text-white btn" variant="ghost" onClick={()=>handleClick('/dashboard')}>
+        <Button className="text-white btn" variant="ghost">
           대시보드
         </Button>
-        <Button className="text-white btn" variant="ghost" onClick={()=>handleClick('/data')}>
+        <Button className="text-white btn" variant="ghost" >
           데이터
         </Button>
       </div>

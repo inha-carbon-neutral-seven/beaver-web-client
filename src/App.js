@@ -3,25 +3,22 @@ import ChatScreen from "./components/main/ChatScreen";
 import Header from "./components/top-side/Header";
 import Data from "./components/details/Data";
 import Dashboard from "./components/dash/Dashboard"
-import {
-  BrowserRouter as Router ,
-  Routes,
-  Route,
-  Link,
-} from 'react-router-dom';
+// import {
+//   BrowserRouter as Router ,
+//   Routes,
+//   Route,
+//   Link,
+// } from 'react-router-dom';
 
 function App() {
   return (
-    <Router>
+    <div className="w-full h-screen bg-gray-50 dark:bg-gray-900 flex flex-col">
       <Header />
-      <Sidebar />
-      <Routes>
-        <Route path="/" element={<ChatScreen/>}/>
-        {/* <Route path="/dashboard" element={<Dashboard/>}/> */}
-        <Route path="/data" element={<Data />} />
-
-      </Routes>
-    </Router>
+      <div className="flex flex-grow mt-16">
+        <Sidebar />
+        <ChatScreen />
+      </div>
+    </div>
   );
 }
 

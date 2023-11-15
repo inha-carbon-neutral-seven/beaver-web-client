@@ -15,7 +15,7 @@ const ServerStatusIndicator = () => {
         //   "http://13.124.82.89:55461/query?query=hello"
         // );
         const response = await fetch(
-          "http://highcloud100.duckdns.org:10100/ping"
+          "http://beaver7.duckdns.org:10100/ping"
         );
 
         // response.status === true : 웹, 모델 살아있음

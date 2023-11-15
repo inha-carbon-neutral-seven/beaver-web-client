@@ -169,113 +169,108 @@ function ChatScreen() {
   };
 
   return (
-    <div className="w-full h-screen bg-gray-50 dark:bg-gray-900 flex flex-col">
-      <div className="flex flex-grow mt-16">
-        <div className="flex-grow flex flex-col bg-white dark:bg-gray-800 p-4 ">
-        {isConnected && (
-          <div>
-            {currentState === "init" && (
-              <div>
-                <p>파일을 업로드하려면 버튼을 누르세요</p>
-                <input
-                  type="file"
-                  onChange={handleFileChange}
-                  ref={fileInput}
-                  style={{ display: "none" }}
-                />
-                <button
-                  className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
-                  onClick={openFileInput}
-                >
-                  업로드
-                </button>
-              </div>
-            )}
+    <div className="flex-grow flex flex-col bg-white dark:bg-gray-800 p-4 ">
+      {isConnected && (
+        <div>
+          {currentState === "init" && (
+            <div>
+              <p>파일을 업로드하려면 버튼을 누르세요</p>
+              <input
+                type="file"
+                onChange={handleFileChange}
+                ref={fileInput}
+                style={{ display: "none" }}
+              />
+              <button
+                className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+                onClick={openFileInput}
+              >
+                업로드
+              </button>
+            </div>
+          )}
 
-            {currentState === "file_uploading" && (
-              <div>
-                <p>파일명: {selectedFile.name}</p>
-                <p>파일크기: {`${selectedFile.size}byte`}</p>
-                <p>데이터의 이름을 정해주세요.</p>
-                <form
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                    dispatch({ type: "UPDATE_APP_STATE", payload: "file_sent" });
-                    handleFileUpload();
-                  }}
-                >
-                  <input
-                    className="border border-gray-300 dark:border-gray-700 dark:bg-gray-800 dark:text-white"
-                    type="text"
-                    onChange={(e) => setDataName(e.target.value)}
-                  ></input>
-
-                  <button
-                    className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-0.5 px-0.5 border border-blue-500 hover:border-transparent ml-1 rounded"
-                    type="submit"
-                  >
-                    확인
-                  </button>
-                </form>
-              </div>
-            )}
-          </div>
-        )}
-
-        <Loader currentState={currentState} />
-        {currentState === "analyzed" && <div>파일 분석 완료!</div>}
-
-        <div className="flex-grow flex flex-col bg-white dark:bg-gray-800 p-4">
-          {/* 채팅 메시지 출력 */}
-          <div className="flex-grow overflow-y-auto">
-            <ul className="list-none p-0 m-0">
-              {chatlog.map((message, index) => (
-                <li
-                  key={index}
-                  className={`p-3 m-5 rounded-md ${
-                    message.user === "user"
-                      ? "bg-blue-200 text-right"
-                      : "bg-gray-200 text-left"
-                  }`}
-                >
-                  {message.message}
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="border-t border-gray-200 dark:border-gray-700 mt-2 pt-2">
-            <div className="flex items-center space-x-2">
+          {currentState === "file_uploading" && (
+            <div>
+              <p>파일명: {selectedFile.name}</p>
+              <p>파일크기: {`${selectedFile.size}byte`}</p>
+              <p>데이터의 이름을 정해주세요.</p>
               <form
-                className="flex flex-grow"
-                onSubmit={messageHandler}
-                disabled={loading}
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  dispatch({ type: "UPDATE_APP_STATE", payload: "file_sent" });
+                  handleFileUpload();
+                }}
               >
                 <input
-                  className="flex-grow rounded-lg w-max px-3 py-2 border border-gray-300 dark:border-gray-700 dark:bg-gray-800 dark:text-white"
-                  placeholder="Type your message"
+                  className="border border-gray-300 dark:border-gray-700 dark:bg-gray-800 dark:text-white"
                   type="text"
-                  value={message}
-                  disabled={
-                    !isConnected ||
-                    currentState === "analyzing" ||
-                    currentState === "response_waiting"
-                  }
-                  onChange={(e) =>
-                    dispatch({ type: "SET_MESSAGE", payload: e.target.value })
-                  }
-                />
-                <Button type="submit" variant="outline">
-                  전송
-                </Button>
+                  onChange={(e) => setDataName(e.target.value)}
+                ></input>
+
+                <button
+                  className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-0.5 px-0.5 border border-blue-500 hover:border-transparent ml-1 rounded"
+                  type="submit"
+                >
+                  확인
+                </button>
               </form>
             </div>
+          )}
+        </div>
+      )}
+
+      <Loader currentState={currentState} />
+      {currentState === "analyzed" && <div>파일 분석 완료!</div>}
+
+      <div className="flex-grow flex flex-col bg-white dark:bg-gray-800 p-4">
+        {/* 채팅 메시지 출력 */}
+        <div className="flex-grow overflow-y-auto">
+          <ul className="list-none p-0 m-0">
+            {chatlog.map((message, index) => (
+              <li
+                key={index}
+                className={`p-3 m-5 rounded-md ${
+                  message.user === "user"
+                    ? "bg-blue-200 text-right"
+                    : "bg-gray-200 text-left"
+                }`}
+              >
+                {message.message}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="border-t border-gray-200 dark:border-gray-700 mt-2 pt-2">
+          <div className="flex items-center space-x-2">
+            <form
+              className="flex flex-grow"
+              onSubmit={messageHandler}
+              disabled={loading}
+            >
+              <input
+                className="flex-grow rounded-lg w-max px-3 py-2 border border-gray-300 dark:border-gray-700 dark:bg-gray-800 dark:text-white"
+                placeholder="Type your message"
+                type="text"
+                value={message}
+                disabled={
+                  !isConnected ||
+                  currentState === "analyzing" ||
+                  currentState === "response_waiting"
+                }
+                onChange={(e) =>
+                  dispatch({ type: "SET_MESSAGE", payload: e.target.value })
+                }
+              />
+              <Button type="submit" variant="outline">
+                전송
+              </Button>
+            </form>
           </div>
         </div>
       </div>
-      </div>
-    </div> 
-    
+    </div>
   );
 }
 export default ChatScreen;
