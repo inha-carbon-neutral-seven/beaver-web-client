@@ -5,9 +5,6 @@ function Sidebar() {
   const anaylizedFileDataList = useSelector(
     (state) => state.chatScreen.anaylizedFileDataList
   );
-  useEffect(() => {
-    console.log(anaylizedFileDataList);
-  }, [anaylizedFileDataList]);
 
   return (
     <aside className="w-64 bg-gray-200 dark:bg-gray-800 p-4 space-y-2">
