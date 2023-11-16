@@ -1,0 +1,30 @@
+.frame{
+    padding-bottom: 24px;
+    border-bottom: 1px solid;
+}
+.table{
+    position: relative;
+    overflow-x: hidden;
+    margin: 16px 0px;
+}
+left{
+    flex: 1 1 auto;
+    min-width: 0px;
+}
+tableheader{
+    display: flex;
+    flex: 0 0 auto;
+    -webkit-box-align: center;
+    align-items: center;
+    padding: 24px;
+}
+tbody{
+    display: flex;
+    width: 100%;
+    border: 0px solid rgb(218, 220, 224);
+    border-radius: 8px;
+
+}
+div{
+    display: block;
+}
