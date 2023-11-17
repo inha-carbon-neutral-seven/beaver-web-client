@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useSelector } from "react-redux";
 
 function Sidebar() {
@@ -7,7 +6,7 @@ function Sidebar() {
   );
 
   return (
-    <aside className="w-64 bg-gray-200 dark:bg-gray-800 p-4 space-y-2">
+    <aside className="w-64 bg-gray-200 dark:bg-gray-800 p-4 space-y-2 flex-shrink-0">
       {anaylizedFileDataList.map((anaylizedFileData, index) => (
         <div key={index}>
           <p>파일명: {anaylizedFileData.anaylizedFileData_name}</p>

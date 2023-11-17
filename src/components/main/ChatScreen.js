@@ -57,16 +57,10 @@ function ChatScreen() {
           });
         dispatch({ type: "UPDATE_APP_STATE", payload: "response_wait" });
 
-        // const response = await fetch(
-        //   "http://13.124.82.89:55461/query?query=hello"
-        // );
         // dispatch({ type: "UPDATE_APP_STATE", payload: "response_wait" });
-
-        // if (response.ok) {
-        //   dispatch({ type: "SET_AIANSWER", payload: `답변 ${message}` });
-        //   dispatch({ type: "UPDATE_APP_STATE", payload: "response_received" });
-        //   dispatch({ type: "UPDATE_APP_STATE", payload: "message_waiting" });
-        // }
+        // dispatch({ type: "SET_AIANSWER", payload: `답변 ${message}` });
+        // dispatch({ type: "UPDATE_APP_STATE", payload: "response_received" });
+        // dispatch({ type: "UPDATE_APP_STATE", payload: "message_waiting" });
       } catch (error) {
         console.log("에러 발생", error);
       } finally {
@@ -125,13 +119,10 @@ function ChatScreen() {
 
       // 서버로 FormData 전송, 응답 요청
       //const response = await fetch("http://13.124.82.89:55461/upload", {
-      const response = await fetch(
-        "http://beaver7.duckdns.org:10100/upload",
-        {
-          method: "POST",
-          body: formData,
-        }
-      )
+      const response = await fetch("http://beaver7.duckdns.org:10100/upload", {
+        method: "POST",
+        body: formData,
+      })
         .then((res) => {
           console.log(res.body);
           // 응답을 받으면, 분석 요청
@@ -230,14 +221,20 @@ function ChatScreen() {
             {chatlog.map((message, index) => (
               <li
                 key={index}
-                className={`p-3 m-5 rounded-md ${message.user === "user"
-                  ? "bg-blue-200 text-right"
-                  : "bg-gray-200 text-left"
-                  }`}
+                className={`p-3 m-5 rounded-md max-w-1/3 overflow-hidden ${
+                  message.user === "user"
+                    ? "bg-blue-200 ml-auto"
+                    : "bg-gray-200 ml-0"
+                }`}
               >
                 {message.message}
               </li>
             ))}
+            {loading && (
+              <li className="p-3 m-5 rounded-md max-w-1/3 overflow-hidden bg-gray-200 ml-0">
+                메시지를 생성중입니다...
+              </li>
+            )}
           </ul>
         </div>
 

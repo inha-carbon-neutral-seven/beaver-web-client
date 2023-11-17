@@ -2,7 +2,7 @@ import Sidebar from "./components/left-side/Sidebar";
 import ChatScreen from "./components/main/ChatScreen";
 import Header from "./components/top-side/Header";
 import Data from "./components/details/Data";
-import Dashboard from "./components/dash/Dashboard"
+import Dashboard from "./components/dash/Dashboard";
 // import {
 //   BrowserRouter as Router ,
 //   Routes,
@@ -21,6 +21,5 @@ function App() {
     </div>
   );
 }
-
 
 export default App;
