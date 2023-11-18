@@ -3,12 +3,10 @@ import Button from "@mui/material/Button";
 import beaver from "../../image/logo.jpg";
 // import {useNavigate } from 'react-router-dom';
 
-function Header() {
-  // let navigate = useNavigate ();
-
-  // function handleClick(page) {
-  //   navigate(page); 
-  // }
+function Header({param}) {
+  const handleButtonClick = (p) => {
+    param(p);
+  };
   return (
     //<div className={styles.header}>
     <div className="h-16 bg-indigo-500 flex justify-between items-center px-4 fixed w-full">
@@ -22,13 +20,13 @@ function Header() {
           </a>
         </div>
 
-        <Button className="text-white btn" variant="ghost">
+        <Button className="text-white btn" variant="ghost" onClick={()=>handleButtonClick(0)}>
           대화하기
         </Button>
-        <Button className="text-white btn" variant="ghost">
+        <Button className="text-white btn" variant="ghost" onClick={()=>handleButtonClick(1)}>
           대시보드
         </Button>
-        <Button className="text-white btn" variant="ghost" >
+        <Button className="text-white btn" variant="ghost" onClick={()=>handleButtonClick(2)}>
           데이터
         </Button>
       </div>
