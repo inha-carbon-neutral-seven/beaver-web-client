@@ -1,7 +1,6 @@
 import ServerStatusIndicator from "./ServerStateIndicator";
 import Button from "@mui/material/Button";
 import beaver from "../../image/logo.jpg";
-// import {useNavigate } from 'react-router-dom';
 
 function Header({param}) {
   const handleButtonClick = (p) => {

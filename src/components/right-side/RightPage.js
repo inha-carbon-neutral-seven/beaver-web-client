@@ -1,17 +1,18 @@
-import Data from "../Data/Data";
-import Dashboard from "../Dash/Dashboard";
-import React from "react";
-import { render } from 'react-dom'
-import App from './App'
+import React, { useState, useEffect } from "react";
 
-function RightPage(){ 
-    return(
-        <Routes>
-            <Route path="/data" element={<Data />} /> {/* Use element prop */}
-            <Route path="/dash" element={<Dashboard />} /> {/* Use element prop */}
-        </Routes>
-    );
+
+function RightPage({ page }) {
     
-}
-export default RightPage()
 
+    return (
+        <div >
+            <div
+                
+            >   
+            </div>
+            
+        </div>
+    );
+}
+
+export default RightPage;

@@ -160,7 +160,7 @@ function ChatScreen() {
   };
 
   return (
-    <div className="flex-grow flex flex-col bg-white dark:bg-gray-800 p-4 ">
+    <div className="flex-grow flex flex-col bg-white dark:bg-gray-800 p-4 h-full">
       {isConnected && (
         <div>
           {currentState === "init" && (
@@ -214,7 +214,7 @@ function ChatScreen() {
       <Loader currentState={currentState} />
       {currentState === "analyzed" && <div>파일 분석 완료!</div>}
 
-      <div className="flex-grow flex flex-col bg-white dark:bg-gray-800 p-4">
+      <div className="flex-grow flex flex-col justify-between">
         {/* 채팅 메시지 출력 */}
         <div className="flex-grow overflow-y-auto">
           <ul className="list-none p-0 m-0">
@@ -238,15 +238,15 @@ function ChatScreen() {
           </ul>
         </div>
 
-        <div className="border-t border-gray-200 dark:border-gray-700 mt-2 pt-2">
-          <div className="flex items-center space-x-2">
+        <div className="border-t border-gray-200 dark:border-gray-700 pt-2">
+          <div className="flex items-center space-x-2 px-4">
             <form
               className="flex flex-grow"
               onSubmit={messageHandler}
               disabled={loading}
             >
               <input
-                className="flex-grow rounded-lg w-max px-3 py-2 border border-gray-300 dark:border-gray-700 dark:bg-gray-800 dark:text-white"
+                className="flex-grow rounded-lg w-full px-3 py-2 border border-gray-300 dark:border-gray-700 dark:bg-gray-800 dark:text-white"
                 placeholder="Type your message"
                 type="text"
                 value={message}
@@ -259,7 +259,7 @@ function ChatScreen() {
                   dispatch({ type: "SET_MESSAGE", payload: e.target.value })
                 }
               />
-              <Button type="submit" variant="outline">
+              <Button type="submit" variant="outline" className="ml-2">
                 전송
               </Button>
             </form>
