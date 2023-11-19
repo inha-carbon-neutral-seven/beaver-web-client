@@ -1,7 +1,6 @@
 import Sidebar from "./components/left-side/Sidebar";
 import ChatScreen from "./components/main/ChatScreen";
 import Header from "./components/top-side/Header";
-import RightPage from "./components/right-side/RightPage"
 import React, {useState} from "react";
 
 function App() {

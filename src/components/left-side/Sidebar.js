@@ -23,7 +23,7 @@ function Sidebar({page}) {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const minWidth = 200;
+  const minWidth = 300;
   const maxWidth = windowWidth * 0.75;
   const handleMouseDown  = (e) => {
       const startWidth = width;
@@ -43,7 +43,7 @@ function Sidebar({page}) {
 
   return (
     <div className="flex"> 
-      <aside className="w-64 bg-gray-200 dark:bg-gray-800 p-4 space-y-2 flex-shrink-0 cursor-col-resize" onMouseDown={handleMouseDown} style={{ width: `${width}px` }}>
+      <aside className="w-64 bg-gray-200 dark:bg-gray-800 p-4 space-y-2 flex-shrink-0 " onMouseDown={handleMouseDown} style={{ width: `${width}px` }}>
         {anaylizedFileDataList.map((anaylizedFileData, index) => (
           <div key={index}>
             <p>파일명: {anaylizedFileData.anaylizedFileData_name}</p>
@@ -56,6 +56,11 @@ function Sidebar({page}) {
             {page === 2 && <Data />}
         </div>
       </aside>
+      <div 
+      className="cursor-col-resize" 
+      style={{ width: '5px', cursor: 'col-resize' }} 
+      onMouseDown={handleMouseDown}
+      ></div>
       </div>
   );
 }
