@@ -9,7 +9,7 @@ function Sidebar({page}) {
   );
   
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const [width, setWidth] = useState(200);
+  const [width, setWidth] = useState(300);
 
   useEffect(() => {
     const handleResize = () => {
