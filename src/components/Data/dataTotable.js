@@ -1,72 +1,49 @@
-import React, { useState } from 'react';
-import Papa from 'papaparse';
-import './Data.css'
+import React from 'react';
+import './DataToTable.css';
 
-function DataToTable() {
-    const [jsonData, setJsonData] = useState([]);
-    const [error, setError] = useState('');
-    const headers = jsonData.length > 0 ? Object.keys(jsonData[0]) : [];
-    const handleFileChange = (e) => {
-        setError('');
-        const file = e.target.files[0];
-        Papa.parse(file, {
-            complete: (result) => {
-                setJsonData(result.data);
-            },
-            header: true,
-            error: (err) => {
-                console.error(err);
-                setError('Error parsing CSV file');
-            }
-        });
-    };
+function DataToTable({ jsonData }) {
+  // Function to generate table headers
+  const renderTableHeader = () => {
+    if (jsonData.length === 0) {
+      return null;
+    }
 
-    const handleJsonInput = (jsonInput) => {
-        try {
-            const json = JSON.parse(jsonInput);
-            setJsonData(Array.isArray(json) ? json : [json]);
-        } catch (e) {
-            console.error(e);
-            console.error("Invalid JSON input");
-        }
-    };
+    let headerKeys = Object.keys(jsonData[0]);
+    return headerKeys.map((key, index) => (
+      <th key={index} className="header">
+        {key.replace('_', ' ')}
+      </th>
+    ));
+  };
 
-    const renderTable = (data) => {
-        if (data.length === 0) return null;
+  // Function to generate table rows
+  const renderTableRows = () => {
+    return jsonData.map((item, index) => (
+      <tr key={index}>
+        {Object.keys(item).map((key) => (
+          <td key={`${index}-${key}`} className="cell">
+            {item[key]}
+          </td>
+        ))}
+      </tr>
+    ));
+  };
 
-        const headers = Object.keys(data[0]);
-        return (
-            <table className='data-table' border="1">
-                <thead>
-                    <tr>
-                        {headers.map((header, index) => (
-                            <th key={index}>{header}</th>
-                        ))}
-                    </tr>
-                </thead>
-                <tbody>
-                    {data.map((row, index) => (
-                        <tr key={index}>
-                            {headers.map((header) => (
-                                <td key={`${header}-${index}`}>{row[header]}</td>
-                            ))}
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-        );
-    };
-
-    return (
-        <div>
-            <label htmlFor='csvInput'>Upload CSV FILE:</label>
-            <input id="csvInput" type="file" accept=".csv" onChange={handleFileChange} />
-            <label htmlFor="jsonInput">Or Enter JSON Data:</label>
-            <textarea id="jsonInput" placeholder="Enter JSON data" onBlur={(e) => handleJsonInput(e.target.value)} />
-            {error && <p className="error-message">{error}</p>}
-            {renderTable(jsonData)}
-        </div>
-    );
+  return (
+    <div className="table-container">
+      <h2>Data Table</h2>
+      {jsonData.length > 0 ? (
+        <table>
+          <thead>
+            <tr>{renderTableHeader()}</tr>
+          </thead>
+          <tbody>{renderTableRows()}</tbody>
+        </table>
+      ) : (
+        <p>No data available to display.</p>
+      )}
+    </div>
+  );
 }
 
 export default DataToTable;
