@@ -1,79 +1,45 @@
-import React, { useState } from "react";
-import Papa from "papaparse";
-import "./Data.css";
+import * as React from 'react';
+import { DataGrid } from '@mui/x-data-grid';
+import './DataToTable.css';
 
-function DataToTable() {
-  const [jsonData, setJsonData] = useState([]);
-  const [error, setError] = useState("");
-  const headers = jsonData.length > 0 ? Object.keys(jsonData[0]) : [];
-  const handleFileChange = (e) => {
-    setError("");
-    const file = e.target.files[0];
-    Papa.parse(file, {
-      complete: (result) => {
-        setJsonData(result.data);
-      },
-      header: true,
-      error: (err) => {
-        console.error(err);
-        setError("Error parsing CSV file");
-      },
-    });
-  };
-
-  const handleJsonInput = (jsonInput) => {
-    try {
-      const json = JSON.parse(jsonInput);
-      setJsonData(Array.isArray(json) ? json : [json]);
-    } catch (e) {
-      console.error(e);
-      console.error("Invalid JSON input");
-    }
-  };
-
-  const renderTable = (data) => {
-    if (data.length === 0) return null;
-
-    const headers = Object.keys(data[0]);
+function DataToTable({ jsonData }) {
+  // Check if jsonData is empty
+  if (jsonData.length === 0) {
     return (
-      <table className="data-table" border="1">
-        <thead>
-          <tr>
-            {headers.map((header, index) => (
-              <th key={index}>{header}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {data.map((row, index) => (
-            <tr key={index}>
-              {headers.map((header) => (
-                <td key={`${header}-${index}`}>{row[header]}</td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <div className="table-container">
+        <p>No data available to display.</p>
+      </div>
     );
-  };
+  }
+
+  // Create columns from jsonData keys
+  const columns = Object.keys(jsonData[0]).map((key) => ({
+    field: key,
+    headerName: key.replace('_', ' '),
+    width: 150,
+  }));
+
+  // Use jsonData as rows
+  const rows = jsonData.map((item, index) => ({
+    id: index,
+    ...item,
+  }));
 
   return (
-    <div>
-      <label htmlFor="csvInput">Upload CSV FILE:</label>
-      <input
-        id="csvInput"
-        type="file"
-        accept=".csv"
-        onChange={handleFileChange}
+    <div className="table-container" style={{ height: 400, width: '100%' }}>
+      <h2>Data Table</h2>
+      <DataGrid
+        rows={rows}
+        columns={columns}
+        pageSize={5}
+        pageSizeOptions={[5, 10]}
+        checkboxSelection
+        initialState={{
+          pagination: {
+            paginationModel: { page: 0, pageSize: 5 },
+          },
+        }}
       />
-      <label htmlFor="jsonInput">Or Enter JSON Data:</label>
-      <textarea
-        id="jsonInput"
-        placeholder="Enter JSON data"
-        onBlur={(e) => handleJsonInput(e.target.value)}
-      />
-      {error && <p className="error-message">{error}</p>}
-      {renderTable(jsonData)}
     </div>
   );
 }
