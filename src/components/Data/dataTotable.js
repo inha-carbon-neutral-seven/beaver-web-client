@@ -1,47 +1,45 @@
-import React from 'react';
+import * as React from 'react';
+import { DataGrid } from '@mui/x-data-grid';
 import './DataToTable.css';
 
 function DataToTable({ jsonData }) {
-  // Function to generate table headers
-  const renderTableHeader = () => {
-    if (jsonData.length === 0) {
-      return null;
-    }
+  // Check if jsonData is empty
+  if (jsonData.length === 0) {
+    return (
+      <div className="table-container">
+        <p>No data available to display.</p>
+      </div>
+    );
+  }
 
-    let headerKeys = Object.keys(jsonData[0]);
-    return headerKeys.map((key, index) => (
-      <th key={index} className="header">
-        {key.replace('_', ' ')}
-      </th>
-    ));
-  };
+  // Create columns from jsonData keys
+  const columns = Object.keys(jsonData[0]).map((key) => ({
+    field: key,
+    headerName: key.replace('_', ' '),
+    width: 150,
+  }));
 
-  // Function to generate table rows
-  const renderTableRows = () => {
-    return jsonData.map((item, index) => (
-      <tr key={index}>
-        {Object.keys(item).map((key) => (
-          <td key={`${index}-${key}`} className="cell">
-            {item[key]}
-          </td>
-        ))}
-      </tr>
-    ));
-  };
+  // Use jsonData as rows
+  const rows = jsonData.map((item, index) => ({
+    id: index,
+    ...item,
+  }));
 
   return (
-    <div className="table-container">
+    <div className="table-container" style={{ height: 400, width: '100%' }}>
       <h2>Data Table</h2>
-      {jsonData.length > 0 ? (
-        <table>
-          <thead>
-            <tr>{renderTableHeader()}</tr>
-          </thead>
-          <tbody>{renderTableRows()}</tbody>
-        </table>
-      ) : (
-        <p>No data available to display.</p>
-      )}
+      <DataGrid
+        rows={rows}
+        columns={columns}
+        pageSize={5}
+        pageSizeOptions={[5, 10]}
+        checkboxSelection
+        initialState={{
+          pagination: {
+            paginationModel: { page: 0, pageSize: 5 },
+          },
+        }}
+      />
     </div>
   );
 }

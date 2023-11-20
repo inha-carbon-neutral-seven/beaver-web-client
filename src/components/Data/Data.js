@@ -38,7 +38,7 @@ function Data() {
         {error && <div className="text-red-500"></div>}
         <div>
           <DataToTable jsonData={jsonData} />
-          {/* <Dashboard jsonData={jsonData} /> */}
+          <Dashboard jsonData={jsonData} />
         </div>
       </div>
     </div>
