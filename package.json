@@ -62,7 +62,7 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "https://ChoiBoKeun1.github.io/react-practice",
+  "homepage": "https://ChoiBoKeun1.github.io/",
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@reduxjs/toolkit": "^1.9.7",

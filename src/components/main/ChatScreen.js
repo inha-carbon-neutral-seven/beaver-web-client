@@ -35,7 +35,7 @@ function ChatScreen() {
 
       try {
         const response = await fetch(
-          "http://beaver7.duckdns.org:44441/generate",
+          "http://beaver7.duckdns.org:10100/generate",
           {
             method: "POST",
             headers: {
@@ -115,7 +115,7 @@ function ChatScreen() {
       dispatch({ type: "UPDATE_APP_STATE", payload: "response_waiting" });
 
       // 서버로 FormData 전송, 응답 요청
-      const response = await fetch("http://beaver7.duckdns.org:44441/upload", {
+      const response = await fetch("http://beaver7.duckdns.org:10100/upload", {
         method: "POST",
         body: formData,
       })
@@ -123,7 +123,7 @@ function ChatScreen() {
           console.log(res.body);
           // 응답을 받으면, 분석 요청
           dispatch({ type: "UPDATE_APP_STATE", payload: "analyzing" });
-          return fetch("http://beaver7.duckdns.org:44441/embed");
+          return fetch("http://beaver7.duckdns.org:10100/embed");
         })
         .then((res) => {
           // 분석이 끝났다는 요청을 받는다.
@@ -136,6 +136,7 @@ function ChatScreen() {
             anaylizedFileData_name: selectedFile.name,
             anaylizedFileData_size: selectedFile.size, // Size in bytes
             userCustomName: dataName, // 사용자가 지정한 데이터 이름도 같이 저장한다.
+            
           };
 
           // 분석 데이터를 리스트에 저장한다.

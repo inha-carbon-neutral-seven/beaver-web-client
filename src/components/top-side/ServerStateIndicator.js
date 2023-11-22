@@ -12,7 +12,7 @@ const ServerStatusIndicator = () => {
       try {
         // console.log("서버 상태 확인 시도");
         // 서버에 핑 보내기
-        const response = await fetch("http://beaver7.duckdns.org:44441/ping");
+        const response = await fetch("http://beaver7.duckdns.org:10100/ping");
 
         // response.status === true : 웹, 모델 살아있음
         // response.status === false : 웹은 살고, 모델 죽음
@@ -35,7 +35,7 @@ const ServerStatusIndicator = () => {
     checkServerConnection();
 
     // 일정 간격으로 서버 상태를 주기적으로 확인
-    const intervalId = setInterval(checkServerConnection, 5000);
+    const intervalId = setInterval(checkServerConnection, 20000);
 
     // 컴포넌트가 언마운트되면 인터벌 클리어
     return () => clearInterval(intervalId);
