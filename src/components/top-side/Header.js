@@ -28,7 +28,7 @@ function Header({ param }) {
         <Button
           className="text-white btn"
           variant="ghost"
-          onClick={() => handleButtonClick(1)}
+          //onClick={() => handleButtonClick(1)}
         >
           대시보드
         </Button>
