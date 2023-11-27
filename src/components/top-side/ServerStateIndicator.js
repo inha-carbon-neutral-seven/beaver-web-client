@@ -1,7 +1,15 @@
+<<<<<<< HEAD
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircle } from '@fortawesome/free-solid-svg-icons';
+=======
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircle } from "@fortawesome/free-solid-svg-icons";
+import { updateServerState } from "../../reducers/serverConnectReducer";
+>>>>>>> 7b66b916a2ae418ee6400016d7c49bbe1cf17afc
 
 const ServerStatusIndicator = () => {
   const isConnected = useSelector((state) => state.connected.isConnected);
@@ -12,7 +20,11 @@ const ServerStatusIndicator = () => {
       try {
         // console.log("서버 상태 확인 시도");
         // 서버에 핑 보내기
+<<<<<<< HEAD
         const response = await fetch('http://beaver7.duckdns.org:10100/ping');
+=======
+        const response = await fetch("http://beaver7.duckdns.org:10100/ping");
+>>>>>>> 7b66b916a2ae418ee6400016d7c49bbe1cf17afc
 
         // response.status === true : 웹, 모델 살아있음
         // response.status === false : 웹은 살고, 모델 죽음
@@ -20,6 +32,7 @@ const ServerStatusIndicator = () => {
         console.log('현재 상태', response.status);
 
         if (response.status) {
+<<<<<<< HEAD
           // 서버로부터 응답이 오면 server state를 true로 변경
           dispatch({ type: 'UPDATE_SERVER_STATE', payload: 'full-connected' });
         } else {
@@ -28,6 +41,17 @@ const ServerStatusIndicator = () => {
       } catch (error) {
         // 에러가 발생하면 server state를 false로 변경
         dispatch({ type: 'UPDATE_SERVER_STATE', payload: 'disconnected' });
+=======
+          // 서버로부터 응답이 오면 server state를 full-connected로 변경
+          dispatch(updateServerState("full-connected"));
+        } else {
+          // 서버로부터 응답이 오지 않으면 server state를 half-connected로 변경
+          dispatch(updateServerState("half-connected"));
+        }
+      } catch (error) {
+        // 에러가 발생하면 server state를 disconneted로 변경
+        dispatch(updateServerState("disconnected"));
+>>>>>>> 7b66b916a2ae418ee6400016d7c49bbe1cf17afc
       }
     };
 
@@ -35,7 +59,7 @@ const ServerStatusIndicator = () => {
     checkServerConnection();
 
     // 일정 간격으로 서버 상태를 주기적으로 확인
-    const intervalId = setInterval(checkServerConnection, 5000);
+    const intervalId = setInterval(checkServerConnection, 20000);
 
     // 컴포넌트가 언마운트되면 인터벌 클리어
     return () => clearInterval(intervalId);

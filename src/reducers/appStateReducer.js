@@ -17,14 +17,26 @@
 // init -> (사용자가 파일을 업로드함) -> file_uploading -> file_sent -> response_waiting
 // -> analyzing -> analyzed -> message_waiting -> message_sent ... 반복
 
+// action type
+const UPDATE_APP_STATE = "UPDATE_APP_STATE";
+
+// action creator
+export function updateAppState(currentState) {
+  return {
+    type: UPDATE_APP_STATE,
+    payload: currentState,
+  };
+}
+
+// 초기 state 정의
 const initialState = {
   currentState: "init",
 };
 
+// reducer
 function appStateReducer(state = initialState, action) {
   switch (action.type) {
-    case "UPDATE_APP_STATE":
-      console.log("디스패치 전 : ", state);
+    case UPDATE_APP_STATE:
       return {
         ...state,
         currentState: action.payload,

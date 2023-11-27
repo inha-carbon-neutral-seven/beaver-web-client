@@ -7,13 +7,26 @@
 // response.status === false : 웹은 살고, 모델 죽음
 // 에러 뭐 404 뭐 그런거 : 웹도 죽음.
 
+// action type
+const UPDATE_SERVER_STATE = "UPDATE_SERVER_STATE";
+
+// action creator
+export function updateServerState(serverState) {
+  return {
+    type: UPDATE_SERVER_STATE,
+    payload: serverState,
+  };
+}
+
+// 초기 state 정의
 const initialState = {
   isConnected: "disconnected",
 };
 
+// reducer
 function serverConnectReducer(state = initialState, action) {
   switch (action.type) {
-    case "UPDATE_SERVER_STATE":
+    case UPDATE_SERVER_STATE:
       return {
         ...state,
         isConnected: action.payload,
