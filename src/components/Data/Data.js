@@ -1,9 +1,10 @@
 import './Data.css';
-import { Expand, Download, Next } from '../../icons';
+import { Expandicon, Downloadicon, Nexticon } from '../../icons';
 import React, { useState } from 'react';
 import CSVLoader from './CSVLoader';
 import Dashboard from './Dash/Dashboard';
 import DataToTable from './DataToTable';
+import Download from '../Utility/Download';
 
 function Data() {
   const [jsonData, setJsonData] = useState([]);
@@ -30,9 +31,9 @@ function Data() {
             <strong>{selectedFile ? selectedFile.name : '파일을 선택해주세요'}</strong>
           </span>
           <div className="ml-auto space-x-2">
-            <Download className="cursor-pointer text-2xl select-none" title="다운로드" />
-            <Expand className="cursor-pointer text-2xl select-none" title="전체화면" />
-            <Next className="cursor-pointer text-2xl select-none" title="화면확장" />
+            <Download jsonData={jsonData} />
+            <Expandicon className="cursor-pointer text-2xl select-none" title="전체화면" />
+            <Nexticon className="cursor-pointer text-2xl select-none" title="화면확장" />
           </div>
         </div>
         {error && <div className="text-red-500"></div>}
