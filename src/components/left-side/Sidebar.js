@@ -2,12 +2,9 @@ import { useSelector } from "react-redux";
 import React, { useState, useEffect } from "react";
 import Dashboard from "../Data/Dash/Dashboard";
 import Data from "../Data/Data";
+import PrintFileCards from "./PrintFileCards";
 
 function Sidebar({ page }) {
-  const anaylizedFileDataList = useSelector(
-    (state) => state.chatScreen.anaylizedFileDataList
-  );
-
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [width, setWidth] = useState(300);
 
@@ -50,14 +47,8 @@ function Sidebar({ page }) {
         className="w-64 bg-gray-200 dark:bg-gray-800 p-4 space-y-2 flex-shrink-0 "
         style={{ width: `${width}px` }}
       >
-        {anaylizedFileDataList.map((anaylizedFileData, index) => (
-          <div key={index}>
-            <p>파일명: {anaylizedFileData.anaylizedFileData_name}</p>
-            <p>파일크기: {`${anaylizedFileData.anaylizedFileData_size}byte`}</p>
-            <p>사용자 지정 데이터 이름 : {anaylizedFileData.userCustomName}</p>
-          </div>
-        ))}
         <div>
+          {page === 0 && <PrintFileCards />}
           {page === 1 && <Dashboard />}
           {page === 2 && <Data />}
         </div>

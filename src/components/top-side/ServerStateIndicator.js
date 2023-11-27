@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircle } from "@fortawesome/free-solid-svg-icons";
+import { updateServerState } from "../../reducers/serverConnectReducer";
 
 const ServerStatusIndicator = () => {
   const isConnected = useSelector((state) => state.connected.isConnected);
@@ -20,14 +21,15 @@ const ServerStatusIndicator = () => {
         console.log("현재 상태", response.status);
 
         if (response.status) {
-          // 서버로부터 응답이 오면 server state를 true로 변경
-          dispatch({ type: "UPDATE_SERVER_STATE", payload: "full-connected" });
+          // 서버로부터 응답이 오면 server state를 full-connected로 변경
+          dispatch(updateServerState("full-connected"));
         } else {
-          dispatch({ type: "UPDATE_SERVER_STATE", payload: "half-connected" });
+          // 서버로부터 응답이 오지 않으면 server state를 half-connected로 변경
+          dispatch(updateServerState("half-connected"));
         }
       } catch (error) {
-        // 에러가 발생하면 server state를 false로 변경
-        dispatch({ type: "UPDATE_SERVER_STATE", payload: "disconnected" });
+        // 에러가 발생하면 server state를 disconneted로 변경
+        dispatch(updateServerState("disconnected"));
       }
     };
 
