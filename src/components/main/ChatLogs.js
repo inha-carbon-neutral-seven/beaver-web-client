@@ -14,7 +14,7 @@ function ChatLogs() {
         {chatlog.map((message, index) => (
           <li
             key={index}
-            className={`p-3 m-5 rounded-md max-w-1/3 overflow-hidden ${
+            className={`p-3 m-5 rounded-md max-w-2/3 overflow-hidden ${
               message.user === "user"
                 ? "bg-blue-200 ml-auto"
                 : "bg-gray-200 ml-0"
@@ -24,8 +24,8 @@ function ChatLogs() {
           </li>
         ))}
         {loading && (
-          <li className="p-3 m-5 rounded-md max-w-1/3 overflow-hidden bg-gray-200 ml-0">
-            {<TypingAnimation text={"메시지를 생성중입니다..."} />}
+          <li className="p-3 m-5 rounded-md max-w-2/3 overflow-hidden bg-gray-200 ml-0">
+            {<TypingAnimation text={"메시지를 생성 중입니다..."} />}
           </li>
         )}
       </ul>
