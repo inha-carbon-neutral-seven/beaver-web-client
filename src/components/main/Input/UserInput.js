@@ -34,7 +34,7 @@ function UserInput() {
 
       try {
         const response = await fetch(
-          "http://beaver7.duckdns.org:10100/generate",
+          "https://beaver7s.duckdns.org/generate",
           {
             method: "POST",
             headers: {
