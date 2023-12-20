@@ -20,8 +20,8 @@ function DataSelect({ jsonData }) {
       <div className="flex flex-col overflow-auto">
         <div className="ml-auto space-x-2">
           <Download jsonData={jsonData} />
-          <Expandicon className="cursor-pointer text-2xl select-none" title="전체화면" />
-          <Nexticon className="cursor-pointer text-2xl select-none" title="화면확장" />
+          <Expand className="cursor-pointer text-2xl select-none" title="전체화면" />
+          <Next className="cursor-pointer text-2xl select-none" title="화면확장" />
         </div>
         <PrintFileCards processAll={false} />
         <div>
