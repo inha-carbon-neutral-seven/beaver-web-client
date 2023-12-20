@@ -2,7 +2,7 @@ import ServerStatusIndicator from './ServerStateIndicator';
 import Button from '@mui/material/Button';
 import beaver from '../../image/logo.jpg';
 
-function Header({param}) {
+function Header({ param }) {
   const handleButtonClick = (p) => {
     param(p);
   };
@@ -14,20 +14,11 @@ function Header({param}) {
           <a href="/" className="flex items-center">
             <img src={beaver} className="h-12 mr-3 rounded-full" />
             <span className="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">
-            비버.ai
+              비버.ai
             </span>
           </a>
         </div>
 
-<<<<<<< Updated upstream
-        <Button className="text-white btn" variant="ghost" onClick={()=>handleButtonClick(0)}>
-          대화하기
-        </Button>
-        <Button className="text-white btn" variant="ghost" onClick={()=>handleButtonClick(1)}>
-          대시보드
-        </Button>
-        <Button className="text-white btn" variant="ghost" onClick={()=>handleButtonClick(2)}>
-=======
         <Button className="text-white btn" variant="ghost" onClick={() => handleButtonClick(0)}>
           대화하기
         </Button>
@@ -35,7 +26,6 @@ function Header({param}) {
           대시보드
         </Button>
         <Button className="text-white btn" variant="ghost" onClick={() => handleButtonClick(2)}>
->>>>>>> Stashed changes
           데이터
         </Button>
       </div>

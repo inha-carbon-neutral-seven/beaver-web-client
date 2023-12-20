@@ -1,6 +1,5 @@
-import { Expandicon, Downloadicon, Nexticon } from '../../icons';
+import { Download, Expand, Next } from '../../icons';
 import React, { useState } from 'react';
-import Download from '../Utility/Download';
 import PrintFileCards from '../left-side/PrintFileCards';
 import DataToTable from './DataToTable';
 function DataSelect({ jsonData }) {

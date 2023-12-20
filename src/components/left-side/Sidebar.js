@@ -1,17 +1,8 @@
 import { useSelector } from 'react-redux';
 import React, { useState, useEffect } from 'react';
-<<<<<<< Updated upstream
-import Dashboard from '../Data/Dash/Dashboard';
-import Data from '../Data/Data';
-
-function Sidebar({ page }) {
-  const anaylizedFileDataList = useSelector((state) => state.chatScreen.anaylizedFileDataList);
-
-=======
 import PrintFileCards from './PrintFileCards';
 import DataSelect from '../Data/DataSelect';
 function Sidebar({ page, jsonData }) {
->>>>>>> Stashed changes
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [width, setWidth] = useState(400);
 
@@ -48,23 +39,10 @@ function Sidebar({ page, jsonData }) {
   return (
     <div className="flex">
       <aside className="w-64 bg-gray-200 dark:bg-gray-800 p-4 space-y-2 flex-shrink-0 " style={{ width: `${width}px` }}>
-<<<<<<< Updated upstream
-        {anaylizedFileDataList.map((anaylizedFileData, index) => (
-          <div key={index}>
-            <p>파일명: {anaylizedFileData.anaylizedFileData_name}</p>
-            <p>파일크기: {`${anaylizedFileData.anaylizedFileData_size}byte`}</p>
-            <p>사용자 지정 데이터 이름 : {anaylizedFileData.userCustomName}</p>
-          </div>
-        ))}
-        <div>
-          {page === 1 && <Dashboard />}
-          {page === 2 && <Data />}
-=======
         <div>
           {page === 0 && <PrintFileCards />}
           {page === 1 && <DataSelect jsonData={jsonData} />}
           {page === 2 && <DataSelect jsonData={jsonData} />}
->>>>>>> Stashed changes
         </div>
       </aside>
       <div
