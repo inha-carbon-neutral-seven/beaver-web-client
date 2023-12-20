@@ -1,13 +1,19 @@
 import { useSelector } from 'react-redux';
 import React, { useState, useEffect } from 'react';
+<<<<<<< Updated upstream
 import Dashboard from '../Data/Dash/Dashboard';
 import Data from '../Data/Data';
 
 function Sidebar({ page }) {
   const anaylizedFileDataList = useSelector((state) => state.chatScreen.anaylizedFileDataList);
 
+=======
+import PrintFileCards from './PrintFileCards';
+import DataSelect from '../Data/DataSelect';
+function Sidebar({ page, jsonData }) {
+>>>>>>> Stashed changes
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const [width, setWidth] = useState(300);
+  const [width, setWidth] = useState(400);
 
   useEffect(() => {
     const handleResize = () => {
@@ -21,7 +27,7 @@ function Sidebar({ page }) {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const minWidth = 300;
+  const minWidth = 400;
   const maxWidth = windowWidth * 0.5;
   const handleMouseDown = (e) => {
     const startWidth = width;
@@ -42,6 +48,7 @@ function Sidebar({ page }) {
   return (
     <div className="flex">
       <aside className="w-64 bg-gray-200 dark:bg-gray-800 p-4 space-y-2 flex-shrink-0 " style={{ width: `${width}px` }}>
+<<<<<<< Updated upstream
         {anaylizedFileDataList.map((anaylizedFileData, index) => (
           <div key={index}>
             <p>파일명: {anaylizedFileData.anaylizedFileData_name}</p>
@@ -52,6 +59,12 @@ function Sidebar({ page }) {
         <div>
           {page === 1 && <Dashboard />}
           {page === 2 && <Data />}
+=======
+        <div>
+          {page === 0 && <PrintFileCards />}
+          {page === 1 && <DataSelect jsonData={jsonData} />}
+          {page === 2 && <DataSelect jsonData={jsonData} />}
+>>>>>>> Stashed changes
         </div>
       </aside>
       <div

@@ -1,6 +1,6 @@
-import ServerStatusIndicator from "./ServerStateIndicator";
-import Button from "@mui/material/Button";
-import beaver from "../../image/logo.jpg";
+import ServerStatusIndicator from './ServerStateIndicator';
+import Button from '@mui/material/Button';
+import beaver from '../../image/logo.jpg';
 
 function Header({param}) {
   const handleButtonClick = (p) => {
@@ -19,6 +19,7 @@ function Header({param}) {
           </a>
         </div>
 
+<<<<<<< Updated upstream
         <Button className="text-white btn" variant="ghost" onClick={()=>handleButtonClick(0)}>
           대화하기
         </Button>
@@ -26,6 +27,15 @@ function Header({param}) {
           대시보드
         </Button>
         <Button className="text-white btn" variant="ghost" onClick={()=>handleButtonClick(2)}>
+=======
+        <Button className="text-white btn" variant="ghost" onClick={() => handleButtonClick(0)}>
+          대화하기
+        </Button>
+        <Button className="text-white btn" variant="ghost" onClick={() => handleButtonClick(1)}>
+          대시보드
+        </Button>
+        <Button className="text-white btn" variant="ghost" onClick={() => handleButtonClick(2)}>
+>>>>>>> Stashed changes
           데이터
         </Button>
       </div>

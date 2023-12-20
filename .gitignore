@@ -21,3 +21,4 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+src/sampledata/liquor_sales_2017_last_six_months.csv

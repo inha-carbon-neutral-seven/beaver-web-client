@@ -1,9 +1,19 @@
+<<<<<<< Updated upstream
 import { useSelector, useDispatch } from "react-redux";
 import React, { useEffect, useState } from "react";
 import Loader from "./Loader";
 import Button from "@mui/material/Button";
+=======
+import { useSelector, useDispatch } from 'react-redux';
+import React, { useEffect } from 'react';
+import Loader from './Loader';
+import ChatLogs from './ChatLogs';
+import UserInput from './Input/UserInput';
+import FileUploadToServer from './Input/FileUploadToServer';
+import { addToChatLog } from '../../reducers/chatScreenReducers';
+>>>>>>> Stashed changes
 
-function ChatScreen() {
+function ChatScreen({ fileData, onFileChange }) {
   // App의 상태변수
   const currentState = useSelector((state) => state.appState.currentState);
   const isConnected = useSelector((state) => state.connected.isConnected);
@@ -72,22 +82,30 @@ function ChatScreen() {
   // 사용자 메시지를 chatlog에 추가
   useEffect(() => {
     if (sentMessage) {
+<<<<<<< Updated upstream
       dispatch({
         type: "ADD_TO_CHATLOG",
         payload: { user: "user", message: sentMessage },
       });
+=======
+      dispatch(addToChatLog('user', sentMessage));
+>>>>>>> Stashed changes
     }
-  }, [sentMessage]);
+  }, [sentMessage, dispatch]); // dispatch를 의존성 배열에 추가
 
   // ai 메시지를 chatlog에 추가
   useEffect(() => {
     if (aiAnswer) {
+<<<<<<< Updated upstream
       dispatch({
         type: "ADD_TO_CHATLOG",
         payload: { user: "ai", message: aiAnswer },
       });
+=======
+      dispatch(addToChatLog('ai', aiAnswer));
+>>>>>>> Stashed changes
     }
-  }, [aiAnswer]);
+  }, [aiAnswer, dispatch]); // dispatch를 의존성 배열에 추가
 
   //////////상태변화 확인//////////////
   // useEffect(() => {
@@ -161,6 +179,7 @@ function ChatScreen() {
 
   return (
     <div className="flex-grow flex flex-col bg-white dark:bg-gray-800 p-4 h-full">
+<<<<<<< Updated upstream
       {isConnected && (
         <div>
           {currentState === "init" && (
@@ -210,12 +229,17 @@ function ChatScreen() {
           )}
         </div>
       )}
+=======
+      {/* 파일 업로드 관련 컴포넌트 */}
+      {isConnected && <FileUploadToServer fileData={fileData} onFileChange={onFileChange} />}
+>>>>>>> Stashed changes
 
       <Loader currentState={currentState} />
       {currentState === "analyzed" && <div>파일 분석 완료!</div>}
 
       <div className="flex-grow flex flex-col justify-between">
         {/* 채팅 메시지 출력 */}
+<<<<<<< Updated upstream
         <div className="flex-grow overflow-y-auto">
           <ul className="list-none p-0 m-0">
             {chatlog.map((message, index) => (
@@ -265,8 +289,14 @@ function ChatScreen() {
             </form>
           </div>
         </div>
+=======
+        <ChatLogs />
+        {/* 사용자 메시지 input */}
+        <UserInput fileData={fileData} onFileChange={onFileChange} />
+>>>>>>> Stashed changes
       </div>
     </div>
   );
 }
+
 export default ChatScreen;
