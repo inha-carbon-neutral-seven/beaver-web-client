@@ -11,6 +11,7 @@ const ServerStatusIndicator = () => {
   useEffect(() => {
     const checkServerConnection = async () => {
       try {
+        // console.log("서버 상태 확인 시도");
         // 서버에 핑 보내기
         const response = await fetch('https://beaver7s.duckdns.org/ping');
 
@@ -36,7 +37,7 @@ const ServerStatusIndicator = () => {
     checkServerConnection();
 
     // 일정 간격으로 서버 상태를 주기적으로 확인
-    const intervalId = setInterval(checkServerConnection, 5000);
+    const intervalId = setInterval(checkServerConnection, 20000);
 
     // 컴포넌트가 언마운트되면 인터벌 클리어
     return () => clearInterval(intervalId);

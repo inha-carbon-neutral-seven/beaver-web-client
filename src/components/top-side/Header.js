@@ -7,7 +7,6 @@ function Header({ param }) {
     param(p);
   };
   return (
-    //<div className={styles.header}>
     <div className="h-16 bg-indigo-500 flex justify-between items-center px-4 fixed w-full">
       <div className="flex items-center space-x-4">
         <div className="flex items-center">
