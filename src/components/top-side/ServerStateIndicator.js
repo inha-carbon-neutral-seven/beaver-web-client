@@ -12,7 +12,7 @@ const ServerStatusIndicator = () => {
     const checkServerConnection = async () => {
       try {
         // 서버에 핑 보내기
-        const response = await fetch('http://beaver7s.duckdns.org/ping');
+        const response = await fetch('https://beaver7s.duckdns.org/ping');
 
         // response.status === true : 웹, 모델 살아있음
         // response.status === false : 웹은 살고, 모델 죽음

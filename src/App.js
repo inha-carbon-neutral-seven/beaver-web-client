@@ -10,8 +10,11 @@ function App() {
   const [showComponent, setShowComponent] = useState(0);
   const [fileData, setFileData] = useState(null);
   const [jsonData, setJsonData] = useState([]);
+  const [selectedColumns, setSelectedColumns] = useState([]);
   const [error, setError] = useState('');
-
+  const handleColumnsChange = (columns) => {
+    setSelectedColumns(columns);
+  };
   useEffect(() => {
     if (!fileData) {
       console.log('No file provided');
@@ -50,10 +53,10 @@ function App() {
     <div className="w-full h-screen bg-gray-50 dark-bg-gray-900 flex flex-col">
       <Header param={handlePage} />
       <div className="flex flex-grow pt-16">
-        <Sidebar page={showComponent} jsonData={jsonData} />
+        <Sidebar page={showComponent} jsonData={jsonData} columns={handleColumnsChange} />
         {showComponent === 0 && <ChatScreen fileData={fileData} onFileChange={handleFileChange} />}
-        {showComponent === 1 && <DashScreen jsonData={jsonData} />}
-        {showComponent === 2 && <DataToTable jsonData={jsonData} />}
+        {showComponent === 1 && <DashScreen jsonData={jsonData} selectedColumns={selectedColumns} />}
+        {showComponent === 2 && <DataToTable jsonData={jsonData} selectedColumns={selectedColumns} />}
       </div>
     </div>
   );

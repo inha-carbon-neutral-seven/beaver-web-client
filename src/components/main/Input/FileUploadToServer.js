@@ -28,7 +28,7 @@ function FileUploadToServer() {
       dispatch(updateAppState('response_waiting'));
 
       // 서버로 FormData 전송, 응답 요청
-      const response = await fetch('http://beaver7s.duckdns.org/upload', {
+      const response = await fetch('https://beaver7s.duckdns.org/upload', {
         method: 'POST',
         body: formData,
       })
@@ -36,7 +36,7 @@ function FileUploadToServer() {
           console.log(res.body);
           // 응답을 받으면, 분석 요청
           dispatch(updateAppState('analyzing'));
-          return fetch('http://beaver7s.duckdns.org/embed');
+          return fetch('https://beaver7s.duckdns.org/embed');
         })
         .then((res) => {
           // 분석이 끝났다는 요청을 받는다.
