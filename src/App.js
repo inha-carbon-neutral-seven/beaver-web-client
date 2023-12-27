@@ -15,7 +15,10 @@ function App() {
       <Header param={handlePage} />
       <div className="flex flex-grow pt-16 mt-1">
         <Sidebar page={showComponent} />
-        <div className="rounded-md flex-grow p-2" style={chatScreenStyle}>
+        <div
+          className="rounded-md flex-grow py-2 pr-2 mr-40 mb-3"
+          style={chatScreenStyle}
+        >
           <ChatScreen />
         </div>
       </div>
