@@ -44,13 +44,13 @@ const ServerStatusIndicator = () => {
   }, []);
 
   return (
-    <div className="flex ml-auto items-center space-x-4">
+    <div className="flex ml-auto items-center space-x-4 drop-shadow-lg">
       <div className="inline bg-white rounded-lg p-2">
         {isConnected === "full-connected" && (
           <>
             <FontAwesomeIcon icon={faCircle} style={{ color: "green" }} />
             <span style={{ marginLeft: "5px", color: "green" }}>
-              서버에 연결되었습니다
+              SERVER CONNECTED :)
             </span>
           </>
         )}
@@ -59,7 +59,7 @@ const ServerStatusIndicator = () => {
           <>
             <FontAwesomeIcon icon={faCircle} style={{ color: "orange" }} />
             <span style={{ marginLeft: "5px", color: "orange" }}>
-              모델 서버에 연결되지 않았습니다
+              BEAVER IS GONE :(
             </span>
           </>
         )}
@@ -67,9 +67,7 @@ const ServerStatusIndicator = () => {
         {isConnected === "disconnected" && (
           <>
             <FontAwesomeIcon icon={faCircle} style={{ color: "red" }} />
-            <span style={{ marginLeft: "5px", color: "red" }}>
-              서버에 연결되지 않았습니다
-            </span>
+            <span style={{ marginLeft: "5px", color: "red" }}>SERVER DEAD</span>
           </>
         )}
       </div>

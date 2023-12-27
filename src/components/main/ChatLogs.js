@@ -6,7 +6,7 @@ function ChatLogs() {
   // 이 컴포넌트에서 사용할 상태변수들
   const loading = useSelector((state) => state.chatScreen.loading);
   const chatlog = useSelector((state) => state.chatScreen.chatlog);
-  
+
   return (
     /* 채팅 메시지 출력 */
     <div className="flex-grow overflow-y-auto">
