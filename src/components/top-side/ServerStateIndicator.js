@@ -44,7 +44,7 @@ const ServerStatusIndicator = () => {
   }, []);
 
   return (
-    <div className="flex ml-auto items-center space-x-4">
+    <div className="flex ml-auto items-center space-x-4 drop-shadow-lg">
       <div className="inline bg-white rounded-lg p-2">
         {isConnected === "full-connected" && (
           <>
@@ -67,9 +67,7 @@ const ServerStatusIndicator = () => {
         {isConnected === "disconnected" && (
           <>
             <FontAwesomeIcon icon={faCircle} style={{ color: "red" }} />
-            <span style={{ marginLeft: "5px", color: "red" }}>
-              SERVER DEAD
-            </span>
+            <span style={{ marginLeft: "5px", color: "red" }}>SERVER DEAD</span>
           </>
         )}
       </div>

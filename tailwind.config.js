@@ -7,6 +7,16 @@ module.exports = {
         "1/3": "30%",
         "2/3": "70%",
       },
+      colors: {
+        "beaver-yellow": "#F3c937",
+        "beaver-brown": "#7B533E",
+        "beaver-lightbrown": "#BFA588",
+        "beaver-godong": "#604847",
+        "beaver-redbrown": "#552723",
+        "beaver-1": "#D8BBB9",
+        "beaver-2": "#E09582",
+        "beaver-3": "#D3E3EF",
+      },
     },
     borderRadius: {
       none: "0",

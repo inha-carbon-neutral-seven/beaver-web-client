@@ -3,7 +3,12 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import FileInputButton from "./FileInputButton";
 import { updateAppState } from "../../../reducers/appStateReducer";
-import { setAIAnswer, setLoading, setMessage, setSentMessage } from "../../../reducers/chatScreenReducers";
+import {
+  setAIAnswer,
+  setLoading,
+  setMessage,
+  setSentMessage,
+} from "../../../reducers/chatScreenReducers";
 
 // 사용자 메시지 input 컴포넌트
 // 파일 input(FileInputButton.js), 메시지 input, 전송 버튼을 포함한다.
@@ -30,7 +35,6 @@ function UserInput() {
       dispatch(setMessage(""));
       dispatch(setSentMessage(message));
       dispatch(setAIAnswer(""));
-
 
       try {
         const response = await fetch(
@@ -64,7 +68,7 @@ function UserInput() {
 
   return (
     /* 사용자 메시지 input */
-    <div className="border-t border-gray-200 dark:border-gray-700 pt-2">
+    <div className="border-t border-gray-200 dark:border-gray-700 pt-2 w-full">
       <div className="flex items-center space-x-2 px-4">
         {/* 파일 input은 따로 만들어놓기 */}
         <FileInputButton />
@@ -83,9 +87,7 @@ function UserInput() {
               currentState === "analyzing" ||
               currentState === "response_waiting"
             }
-            onChange={(e) =>
-              dispatch(setMessage(e.target.value))
-            }
+            onChange={(e) => dispatch(setMessage(e.target.value))}
           />
           <Button type="submit" variant="outline" className="ml-2">
             전송

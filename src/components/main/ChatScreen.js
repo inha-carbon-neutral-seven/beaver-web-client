@@ -33,7 +33,7 @@ function ChatScreen() {
   }, [aiAnswer]);
 
   return (
-    <div className="flex-grow flex flex-col bg-white dark:bg-gray-800 p-4 h-full">
+    <div className="flex-grow flex flex-col bg-white dark:bg-gray-800 p-4 h-full drop-shadow-lg w-full rounded-[12px]">
       {/* 파일 업로드 후(아직 서버로 전송은 안한 상황), 사용자지정 이름 input 입력받기 */}
       {/* 이후에 파일과 사용자 지정 이름을 같이 서버로 보낸다 */}
       {isConnected && <FileUploadToServer />}
