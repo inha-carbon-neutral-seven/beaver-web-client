@@ -44,10 +44,13 @@ function ChatScreen() {
 
       <div className="flex-grow flex flex-col justify-between">
         {currentState === "init" && (
-          <img
-            src={beaver}
-            className="h-40 w-40 rounded-full place-self-center"
-          />
+          <div className="place-self-center">
+            <img
+              src={beaver}
+              className="h-40 w-40 rounded-full place-self-center"
+            />
+            <div>How can I help you?</div>
+          </div>
         )}
 
         {/* 채팅 메시지 출력 */}
