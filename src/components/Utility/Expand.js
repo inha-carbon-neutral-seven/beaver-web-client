@@ -23,9 +23,9 @@ function Expand({ jsonData }) {
       title="다운로드"
       onClick={handleDownload}
     >
-      <Downloadicon />
+      <Expandicon />
     </button>
   );
 }
 
-export default Download;
+export default Expand;

@@ -1,7 +1,7 @@
-import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
 
-function PrintFileCards() {
+function PrintFileCards({ processAll = true }) {
   const analyzedFileDataList = useSelector(
     (state) => state.chatScreen.analyzedFileDataList
   );
@@ -10,14 +10,17 @@ function PrintFileCards() {
   const handelCardClick = (index) => {
     setClickedIndex(index);
   };
+  const dataListToProcess = processAll
+    ? analyzedFileDataList
+    : [analyzedFileDataList[analyzedFileDataList.length - 1]];
 
   return (
     <div>
-      {analyzedFileDataList.map((analyzedFileData, index) => (
+      {dataListToProcess.map((analyzedFileData, index) => (
         <div
           key={index}
           className={`max-w-sm p-6 border border-gray-200 rounded-lg shadow cursor-pointer mb-3 dark:bg-gray-800 dark:border-gray-700 ${
-            clickedIndex === index ? "bg-blue-500 text-white" : "bg-white"
+            clickedIndex === index ? 'bg-blue-500 text-white' : 'bg-white'
           }`}
           onClick={() => handelCardClick(index)}
         >

@@ -1,9 +1,9 @@
 import { useSelector } from 'react-redux';
 import React, { useState, useEffect } from 'react';
-import Dashboard from '../Data/Dash/Dashboard';
 import PrintFileCards from './PrintFileCards';
+import DataSelect from '../Data/DataSelect';
 
-function Sidebar({ page }) {
+function Sidebar({ page, jsonData }) {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [width, setWidth] = useState(300);
 
@@ -48,7 +48,8 @@ function Sidebar({ page }) {
       >
         <div>
           {page === 0 && <PrintFileCards />}
-          {page === 1 && <Dashboard />}
+          {page === 1 && <DataSelect jsonData={jsonData} />}
+          {page === 2 && <DataSelect jsonData={jsonData} />}
         </div>
       </aside>
       <div

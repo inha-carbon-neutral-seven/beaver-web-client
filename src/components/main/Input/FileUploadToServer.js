@@ -1,7 +1,7 @@
-import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { updateAppState } from '../../../reducers/appStateReducer';
-import { addAnalyzedFileData } from '../../../reducers/chatScreenReducers';
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { updateAppState } from "../../../reducers/appStateReducer";
+import { addAnalyzedFileData } from "../../../reducers/chatScreenReducers";
 
 // 파일 업로드 후(아직 서버로 전송은 안한 상황), 사용자지정 이름 input 입력받기
 // 이름을 입력 받은 후, server로 전송한다.
@@ -13,7 +13,7 @@ function FileUploadToServer() {
   const selectedFile = useSelector((state) => state.chatScreen.selectedFile);
 
   // 사용자 지정 데이터 이름
-  const [dataName, setDataName] = useState('');
+  const [dataName, setDataName] = useState("");
 
   // dispatch func
   const dispatch = useDispatch();
@@ -22,25 +22,25 @@ function FileUploadToServer() {
   const handleFileUpload = async () => {
     try {
       const formData = new FormData();
-      formData.append('file', selectedFile);
-      formData.append('description', dataName);
+      formData.append("file", selectedFile);
+      formData.append("description", dataName);
 
-      dispatch(updateAppState('response_waiting'));
+      dispatch(updateAppState("response_waiting"))
 
       // 서버로 FormData 전송, 응답 요청
-      const response = await fetch('https://beaver7s.duckdns.org/upload', {
-        method: 'POST',
+      const response = await fetch("https://beaver7s.duckdns.org/upload", {
+        method: "POST",
         body: formData,
       })
         .then((res) => {
           console.log(res.body);
           // 응답을 받으면, 분석 요청
-          dispatch(updateAppState('analyzing'));
-          return fetch('https://beaver7s.duckdns.org/embed');
+          dispatch(updateAppState("analyzing"))
+          return fetch("https://beaver7s.duckdns.org/embed");
         })
         .then((res) => {
           // 분석이 끝났다는 요청을 받는다.
-          dispatch(updateAppState('analyzed'));
+          dispatch(updateAppState("analyzed"))
 
           // 분석된 데이터를 받는다.
           // 여기서 뭔가 한다.
@@ -57,15 +57,15 @@ function FileUploadToServer() {
         });
 
       // 서버 응답 처리
-      console.log('파일 업로드 성공:', response);
+      console.log("파일 업로드 성공:", response);
     } catch (error) {
-      console.error('파일 업로드 오류:', error);
+      console.error("파일 업로드 오류:", error);
     }
   };
 
   /* 파일 업로드 후(아직 서버로 전송은 안한 상황), 사용자지정 이름 input 입력받기*/
   /* 이후에 파일과 사용자 지정 이름을 같이 서버로 보낸다 */
-  return currentState === 'file_uploading' ? (
+  return currentState === "file_uploading" ? (
     <div>
       <p>파일명: {selectedFile.name}</p>
       <p>파일크기: {`${selectedFile.size}byte`}</p>
@@ -73,7 +73,7 @@ function FileUploadToServer() {
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          dispatch(updateAppState('file_sent'));
+          dispatch(updateAppState("file_sent"));
           handleFileUpload();
         }}
       >

@@ -1,6 +1,6 @@
-import ServerStatusIndicator from "./ServerStateIndicator";
-import Button from "@mui/material/Button";
-import beaver from "../../image/logo.jpg";
+import ServerStatusIndicator from './ServerStateIndicator';
+import Button from '@mui/material/Button';
+import beaver from '../../image/logo.jpg';
 
 function Header({ param }) {
   const handleButtonClick = (p) => {
@@ -8,15 +8,15 @@ function Header({ param }) {
   };
   const buttonSx = {
     m: 1,
-    color: "white",
-    borderColor: "#ffffff00",
-    boxShadow: "2",
-    ":hover": {
-      borderColor: "#a39e9e26",
-      color: "white",
-      bgcolor: "#a39e9e26",
+    color: 'white',
+    borderColor: '#ffffff00',
+    boxShadow: '2',
+    ':hover': {
+      borderColor: '#a39e9e26',
+      color: 'white',
+      bgcolor: '#a39e9e26',
     },
-    fontFamily: "san-serif",
+    fontFamily: 'san-serif',
   };
   return (
     <div className="h-16 bg-gradient-to-r from-beaver-2 to-beaver-1 flex justify-between items-center px-4 w-4/5 fixed rounded-[12px] drop-shadow-lg place-self-center mt-3">
@@ -41,7 +41,7 @@ function Header({ param }) {
         <Button
           sx={buttonSx}
           variant="outlined"
-          //onClick={() => handleButtonClick(1)}
+          onClick={() => handleButtonClick(1)}
         >
           대시보드
         </Button>

@@ -1,40 +1,47 @@
+import React, { useState, useEffect } from 'react';
+import csvtojson from 'csvtojson';
 import Sidebar from './components/left-side/Sidebar';
 import ChatScreen from './components/main/ChatScreen';
 import Header from './components/top-side/Header';
-import CSVLoader from './components/Data/CSVLoader';
-import React, { useState, useEffect } from 'react';
+import DashScreen from './components/Data/DashScreen';
+import DataToTable from './components/Data/DataToTable';
 
 function App() {
-  const [csvData, setCSVData] = useState(null);
-  const [jsonData, setJSONData] = useState(null);
-
-  const handleCSVDataChange = (jsonArray) => {
-    setJSONData(jsonArray);
-  };
-
-  const handleFileChange = async (event) => {
-    const file = event.target.files[0];
-    const reader = new FileReader();
-
-    reader.onload = (e) => {
-      setCSVData(e.target.result);
-    };
-
-    reader.readAsText(file);
-  };
-
-  const convertCSVData = async () => {
-    if (csvData) {
-      const csvLoader = new CSVLoader({ onCSVDataChange: handleCSVDataChange });
-      csvLoader.convertCSVToJson(csvData);
-    }
-  };
+  const [showComponent, setShowComponent] = useState(0);
+  const [fileData, setFileData] = useState(null);
+  const [jsonData, setJsonData] = useState([]);
+  const [error, setError] = useState('');
 
   useEffect(() => {
-    convertCSVData();
-  }, [csvData]);
+    if (!fileData) {
+      console.log('No file provided');
+      return;
+    }
 
-  const [showComponent, setShowComponent] = useState(0);
+    const reader = new FileReader();
+
+    reader.onload = async (e) => {
+      console.log('FileReader onload triggered');
+      const csvText = e.target.result;
+
+      try {
+        const jsonArray = await csvtojson().fromString(csvText);
+        console.log('CSV to JSON conversion successful:', jsonArray);
+        setJsonData(jsonArray);
+      } catch (error) {
+        console.error('Error converting CSV to JSON', error);
+        setError('Error converting CSV to JSON');
+      }
+    };
+
+    reader.readAsText(fileData);
+  }, [fileData]);
+
+  const handleFileChange = (file) => {
+    console.log('File selected:', file); // Log the selected file
+    setFileData(file);
+  };
+
   const handlePage = (p) => {
     setShowComponent(p);
   };
@@ -44,12 +51,16 @@ function App() {
     <div className="w-full h-screen bg-gradient-to-br from-beaver-3 to-beaver-lightbrown flex flex-col">
       <Header param={handlePage} />
       <div className="flex flex-grow pt-16 mt-1">
-        <Sidebar page={showComponent} />
+        <Sidebar page={showComponent} jsonData={jsonData} />
         <div
           className="rounded-md flex-grow py-2 pr-2 mr-40 mb-3"
           style={chatScreenStyle}
         >
-          <ChatScreen fileData={jsonData} onFileChange={handleFileChange} />
+          {showComponent === 0 && (
+            <ChatScreen fileData={fileData} onFileChange={handleFileChange} />
+          )}
+          {showComponent === 1 && <DashScreen jsonData={jsonData} />}
+          {showComponent === 2 && <DataToTable jsonData={jsonData} />}
         </div>
       </div>
     </div>

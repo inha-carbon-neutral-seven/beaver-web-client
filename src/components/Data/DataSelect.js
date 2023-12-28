@@ -7,7 +7,9 @@ import DataToTable from './DataToTable';
 function DataSelect({ jsonData }) {
   const [error, setError] = useState('');
   const [selectedColumns, setSelectedColumns] = useState([]);
-  const columnOptions = jsonData.length > 0 ? Object.keys(jsonData[0]) : [];
+
+  const columnOptions =
+    !jsonData || jsonData.length > 0 ? Object.keys(jsonData[0]) : [];
   const handleColumnChange = (event) => {
     const column = event.target.value;
     if (event.target.checked) {

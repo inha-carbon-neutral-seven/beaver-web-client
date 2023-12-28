@@ -7,7 +7,7 @@ import FileUploadToServer from "./Input/FileUploadToServer";
 import { addToChatLog } from "../../reducers/chatScreenReducers";
 import beaver from "../../image/logo.jpg";
 
-function ChatScreen() {
+function ChatScreen({ fileData, onFileChange }) {
   // App의 상태변수
   const currentState = useSelector((state) => state.appState.currentState);
   const isConnected = useSelector((state) => state.connected.isConnected);
@@ -55,8 +55,9 @@ function ChatScreen() {
 
         {/* 채팅 메시지 출력 */}
         <ChatLogs />
+        
         {/* 사용자 메시지 input */}
-        <UserInput />
+        <UserInput fileData={fileData} onFileChange={onFileChange} />
       </div>
     </div>
   );
