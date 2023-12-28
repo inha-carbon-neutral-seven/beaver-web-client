@@ -1,7 +1,5 @@
 import { useSelector } from "react-redux";
 import React, { useState, useEffect } from "react";
-import Dashboard from "../Data/Dash/Dashboard";
-import Data from "../Data/Data";
 import PrintFileCards from "./PrintFileCards";
 
 function Sidebar({ page }) {
@@ -49,8 +47,8 @@ function Sidebar({ page }) {
       >
         <div>
           {page === 0 && <PrintFileCards />}
-          {page === 1 && <Dashboard />}
-          {page === 2 && <Data />}
+          {/* {page === 1 && <Dashboard />}
+          {page === 2 && <Data />} */}
         </div>
       </aside>
       <div
