@@ -24,7 +24,7 @@ function Header({ param }) {
         <div className="flex items-center">
           <a href="/" className="flex items-center">
             <img src={beaver} className="h-12 mr-3 rounded-full" />
-            <span className="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white text-white">
+            <span className="self-center text-xl font-extrabold sm:text-2xl whitespace-nowrap text-white">
               비버.ai
             </span>
           </a>

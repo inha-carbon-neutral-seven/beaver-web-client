@@ -11,7 +11,7 @@ function App() {
   const chatScreenStyle = showComponent === 0 ? { flexGrow: 1 } : {};
 
   return (
-    <div className="w-full h-screen bg-gradient-to-br from-beaver-3 to-beaver-lightbrown flex flex-col">
+    <div className="w-full h-screen  bg-beaver-bg flex flex-col overflow-y-scroll">
       <Header param={handlePage} />
       <div className="flex flex-grow pt-16 mt-1">
         <Sidebar page={showComponent} />
