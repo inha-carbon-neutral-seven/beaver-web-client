@@ -1,4 +1,6 @@
-import { Download, Expand, Next } from '../../icons';
+import Download from '../Utility/Download';
+import Expand from '../Utility/Expand';
+import Next from '../Utility/Next';
 import React, { useState } from 'react';
 import PrintFileCards from '../left-side/PrintFileCards';
 import DataToTable from './DataToTable';
