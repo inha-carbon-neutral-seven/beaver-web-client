@@ -1,11 +1,11 @@
-import { Download, Expand, Next } from '../../icons';
+import { Downloadicon, Expandicon, Nexticon } from '../../icons';
 import React, { useState } from 'react';
 import PrintFileCards from '../left-side/PrintFileCards';
 import DataToTable from './DataToTable';
 function DataSelect({ jsonData }) {
   const [error, setError] = useState('');
   const [selectedColumns, setSelectedColumns] = useState([]);
-  const columnOptions = jsonData.length > 0 ? Object.keys(jsonData[0]) : [];
+  const columnOptions = (!jsonData || jsonData.length > 0) ? Object.keys(jsonData[0]) : [];
   const handleColumnChange = (event) => {
     const column = event.target.value;
     if (event.target.checked) {
@@ -19,14 +19,12 @@ function DataSelect({ jsonData }) {
     <div className="pb-6 border-solid max-h-[85vh] border-gray-300">
       <div className="flex flex-col overflow-auto">
         <div className="ml-auto space-x-2">
-          <Download jsonData={jsonData} />
-          <Expand
+          <Downloadicon jsonData={jsonData} />
+          <Expandicon
             className="cursor-pointer text-2xl select-none"
             title="전체화면"
           />
-          <Next
-            className="cursor-pointer text-2xl select-none"
-            title="화면확장"
+          <Nexticon className="cursor-pointer text-2xl select-none" title="화면확장"
           />
         </div>
         <PrintFileCards processAll={false} />

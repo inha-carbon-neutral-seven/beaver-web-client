@@ -1,63 +1,49 @@
-import React, { useState, useEffect } from 'react';
-import { ChartComponent, ChartData, ChartOptions } from './ChartComponent';
+import React, { useState } from 'react';
+import BarChart from './Dash/BarChart';
+import PieChart from './Dash/PieChart';
+import LineChart from './Dash/LineChart';
+import CumulativeBarChart from './Dash/CumulativeBarChart';
 
-function HousingDataCharts({ jsonData }) {
-  const [ageData, setAgeData] = useState(null);
-  const [crimData, setCrimData] = useState(null);
-  const [rmTargetData, setRmTargetData] = useState(null);
-  const [chasData, setChasData] = useState(null);
+function DashScreen({ jsonData }) {
+  const [error, setError] = useState('');
+  const [charts, setCharts] = useState([]);
+  const [showChartSelection, setShowChartSelection] = useState(false);
 
-  useEffect(() => {
-    if (jsonData) {
-      // Process data for AGE distribution (Bar Chart)
-      setAgeData(ChartData('AGE Distribution', jsonData, 'AGE', 'Target'));
-      // Process data for CRIM rates (Line Chart)
-      setCrimData(ChartData('CRIM Rates', jsonData, 'CRIM', 'Target'));
-      // Process data for RM vs Target (Scatter Chart)
-      setRmTargetData(ChartData('RM vs Target', jsonData, 'RM', 'Target'));
-      // Process data for CHAS distribution (Pie Chart)
-      setChasData(ChartData('CHAS Distribution', jsonData, 'CHAS', 'Target'));
-    }
-  }, [jsonData]);
-
-  const commonOptions = (title) => ChartOptions(title);
-
+  const handleChartSelection = (type) => {
+    setCharts((charts) => [...charts, type]);
+    setShowChartSelection(false);
+  };
   return (
-    <div className="housing-data-charts">
-      {ageData && (
-        <ChartComponent
-          type="Bar"
-          data={ageData}
-          options={commonOptions('AGE Distribution')}
-          style={{ width: '400px', height: '300px' }}
-        />
-      )}
-      {crimData && (
-        <ChartComponent
-          type="Line"
-          data={crimData}
-          options={commonOptions('CRIM Rates')}
-          style={{ width: '400px', height: '300px' }}
-        />
-      )}
-      {rmTargetData && (
-        <ChartComponent
-          type="Scatter"
-          data={rmTargetData}
-          options={commonOptions('RM vs Target')}
-          style={{ width: '400px', height: '300px' }}
-        />
-      )}
-      {chasData && (
-        <ChartComponent
-          type="Pie"
-          data={chasData}
-          options={commonOptions('CHAS Distribution')}
-          style={{ width: '400px', height: '300px' }}
-        />
-      )}
+    <div className="flex-grow flex flex-col bg-white dark:bg-gray-800 p-4 h-full drop-shadow-lg w-full rounded-[12px] mt-3">
+      <div className="flex flex-col overflow-auto">
+        {error && <p className="error-message">{error}</p>}
+
+        <div className="chart-container flex flex-wrap justify-start">
+          {charts.map((chartType, index) => (
+            <div key={index} className="chart-item">
+              {chartType === 'bar' && <BarChart jsonData={jsonData} />}
+              {chartType === 'pie' && <PieChart jsonData={jsonData} />}
+              {chartType === 'line' && <LineChart jsonData={jsonData} />}
+              {chartType === 'cumulativeBar' && <CumulativeBarChart jsonData={jsonData} />}
+            </div>
+          ))}
+
+          <button onClick={() => setShowChartSelection(true)} className="add-chart-btn">
+            + Add Chart
+          </button>
+
+          {showChartSelection && (
+            <div className="chart-selection-modal">
+              <button onClick={() => handleChartSelection('bar')}>Bar Chart</button>
+              <button onClick={() => handleChartSelection('pie')}>Pie Chart</button>
+              <button onClick={() => handleChartSelection('line')}>Line Chart</button>
+              <button onClick={() => handleChartSelection('cumulativeBar')}>Cumulative Bar Chart</button>
+            </div>
+          )}
+        </div>
+      </div>
     </div>
   );
 }
 
-export default HousingDataCharts;
+export default DashScreen;

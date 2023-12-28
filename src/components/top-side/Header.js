@@ -41,7 +41,7 @@ function Header({ param }) {
         <Button
           sx={buttonSx}
           variant="outlined"
-          //onClick={() => handleButtonClick(1)}
+          onClick={() => handleButtonClick(1)}
         >
           대시보드
         </Button>

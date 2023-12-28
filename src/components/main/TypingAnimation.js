@@ -38,7 +38,6 @@ function TypingAnimation({ text }) {
         } else {
           setVisibleText((prevText) => prevText + currentChar);
         }
-
         setTimeout(() => typeText(currentIndex + 1), typingDelay);
       }
     };
