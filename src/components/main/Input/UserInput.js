@@ -1,14 +1,14 @@
-import { Button } from "@mui/material";
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import FileInputButton from "./FileInputButton";
-import { updateAppState } from "../../../reducers/appStateReducer";
+import { Button } from '@mui/material';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import FileInputButton from './FileInputButton';
+import { updateAppState } from '../../../reducers/appStateReducer';
 import {
   setAIAnswer,
   setLoading,
   setMessage,
   setSentMessage,
-} from "../../../reducers/chatScreenReducers";
+} from '../../../reducers/chatScreenReducers';
 
 // 사용자 메시지 input 컴포넌트
 // 파일 input(FileInputButton.js), 메시지 input, 전송 버튼을 포함한다.
@@ -28,38 +28,35 @@ function UserInput() {
   // 채팅 메시지 전송 시
   const messageHandler = async (e) => {
     e.preventDefault();
-    dispatch(updateAppState("message_sent"));
+    dispatch(updateAppState('message_sent'));
 
     if (!loading) {
       dispatch(setLoading(true));
-      dispatch(setMessage(""));
+      dispatch(setMessage(''));
       dispatch(setSentMessage(message));
-      dispatch(setAIAnswer(""));
+      dispatch(setAIAnswer(''));
 
       try {
-        const response = await fetch(
-          "http://beaver7.duckdns.org:10100/generate",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              message: message,
-            }),
-          }
-        )
+        const response = await fetch('https://beaver7s.duckdns.org/generate', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            message: message,
+          }),
+        })
           .then((res) => res.json())
           .then((res) => {
             dispatch(setAIAnswer(res.message));
-            dispatch(updateAppState("response_received"));
-            dispatch(updateAppState("message_waiting"));
+            dispatch(updateAppState('response_received'));
+            dispatch(updateAppState('message_waiting'));
             return res;
           });
 
-        dispatch(updateAppState("response_wait"));
+        dispatch(updateAppState('response_wait'));
       } catch (error) {
-        console.log("에러 발생", error);
+        console.log('에러 발생', error);
       } finally {
         dispatch(setLoading(false));
       }
@@ -84,8 +81,8 @@ function UserInput() {
             value={message}
             disabled={
               !isConnected ||
-              currentState === "analyzing" ||
-              currentState === "response_waiting"
+              currentState === 'analyzing' ||
+              currentState === 'response_waiting'
             }
             onChange={(e) => dispatch(setMessage(e.target.value))}
           />
