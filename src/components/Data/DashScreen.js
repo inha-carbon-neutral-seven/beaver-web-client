@@ -23,39 +23,41 @@ function HousingDataCharts({ jsonData }) {
   const commonOptions = (title) => ChartOptions(title);
 
   return (
-    <div className="housing-data-charts">
-      {ageData && (
-        <ChartComponent
-          type="Bar"
-          data={ageData}
-          options={commonOptions('AGE Distribution')}
-          style={{ width: '400px', height: '300px' }}
-        />
-      )}
-      {crimData && (
-        <ChartComponent
-          type="Line"
-          data={crimData}
-          options={commonOptions('CRIM Rates')}
-          style={{ width: '400px', height: '300px' }}
-        />
-      )}
-      {rmTargetData && (
-        <ChartComponent
-          type="Scatter"
-          data={rmTargetData}
-          options={commonOptions('RM vs Target')}
-          style={{ width: '400px', height: '300px' }}
-        />
-      )}
-      {chasData && (
-        <ChartComponent
-          type="Pie"
-          data={chasData}
-          options={commonOptions('CHAS Distribution')}
-          style={{ width: '400px', height: '300px' }}
-        />
-      )}
+    <div className="table-container  flex-grow flex flex-col bg-white dark:bg-gray-800 p-4 h-full drop-shadow-lg w-full rounded-[12px] mt-3">
+      <div className="housing-data-charts">
+        {ageData && (
+          <ChartComponent
+            type="Bar"
+            data={ageData}
+            options={commonOptions('AGE Distribution')}
+            style={{ width: '400px', height: '300px' }}
+          />
+        )}
+        {crimData && (
+          <ChartComponent
+            type="Line"
+            data={crimData}
+            options={commonOptions('CRIM Rates')}
+            style={{ width: '400px', height: '300px' }}
+          />
+        )}
+        {rmTargetData && (
+          <ChartComponent
+            type="Scatter"
+            data={rmTargetData}
+            options={commonOptions('RM vs Target')}
+            style={{ width: '400px', height: '300px' }}
+          />
+        )}
+        {chasData && (
+          <ChartComponent
+            type="Pie"
+            data={chasData}
+            options={commonOptions('CHAS Distribution')}
+            style={{ width: '400px', height: '300px' }}
+          />
+        )}
+      </div>
     </div>
   );
 }

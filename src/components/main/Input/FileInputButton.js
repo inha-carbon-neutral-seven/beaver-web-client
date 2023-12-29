@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { setSelectedFile } from '../../../reducers/chatScreenReducers';
 import { updateAppState } from '../../../reducers/appStateReducer';
 
 // file upload 버튼 컴포넌트 return.
 // 파일 업로드 버튼 클릭 시, file input 창을 띄운다.
-function FileInputButton({ onFileChange }) {
+function FileInput({ onFileChange }) {
   const fileInput = useRef(null);
 
   // dispatch func
@@ -44,4 +44,4 @@ function FileInputButton({ onFileChange }) {
   );
 }
 
-export default FileInputButton;
+export default FileInput;

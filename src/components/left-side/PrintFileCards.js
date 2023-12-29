@@ -1,19 +1,18 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 
-function PrintFileCards(processAll = true) {
+function PrintFileCards({ processAll = true }) {
   const analyzedFileDataList = useSelector(
     (state) => state.chatScreen.analyzedFileDataList
   );
-
-  const dataListToProcess = processAll
-    ? analyzedFileDataList
-    : [analyzedFileDataList[analyzedFileDataList.length - 1]];
 
   const [clickedIndex, setClickedIndex] = useState(null);
   const handelCardClick = (index) => {
     setClickedIndex(index);
   };
+  const dataListToProcess = processAll
+    ? analyzedFileDataList
+    : [analyzedFileDataList[analyzedFileDataList.length - 1]];
 
   return (
     <div>

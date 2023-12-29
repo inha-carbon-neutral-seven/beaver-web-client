@@ -1,7 +1,7 @@
 import { Button } from "@mui/material";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import FileInputButton from "./FileInputButton";
+import FileInput from "./FileInputButton";
 import { updateAppState } from "../../../reducers/appStateReducer";
 import {
   setAIAnswer,
@@ -13,7 +13,7 @@ import {
 // 사용자 메시지 input 컴포넌트
 // 파일 input(FileInputButton.js), 메시지 input, 전송 버튼을 포함한다.
 // 전송 버튼은 메시지 input만 전송한다.
-function UserInput() {
+function UserInput( { fileData, onFileChange } ) {
   // App의 상태변수
   const currentState = useSelector((state) => state.appState.currentState);
   const isConnected = useSelector((state) => state.connected.isConnected);
@@ -38,7 +38,7 @@ function UserInput() {
 
       try {
         const response = await fetch(
-          "http://beaver7.duckdns.org:10100/generate",
+          "https://beaver7s.duckdns.org/generate",
           {
             method: "POST",
             headers: {
@@ -71,7 +71,7 @@ function UserInput() {
     <div className="border-t border-gray-200 dark:border-gray-700 pt-2 w-full">
       <div className="flex items-center space-x-2 px-4">
         {/* 파일 input은 따로 만들어놓기 */}
-        <FileInputButton />
+        <FileInput onFileChange={onFileChange} />
         <form
           className="flex flex-grow"
           onSubmit={messageHandler}

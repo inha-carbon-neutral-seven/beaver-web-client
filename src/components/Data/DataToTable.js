@@ -1,12 +1,11 @@
 import * as React from 'react';
 import { DataGrid } from '@mui/x-data-grid';
-import './DataToTable.css';
 
 function DataToTable({ jsonData }) {
   // Check if jsonData is empty
-  if (jsonData.length === 0) {
+  if (!jsonData || jsonData.length === 0) {
     return (
-      <div className="table-container">
+      <div className="table-container  flex-grow flex flex-col bg-white dark:bg-gray-800 p-4 h-full drop-shadow-lg w-full rounded-[12px] mt-3">
         <p>No data available to display.</p>
       </div>
     );
@@ -26,12 +25,16 @@ function DataToTable({ jsonData }) {
   }));
 
   return (
-    <div className="table-container" style={{ height: 400, width: '100%' }}>
+    <div
+      className="table-container flex-grow flex flex-col bg-white dark:bg-gray-800 p-4 h-full drop-shadow-lg w-full rounded-[12px] mt-3"
+      style={{ height: 500, width: '100%' }}
+    >
+      {' '}
       <h2>Data Table</h2>
       <DataGrid
         rows={rows}
         columns={columns}
-        pageSize={5}
+        pageSize={10}
         pageSizeOptions={[5, 10]}
         checkboxSelection
         initialState={{
