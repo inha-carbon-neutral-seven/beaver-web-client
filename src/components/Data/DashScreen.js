@@ -21,43 +21,51 @@ function HousingDataCharts({ jsonData }) {
   }, [jsonData]);
 
   const commonOptions = (title) => ChartOptions(title);
-
+  const chartDataArray = [
+    {
+      type: 'Bar',
+      data: ageData,
+      options: commonOptions('AGE Distribution'),
+      title: 'AGE Distribution',
+    },
+    {
+      type: 'Line',
+      data: crimData,
+      options: commonOptions('CRIM Rates'),
+      title: 'CRIM Rates',
+    },
+    {
+      type: 'Scatter',
+      data: rmTargetData,
+      options: commonOptions('RM vs Target'),
+      title: 'RM vs Target',
+    },
+    {
+      type: 'Pie',
+      data: chasData,
+      options: commonOptions('CHAS Distribution'),
+      title: 'CHAS Distribution',
+    },
+    // ... any additional charts
+  ];
   return (
-    <div className="table-container  flex-grow flex flex-col bg-white dark:bg-gray-800 p-4 h-full drop-shadow-lg w-full rounded-[12px] mt-3">
-      <div className="housing-data-charts">
-        {ageData && (
-          <ChartComponent
-            type="Bar"
-            data={ageData}
-            options={commonOptions('AGE Distribution')}
-            style={{ width: '400px', height: '300px' }}
-          />
-        )}
-        {crimData && (
-          <ChartComponent
-            type="Line"
-            data={crimData}
-            options={commonOptions('CRIM Rates')}
-            style={{ width: '400px', height: '300px' }}
-          />
-        )}
-        {rmTargetData && (
-          <ChartComponent
-            type="Scatter"
-            data={rmTargetData}
-            options={commonOptions('RM vs Target')}
-            style={{ width: '400px', height: '300px' }}
-          />
-        )}
-        {chasData && (
-          <ChartComponent
-            type="Pie"
-            data={chasData}
-            options={commonOptions('CHAS Distribution')}
-            style={{ width: '400px', height: '300px' }}
-          />
-        )}
-      </div>
+    <div className="flex flex-wrap -m-4">
+      {chartDataArray.map(
+        (chart, index) =>
+          chart.data && (
+            <div
+              key={index}
+              className="p-4 m-4 border-gray-400 min-w-[600px] min-h-[400px]"
+            >
+              <ChartComponent
+                type={chart.type}
+                data={chart.data}
+                options={chart.options}
+                style={{ width: '100%', height: '100%' }}
+              />
+            </div>
+          )
+      )}
     </div>
   );
 }

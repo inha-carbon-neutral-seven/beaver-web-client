@@ -112,7 +112,7 @@ export const ChartComponent = ({
   const Chart = chartTypes[type] || (() => <p>Invalid chart type</p>);
 
   return (
-    <div style={style}>
+    <div className="border-2 border-gray-400 bg-white min-w-[600px] min-h-[400px] pb-2 mb-2">
       <Chart data={data} options={options} />
     </div>
   );
