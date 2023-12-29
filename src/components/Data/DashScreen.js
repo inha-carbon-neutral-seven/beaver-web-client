@@ -1,22 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import { ChartComponent, ChartData, ChartOptions } from './ChartComponent';
 
-function HousingDataCharts({ jsonData }) {
-  const [ageData, setAgeData] = useState(null);
-  const [crimData, setCrimData] = useState(null);
-  const [rmTargetData, setRmTargetData] = useState(null);
-  const [chasData, setChasData] = useState(null);
+function DashScreen({ jsonData }) {
+  const [colorIndex, setColorIndex] = useState(0); // 색상 인덱스 상태 추가
+  const [sampleData1, setSampleData1] = useState(null);
+  const [sampleData2, setSampleData2] = useState(null);
+  const [sampleData3, setSampleData3] = useState(null);
+  const [sampleData4, setSampleData4] = useState(null);
 
   useEffect(() => {
     if (jsonData) {
-      // Process data for AGE distribution (Bar Chart)
-      setAgeData(ChartData('AGE Distribution', jsonData, 'AGE', 'Target'));
-      // Process data for CRIM rates (Line Chart)
-      setCrimData(ChartData('CRIM Rates', jsonData, 'CRIM', 'Target'));
-      // Process data for RM vs Target (Scatter Chart)
-      setRmTargetData(ChartData('RM vs Target', jsonData, 'RM', 'Target'));
-      // Process data for CHAS distribution (Pie Chart)
-      setChasData(ChartData('CHAS Distribution', jsonData, 'CHAS', 'Target'));
+      setSampleData1(
+        ChartData('AGE Distribution', jsonData, 'AGE', 'Target', 0)
+      );
+      setColorIndex((prev) => prev + 1);
+      setSampleData2(ChartData('CRIM Rates', jsonData, 'CRIM', 'Target', 1));
+      setColorIndex((prev) => prev + 1);
+      setSampleData3(ChartData('RM vs Target', jsonData, 'RM', 'Target', 2));
+      setColorIndex((prev) => prev + 1);
+      setSampleData4(
+        ChartData('CHAS Distribution', jsonData, 'CHAS', 'Target', 3)
+      );
+      setColorIndex((prev) => prev + 1);
     }
   }, [jsonData]);
 
@@ -24,47 +29,48 @@ function HousingDataCharts({ jsonData }) {
   const chartDataArray = [
     {
       type: 'Bar',
-      data: ageData,
+      data: sampleData1,
       options: commonOptions('AGE Distribution'),
       title: 'AGE Distribution',
     },
     {
       type: 'Line',
-      data: crimData,
+      data: sampleData2,
       options: commonOptions('CRIM Rates'),
       title: 'CRIM Rates',
     },
     {
       type: 'Scatter',
-      data: rmTargetData,
+      data: sampleData3,
       options: commonOptions('RM vs Target'),
       title: 'RM vs Target',
     },
     {
       type: 'Pie',
-      data: chasData,
+      data: sampleData4,
       options: commonOptions('CHAS Distribution'),
       title: 'CHAS Distribution',
     },
-    // ... any additional charts
   ];
+
   return (
-    <div className="flex flex-wrap -m-4">
-      {chartDataArray.map(
-        (chart, index) =>
-          chart.data && (
-            <div key={index} className="">
+    <div className="container mx-auto p-4 flex flex-wrap gap-6">
+      {chartDataArray.map((chart, index) =>
+        chart.data ? (
+          <div key={index}>
+            <div className="flex-1">
               <ChartComponent
                 type={chart.type}
                 data={chart.data}
                 options={chart.options}
-                style={{ width: '100%', height: '100%' }}
+                index={index}
               />
             </div>
-          )
+          </div>
+        ) : null
       )}
     </div>
   );
 }
 
-export default HousingDataCharts;
+export default DashScreen;
