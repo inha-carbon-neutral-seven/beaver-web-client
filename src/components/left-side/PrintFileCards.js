@@ -21,7 +21,7 @@ function PrintFileCards({ processAll = true }) {
           key={index}
           className={`max-w-sm p-6 border border-gray-200 rounded-lg shadow cursor-pointer mb-3 dark:bg-gray-800 dark:border-gray-700 ${
             clickedIndex === index ? 'bg-blue-500 text-white' : 'bg-white'
-          }`}
+          } break-words`}
           onClick={() => handelCardClick(index)}
         >
           <p>파일명: {analyzedFileData.analyzedFileData_name}</p>
