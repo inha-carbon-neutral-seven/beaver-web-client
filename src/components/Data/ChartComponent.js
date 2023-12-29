@@ -1,11 +1,12 @@
 import React from 'react';
+import { ResizableBox } from 'react-resizable';
+import 'react-resizable/css/styles.css';
 import {
   Chart as ChartJS,
   CategoryScale,
   LinearScale,
   BarElement,
   Title,
-  Colors,
   Tooltip,
   Legend,
   ArcElement,
@@ -26,7 +27,6 @@ import autocolors from 'chartjs-plugin-autocolors';
 // Register all components needed for all chart types
 ChartJS.register(
   CategoryScale,
-  autocolors,
   LinearScale,
   BarElement,
   Title,
@@ -34,7 +34,8 @@ ChartJS.register(
   Legend,
   ArcElement,
   PointElement,
-  LineElement
+  LineElement,
+  autocolors
 );
 const colorArray = [
   'rgba(240, 165, 216, 0.5)',
@@ -119,17 +120,10 @@ export function ChartOptions(titleText) {
         forceOverride: true,
       },
     },
-    scales: {
-      y: {
-        beginAtZero: true,
-        suggestedMin: 30,
-        suggestedMax: 50,
-      },
-    },
   };
 }
 
-export const ChartComponent = ({ type, data, options, index }) => {
+export const ChartComponent = ({ type, data, options }) => {
   if (!data) {
     return <p>No chart data</p>;
   }
@@ -153,8 +147,14 @@ export const ChartComponent = ({ type, data, options, index }) => {
   const Chart = chartTypes[type] || (() => <p>Invalid chart type</p>);
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 flex flex-col min-w-[600px] min-h-[400px] m-2">
+    <ResizableBox
+      width={600}
+      height={400}
+      minConstraints={[300, 200]}
+      maxConstraints={[800, 600]}
+      className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 flex flex-col m-2"
+    >
       <Chart data={data} options={options} />
-    </div>
+    </ResizableBox>
   );
 };
