@@ -53,10 +53,7 @@ function HousingDataCharts({ jsonData }) {
       {chartDataArray.map(
         (chart, index) =>
           chart.data && (
-            <div
-              key={index}
-              className="p-4 m-4 border-gray-400 min-w-[600px] min-h-[400px]"
-            >
+            <div key={index} className="">
               <ChartComponent
                 type={chart.type}
                 data={chart.data}
