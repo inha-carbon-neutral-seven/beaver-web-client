@@ -5,6 +5,7 @@ import ChatScreen from './components/main/ChatScreen';
 import Header from './components/top-side/Header';
 import DashScreen from './components/Data/DashScreen';
 import DataToTable from './components/Data/DataToTable';
+import { ExampleData } from './components/Data/Chart/ChartExample';
 
 function App() {
   const [showComponent, setShowComponent] = useState(0);

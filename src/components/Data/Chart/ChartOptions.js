@@ -1,4 +1,4 @@
-export function BarChartOptions(titleText) {
+export function commonOptions(titleText) {
   return {
     responsive: true,
     layout: {
@@ -25,307 +25,114 @@ export function BarChartOptions(titleText) {
         mode: 'label',
       },
       colors: {
-        enabled: false,
-        forceOverride: true,
+        enabled: true,
       },
     },
   };
+}
+export function BarChartOptions(titleText) {
+  const options = commonOptions(titleText);
+  options.scales = {
+    x: {
+      stacked: false,
+    },
+    y: {
+      stacked: false,
+    },
+  };
+  return options;
 }
 
-export function BubbleChartOptions(titleText) {
-  return {
-    responsive: true,
-    layout: {
-      padding: 20,
-    },
-    plugins: {
-      legend: {
-        position: 'top',
-        labels: {
-          font: {
-            size: 12,
-          },
-        },
-      },
-      title: {
-        display: true,
-        text: titleText,
-        font: {
-          size: 18,
-          weight: 'bold',
-        },
-      },
-      autocolors: {
-        mode: 'label',
-      },
-      colors: {
-        enabled: false,
-        forceOverride: true,
-      },
-    },
-  };
-}
-export function DoughnutChartOptions(titleText) {
-  return {
-    responsive: true,
-    layout: {
-      padding: 20,
-    },
-    plugins: {
-      legend: {
-        position: 'top',
-        labels: {
-          font: {
-            size: 12,
-          },
-        },
-      },
-      title: {
-        display: true,
-        text: titleText,
-        font: {
-          size: 18,
-          weight: 'bold',
-        },
-      },
-      autocolors: {
-        mode: 'label',
-      },
-      colors: {
-        enabled: false,
-        forceOverride: true,
-      },
-    },
-  };
-}
 export function HorizontalBarChartOptions(titleText) {
-  return {
-    responsive: true,
-    layout: {
-      padding: 20,
-    },
-    plugins: {
-      legend: {
-        position: 'top',
-        labels: {
-          font: {
-            size: 12,
-          },
-        },
-      },
-      title: {
-        display: true,
-        text: titleText,
-        font: {
-          size: 18,
-          weight: 'bold',
-        },
-      },
-      autocolors: {
-        mode: 'label',
-      },
-      colors: {
-        enabled: false,
-        forceOverride: true,
-      },
-    },
-  };
+  const options = commonOptions(titleText);
+  options.indexAxis = 'y';
+  return options;
 }
-export function LineBarChartOptions(titleText) {
-  return {
-    responsive: true,
-    layout: {
-      padding: 20,
+
+export function StackedBarChartOptions(titleText) {
+  const options = commonOptions(titleText);
+  options.scales = {
+    x: {
+      stacked: true,
     },
-    plugins: {
-      legend: {
-        position: 'top',
-        labels: {
-          font: {
-            size: 12,
-          },
-        },
-      },
-      title: {
-        display: true,
-        text: titleText,
-        font: {
-          size: 18,
-          weight: 'bold',
-        },
-      },
-      autocolors: {
-        mode: 'label',
-      },
-      colors: {
-        enabled: false,
-        forceOverride: true,
-      },
+    y: {
+      stacked: true,
     },
   };
+  return options;
+}
+
+export function VerticalBarChartOptions(titleText) {
+  const options = commonOptions(titleText);
+  return options;
+}
+export function ComboBarChartOptions(titleText) {
+  const options = commonOptions(titleText);
+  return options;
 }
 export function LineChartOptions(titleText) {
-  return {
-    responsive: true,
-    layout: {
-      padding: 20,
+  const options = commonOptions(titleText);
+  options.elements = {
+    line: {
+      tension: 0.4, // Smoothening line
     },
-    plugins: {
-      legend: {
-        position: 'top',
-        labels: {
-          font: {
-            size: 12,
-          },
-        },
-      },
-      title: {
-        display: true,
-        text: titleText,
-        font: {
-          size: 18,
-          weight: 'bold',
-        },
-      },
-      autocolors: {
-        mode: 'label',
-      },
-      colors: {
-        enabled: false,
-        forceOverride: true,
-      },
+    point: {
+      radius: 5, // Point size
     },
   };
+  return options;
 }
+export function MultiAxisLineChartOptions(titleText) {
+  const options = commonOptions(titleText);
+  return options;
+}
+export function PointStyleLineChartOptions(titleText) {
+  const options = commonOptions(titleText);
+  return options;
+}
+export function StackedBarLineChartOptions(titleText) {
+  const options = commonOptions(titleText);
+  return options;
+}
+export function BubbleChartOptions(titleText) {
+  const options = commonOptions(titleText);
+  return options;
+}
+
+export function DoughnutChartOptions(titleText) {
+  const options = commonOptions(titleText);
+  options.cutout = '50%';
+  return options;
+}
+
 export function PieChartOptions(titleText) {
-  return {
-    responsive: true,
-    layout: {
-      padding: 20,
-    },
-    plugins: {
-      legend: {
-        position: 'top',
-        labels: {
-          font: {
-            size: 12,
-          },
-        },
-      },
-      title: {
-        display: true,
-        text: titleText,
-        font: {
-          size: 18,
-          weight: 'bold',
-        },
-      },
-      autocolors: {
-        mode: 'label',
-      },
-      colors: {
-        enabled: false,
-        forceOverride: true,
-      },
-    },
+  const options = commonOptions(titleText);
+  options.emptyDoughnut = {
+    color: 'rgba(255, 128, 0, 0.5)',
+    width: 2,
+    radiusDecrease: 20,
   };
+  return options;
 }
 export function PolarAreaChartOptions(titleText) {
-  return {
-    responsive: true,
-    layout: {
-      padding: 20,
-    },
-    plugins: {
-      legend: {
-        position: 'top',
-        labels: {
-          font: {
-            size: 12,
-          },
-        },
-      },
-      title: {
-        display: true,
-        text: titleText,
-        font: {
-          size: 18,
-          weight: 'bold',
-        },
-      },
-      autocolors: {
-        mode: 'label',
-      },
-      colors: {
-        enabled: false,
-        forceOverride: true,
-      },
-    },
-  };
+  const options = commonOptions(titleText);
+  return options;
 }
-export function RadarChartOptions(titleText) {
-  return {
-    responsive: true,
-    layout: {
-      padding: 20,
-    },
-    plugins: {
-      legend: {
-        position: 'top',
-        labels: {
-          font: {
-            size: 12,
-          },
-        },
-      },
-      title: {
-        display: true,
-        text: titleText,
-        font: {
-          size: 18,
-          weight: 'bold',
-        },
-      },
-      autocolors: {
-        mode: 'label',
-      },
-      colors: {
-        enabled: false,
-        forceOverride: true,
-      },
-    },
-  };
+export function PolarAreaCenteredChartOptions(titleText) {
+  const options = commonOptions(titleText);
+  return options;
 }
+
 export function ScatterChartOptions(titleText) {
-  return {
-    responsive: true,
-    layout: {
-      padding: 20,
+  const options = commonOptions(titleText);
+  options.scales = {
+    x: {
+      type: 'linear',
+      position: 'bottom',
     },
-    plugins: {
-      legend: {
-        position: 'top',
-        labels: {
-          font: {
-            size: 12,
-          },
-        },
-      },
-      title: {
-        display: true,
-        text: titleText,
-        font: {
-          size: 18,
-          weight: 'bold',
-        },
-      },
-      autocolors: {
-        mode: 'label',
-      },
-      colors: {
-        enabled: false,
-        forceOverride: true,
-      },
+    y: {
+      type: 'linear',
     },
   };
+  return options;
 }

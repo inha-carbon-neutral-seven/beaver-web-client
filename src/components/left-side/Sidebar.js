@@ -47,7 +47,7 @@ function Sidebar({ page, jsonData }) {
         style={{ width: `${width}px` }}
       >
         <div>
-          {page === 0 && <PrintFileCards />}
+          {page === 0 && <PrintFileCards jsonData={jsonData} />}
           {page === 1 && <DataSelect jsonData={jsonData} />}
           {page === 2 && <DataSelect jsonData={jsonData} />}
         </div>
