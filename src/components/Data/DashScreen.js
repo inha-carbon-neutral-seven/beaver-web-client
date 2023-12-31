@@ -11,15 +11,43 @@ function DashScreen({ jsonData }) {
   useEffect(() => {
     if (jsonData) {
       setSampleData1(
-        ChartData('AGE Distribution', jsonData, 'AGE', 'Target', 0)
+        ChartData(
+          'Sales Trends Over Time',
+          jsonData,
+          'Date',
+          'Sale (Dollars)',
+          0
+        )
       );
       setColorIndex((prev) => prev + 1);
-      setSampleData2(ChartData('CRIM Rates', jsonData, 'CRIM', 'Target', 1));
+      setSampleData2(
+        ChartData(
+          'Category Popularity',
+          jsonData,
+          'Category Name',
+          'Sale (Dollars)',
+          1
+        )
+      );
       setColorIndex((prev) => prev + 1);
-      setSampleData3(ChartData('RM vs Target', jsonData, 'RM', 'Target', 2));
+      setSampleData3(
+        ChartData(
+          'Top Performing Products',
+          jsonData,
+          'Item Description',
+          'Sale (Dollars)',
+          2
+        )
+      );
       setColorIndex((prev) => prev + 1);
       setSampleData4(
-        ChartData('CHAS Distribution', jsonData, 'CHAS', 'Target', 3)
+        ChartData(
+          'Geographical Sales Analysis',
+          jsonData,
+          'City',
+          'Sale (Dollars)',
+          3
+        )
       );
       setColorIndex((prev) => prev + 1);
     }
@@ -30,31 +58,27 @@ function DashScreen({ jsonData }) {
     {
       type: 'Bar',
       data: sampleData1,
-      options: commonOptions('AGE Distribution'),
-      title: 'AGE Distribution',
+      options: commonOptions('Sales Trends Over Time'),
     },
     {
       type: 'Line',
       data: sampleData2,
-      options: commonOptions('CRIM Rates'),
-      title: 'CRIM Rates',
+      options: commonOptions('Category Popularity'),
     },
     {
       type: 'Scatter',
       data: sampleData3,
-      options: commonOptions('RM vs Target'),
-      title: 'RM vs Target',
+      options: commonOptions('Top Performing Products'),
     },
     {
       type: 'Pie',
       data: sampleData4,
-      options: commonOptions('CHAS Distribution'),
-      title: 'CHAS Distribution',
+      options: commonOptions('Geographical Sales Analysis'),
     },
   ];
 
   return (
-    <div className="container mx-auto p-4 flex flex-wrap gap-6">
+    <div className="container mx-auto p-4 flex flex-wrap gap-6 overflow-auto max-w-full max-h-[90vh]">
       {chartDataArray.map((chart, index) =>
         chart.data ? (
           <div key={index}>

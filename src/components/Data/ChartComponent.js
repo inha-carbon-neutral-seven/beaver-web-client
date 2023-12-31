@@ -98,18 +98,24 @@ export function ChartData(
 export function ChartOptions(titleText) {
   return {
     responsive: true,
+    layout: {
+      padding: 20,
+    },
     plugins: {
-      title: {
-        display: true,
-        text: titleText,
-      },
       legend: {
         position: 'top',
         labels: {
           font: {
-            size: 18,
-            weight: 'bold',
+            size: 12,
           },
+        },
+      },
+      title: {
+        display: true,
+        text: titleText,
+        font: {
+          size: 18,
+          weight: 'bold',
         },
       },
       autocolors: {
