@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { ChartComponent, ChartData, ChartOptions } from './ChartComponent';
+import { ChartComponent, ChartData } from './Chart/ChartComponent';
 
 function DashScreen({ jsonData }) {
-  const [colorIndex, setColorIndex] = useState(0); // 색상 인덱스 상태 추가
+  const [colorIndex, setColorIndex] = useState(0);
   const [sampleData1, setSampleData1] = useState(null);
   const [sampleData2, setSampleData2] = useState(null);
   const [sampleData3, setSampleData3] = useState(null);
@@ -53,27 +53,26 @@ function DashScreen({ jsonData }) {
     }
   }, [jsonData]);
 
-  const commonOptions = (title) => ChartOptions(title);
   const chartDataArray = [
     {
       type: 'Bar',
       data: sampleData1,
-      options: commonOptions('Sales Trends Over Time'),
-    },
-    {
-      type: 'Line',
-      data: sampleData2,
-      options: commonOptions('Category Popularity'),
-    },
-    {
-      type: 'Scatter',
-      data: sampleData3,
-      options: commonOptions('Top Performing Products'),
+      options: { title: 'Sales Trends Over Time' },
     },
     {
       type: 'Pie',
+      data: sampleData2,
+      options: { title: 'Category Popularity' },
+    },
+    {
+      type: 'Line',
+      data: sampleData3,
+      options: { title: 'Top Performing Products' },
+    },
+    {
+      type: 'Doughnut',
       data: sampleData4,
-      options: commonOptions('Geographical Sales Analysis'),
+      options: { title: 'Geographical Sales Analysis' },
     },
   ];
 
@@ -81,15 +80,12 @@ function DashScreen({ jsonData }) {
     <div className="container mx-auto p-4 flex flex-wrap gap-6 overflow-auto max-w-full max-h-[90vh]">
       {chartDataArray.map((chart, index) =>
         chart.data ? (
-          <div key={index}>
-            <div className="flex-1">
-              <ChartComponent
-                type={chart.type}
-                data={chart.data}
-                options={chart.options}
-                index={index}
-              />
-            </div>
+          <div key={index} className="flex-1">
+            <ChartComponent
+              type={chart.type}
+              data={chart.data}
+              options={chart.options}
+            />
           </div>
         ) : null
       )}

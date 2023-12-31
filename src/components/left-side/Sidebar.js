@@ -43,7 +43,7 @@ function Sidebar({ page, jsonData }) {
   return (
     <div className="flex">
       <aside
-        className="w-64 bg-white dark:bg-gray-800 p-4 space-y-2 flex-shrink-0 drop-shadow-lg ml-40 mt-5 mb-2 rounded-[12px]"
+        className="w-64 max-h-[90vh] bg-white dark:bg-gray-800 p-4 space-y-2 flex-shrink-0 drop-shadow-lg ml-40 mt-5 mb-2 rounded-[12px]"
         style={{ width: `${width}px` }}
       >
         <div>

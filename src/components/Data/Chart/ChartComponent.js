@@ -2,6 +2,16 @@ import React from 'react';
 import { ResizableBox } from 'react-resizable';
 import 'react-resizable/css/styles.css';
 import {
+  Pie,
+  Line,
+  Doughnut,
+  Radar,
+  PolarArea,
+  Bubble,
+  Scatter,
+  Bar,
+} from 'react-chartjs-2';
+import {
   Chart as ChartJS,
   CategoryScale,
   LinearScale,
@@ -13,17 +23,9 @@ import {
   PointElement,
   LineElement,
 } from 'chart.js';
-import {
-  Bar,
-  Pie,
-  Line,
-  Doughnut,
-  Radar,
-  PolarArea,
-  Bubble,
-  Scatter,
-} from 'react-chartjs-2';
 import autocolors from 'chartjs-plugin-autocolors';
+import * as ChartOptions from './ChartOptions';
+
 // Register all components needed for all chart types
 ChartJS.register(
   CategoryScale,
@@ -94,41 +96,16 @@ export function ChartData(
   };
 }
 
-// Export ChartOptions function
-export function ChartOptions(titleText) {
-  return {
-    responsive: true,
-    layout: {
-      padding: 20,
-    },
-    plugins: {
-      legend: {
-        position: 'top',
-        labels: {
-          font: {
-            size: 12,
-          },
-        },
-      },
-      title: {
-        display: true,
-        text: titleText,
-        font: {
-          size: 18,
-          weight: 'bold',
-        },
-      },
-      autocolors: {
-        mode: 'label',
-      },
-      colors: {
-        enabled: false,
-        forceOverride: true,
-      },
-    },
-  };
-}
-
+const chartComponents = {
+  Bar,
+  Line,
+  Pie,
+  Doughnut,
+  Radar,
+  PolarArea,
+  Bubble,
+  Scatter,
+};
 export const ChartComponent = ({ type, data, options }) => {
   if (!data) {
     return <p>No chart data</p>;
@@ -139,28 +116,21 @@ export const ChartComponent = ({ type, data, options }) => {
   if (!data.datasets) {
     return <p>No chart datasets</p>;
   }
-  const chartTypes = {
-    Bar,
-    Line,
-    Pie,
-    Doughnut,
-    Radar,
-    PolarArea,
-    Bubble,
-    Scatter,
-  };
+  const Chart = chartComponents[type];
+  if (!Chart) return <p>Invalid chart type</p>;
 
-  const Chart = chartTypes[type] || (() => <p>Invalid chart type</p>);
+  const chartOptions = ChartOptions[`${type}ChartOptions`];
+  if (!chartOptions) return <p>Invalid chart options</p>;
 
   return (
     <ResizableBox
-      width={600}
-      height={400}
+      width={450}
+      height={300}
       minConstraints={[300, 200]}
       maxConstraints={[800, 600]}
       className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 flex flex-col m-2"
     >
-      <Chart data={data} options={options} />
+      <Chart data={data} options={chartOptions(options.title)} />
     </ResizableBox>
   );
 };
