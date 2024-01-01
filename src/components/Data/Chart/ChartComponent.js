@@ -2,15 +2,7 @@ import React from 'react';
 import { ResizableBox } from 'react-resizable';
 import 'react-resizable/css/styles.css';
 import ChartWrapperBox from './ChartWrapperBox';
-import {
-  Pie,
-  Line,
-  Doughnut,
-  PolarArea,
-  Bubble,
-  Scatter,
-  Bar,
-} from 'react-chartjs-2';
+import { Pie, Line, Doughnut, PolarArea, Scatter, Bar } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -226,29 +218,7 @@ export function LineChartData(
     ],
   };
 }
-export function BubbleChartData(
-  jsonData,
-  categoryColumn,
-  dataColumn,
-  radiusColumn,
-  colorArray
-) {
-  const bubbles = jsonData.map((item) => ({
-    x: item[categoryColumn],
-    y: parseFloat(item[dataColumn]) || 0,
-    r: parseFloat(item[radiusColumn]) || 5, // Default radius
-  }));
 
-  return {
-    datasets: [
-      {
-        label: 'Bubble Chart',
-        data: bubbles,
-        backgroundColor: colorArray[0], // You can use different colors if needed
-      },
-    ],
-  };
-}
 export function DoughnutChartData(jsonData, categoryColumn, colorArray) {
   const uniqueValuesCount = {};
   jsonData.forEach((item) => {
@@ -277,7 +247,6 @@ export function PolarAreaChartData(
   jsonData,
   categoryColumn,
   dataColumn,
-  index,
   colorArray
 ) {
   const { sortedCategories, dataValues } = ChartData(
@@ -293,12 +262,13 @@ export function PolarAreaChartData(
         label: 'Polar Area Chart',
         data: dataValues,
         backgroundColor: sortedCategories.map(
-          (_, i) => colorArray[i % colorArray.length]
+          (_, i) => colorArray[i % colorArray.length] // Use sortedCategories for mapping
         ),
       },
     ],
   };
 }
+
 export function ScatterChartData(
   jsonData,
   xColumn,
@@ -375,7 +345,6 @@ const chartComponents = {
   MultiAxisLine: Line,
   PointStyleLine: Line,
   StackedBarLine: Line,
-  Bubble,
   Doughnut,
   Pie,
   PolarArea,

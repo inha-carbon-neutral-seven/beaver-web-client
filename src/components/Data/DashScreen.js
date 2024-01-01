@@ -11,7 +11,7 @@ function DashScreen({ jsonData }) {
   }, [jsonData]);
 
   return (
-    <div className="container mx-auto p-4 flex flex-wrap gap-6 overflow-auto max-w-full max-h-[90vh]">
+    <div className="container mx-auto mt-5 mr-4 flex flex-wrap gap-6 overflow-auto max-w-full max-h-[85vh]">
       {jsonData.length === 0 ? <ChartExample /> : <div>Data is available</div>}
     </div>
   );

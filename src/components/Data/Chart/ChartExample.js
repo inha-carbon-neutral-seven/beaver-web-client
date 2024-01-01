@@ -7,7 +7,7 @@ import {
   PieChartData,
   DoughnutChartData,
   ScatterChartData,
-  BubbleChartData,
+  PolarAreaChartData,
 } from './ChartComponent';
 export const ExampleData = [
   {
@@ -839,19 +839,16 @@ const sampleData4 = DoughnutChartData(
   'Item Description',
   colorArray
 );
-// For Bubble chart, assuming you have a radiusColumn, modify accordingly
-const sampleData5 = BubbleChartData(
+const sampleData5 = PolarAreaChartData(
   ExampleData,
-  'Vendor Name',
-  'Sale (Dollars)',
-  'radiusColumn', // replace with actual radius column
-  3,
+  'Category Name',
+  'Bottles Sold',
   colorArray
 );
 const sampleData6 = PieChartData(ExampleData, 'Category Name', colorArray);
 const sampleData7 = ScatterChartData(
   ExampleData,
-  'County',
+  'Bottles Sold',
   'Sale (Dollars)',
   4,
   colorArray
@@ -878,7 +875,7 @@ const chartDataArray = [
     options: { title: 'Geographical Sales Analysis' },
   },
   {
-    type: 'Bubble',
+    type: 'PolarArea',
     data: sampleData5,
     options: { title: 'Vendor Performance Analysis' },
   },
@@ -890,7 +887,7 @@ const chartDataArray = [
   {
     type: 'Scatter',
     data: sampleData7,
-    options: { title: 'County Sales Analysis' },
+    options: { title: 'Bottles Sold vs. Sale (Dollars)' },
   },
 ];
 
