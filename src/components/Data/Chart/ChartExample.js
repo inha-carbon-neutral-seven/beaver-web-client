@@ -827,7 +827,6 @@ const sampleData2 = BarChartData(
   colorArray
 );
 const sampleData3 = BarChartData(
-  // Assuming HorizontalBar is just a styled Bar chart
   ExampleData,
   'Item Description',
   'Sale (Dollars)',
