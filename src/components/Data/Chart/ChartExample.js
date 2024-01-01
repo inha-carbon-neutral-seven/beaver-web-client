@@ -836,15 +836,17 @@ const sampleData3 = BarChartData(
 const sampleData4 = DoughnutChartData(
   ExampleData,
   'Item Description',
+  10,
   colorArray
 );
 const sampleData5 = PolarAreaChartData(
   ExampleData,
   'Category Name',
   'Bottles Sold',
+  10,
   colorArray
 );
-const sampleData6 = PieChartData(ExampleData, 'Category Name', colorArray);
+const sampleData6 = PieChartData(ExampleData, 'Category Name', 10, colorArray);
 const sampleData7 = ScatterChartData(
   ExampleData,
   'Bottles Sold',
@@ -856,37 +858,37 @@ const chartDataArray = [
   {
     type: 'Line',
     data: sampleData1,
-    options: { title: 'Sales Trends Over Time' },
+    options: { title: 'Sample Data1' },
   },
   {
     type: 'Bar',
     data: sampleData2,
-    options: { title: 'Category Popularity' },
+    options: { title: 'Sample Data2' },
   },
   {
     type: 'HorizontalBar',
     data: sampleData3,
-    options: { title: 'Top Performing Products' },
+    options: { title: 'Sample Data3' },
   },
   {
     type: 'Doughnut',
     data: sampleData4,
-    options: { title: 'Geographical Sales Analysis' },
+    options: { title: 'Sample Data4' },
   },
   {
     type: 'PolarArea',
     data: sampleData5,
-    options: { title: 'Vendor Performance Analysis' },
+    options: { title: 'Sample Data5' },
   },
   {
     type: 'Pie',
     data: sampleData6,
-    options: { title: 'Store Performance Analysis' },
+    options: { title: 'Sample Data6' },
   },
   {
     type: 'Scatter',
     data: sampleData7,
-    options: { title: 'Bottles Sold vs. Sale (Dollars)' },
+    options: { title: 'Sample Data7' },
   },
 ];
 

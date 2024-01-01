@@ -17,6 +17,7 @@ import {
 } from 'chart.js/auto';
 import autocolors from 'chartjs-plugin-autocolors';
 import * as ChartOptions from './ChartOptions';
+import { data } from '@tensorflow/tfjs';
 
 // Register all components needed for all chart types
 
@@ -156,35 +157,74 @@ export function BarChartData(
     labels: sortedCategories,
     datasets: [
       {
-        label: 'Bar Chart',
+        label: dataColumn,
         data: dataValues,
         backgroundColor: selectedColor,
         borderColor: selectedColor.replace('0.5', '1'),
         borderWidth: 1,
       },
     ],
+    scales: {
+      x: {
+        display: true,
+        title: {
+          display: true,
+          text: categoryColumn,
+        },
+      },
+      y: {
+        display: true,
+        title: {
+          display: true,
+          text: dataColumn,
+        },
+      },
+    },
   };
 }
 
-export function PieChartData(jsonData, categoryColumn, colorArray) {
+export function PieChartData(jsonData, categoryColumn, num, colorArray) {
   const uniqueValuesCount = {};
   jsonData.forEach((item) => {
     const category = item[categoryColumn];
     uniqueValuesCount[category] = (uniqueValuesCount[category] || 0) + 1;
   });
 
-  const labels = Object.keys(uniqueValuesCount);
-  const data = Object.values(uniqueValuesCount);
+  // Convert to array and sort by count
+  const sortedCategories = Object.entries(uniqueValuesCount).sort(
+    (a, b) => b[1] - a[1]
+  );
+
+  // Slice to get top 'num' items
+  const topCategories = sortedCategories.slice(0, num);
+
+  // Calculate the sum of the remaining items
+  const othersCount = sortedCategories
+    .slice(num)
+    .reduce((acc, curr) => acc + curr[1], 0);
+
+  // Create new labels and data arrays
+  const labels = topCategories.map((item) => item[0]);
+  if (othersCount > 0) {
+    labels.push('Others');
+  }
+  const data = topCategories.map((item) => item[1]);
+  if (othersCount > 0) {
+    data.push(othersCount);
+  }
+
+  // Map colors
+  const backgroundColor = labels.map(
+    (_, i) => colorArray[i % colorArray.length]
+  );
 
   return {
     labels: labels,
     datasets: [
       {
-        label: 'Pie Chart',
+        label: categoryColumn,
         data: data,
-        backgroundColor: labels.map(
-          (_, i) => colorArray[i % colorArray.length]
-        ),
+        backgroundColor: backgroundColor,
       },
     ],
   };
@@ -208,7 +248,7 @@ export function LineChartData(
     labels: sortedCategories,
     datasets: [
       {
-        label: 'Line Chart',
+        label: dataColumn,
         data: dataValues,
         backgroundColor: selectedColor,
         borderColor: selectedColor.replace('0.5', '1'),
@@ -219,25 +259,48 @@ export function LineChartData(
   };
 }
 
-export function DoughnutChartData(jsonData, categoryColumn, colorArray) {
+export function DoughnutChartData(jsonData, categoryColumn, num, colorArray) {
   const uniqueValuesCount = {};
   jsonData.forEach((item) => {
     const category = item[categoryColumn];
     uniqueValuesCount[category] = (uniqueValuesCount[category] || 0) + 1;
   });
 
-  const labels = Object.keys(uniqueValuesCount);
-  const data = Object.values(uniqueValuesCount);
+  // Convert to array and sort by count
+  const sortedCategories = Object.entries(uniqueValuesCount).sort(
+    (a, b) => b[1] - a[1]
+  );
+
+  // Slice to get top 'num' items
+  const topCategories = sortedCategories.slice(0, num);
+
+  // Calculate the sum of the remaining items
+  const othersCount = sortedCategories
+    .slice(num)
+    .reduce((acc, curr) => acc + curr[1], 0);
+
+  // Create new labels and data arrays
+  const labels = topCategories.map((item) => item[0]);
+  if (othersCount > 0) {
+    labels.push('Others');
+  }
+  const data = topCategories.map((item) => item[1]);
+  if (othersCount > 0) {
+    data.push(othersCount);
+  }
+
+  // Map colors
+  const backgroundColor = labels.map(
+    (_, i) => colorArray[i % colorArray.length]
+  );
 
   return {
     labels: labels,
     datasets: [
       {
-        label: 'Doughnut Chart',
+        label: categoryColumn,
         data: data,
-        backgroundColor: labels.map(
-          (_, i) => colorArray[i % colorArray.length]
-        ),
+        backgroundColor: backgroundColor,
       },
     ],
   };
@@ -247,6 +310,7 @@ export function PolarAreaChartData(
   jsonData,
   categoryColumn,
   dataColumn,
+  num,
   colorArray
 ) {
   const { sortedCategories, dataValues } = ChartData(
@@ -255,15 +319,37 @@ export function PolarAreaChartData(
     dataColumn
   );
 
+  // Assuming sortedCategories and dataValues are arrays of equal length and in corresponding order
+
+  // Slice to get top 'num' categories and their data
+  const topCategories = sortedCategories.slice(0, num);
+  const topData = dataValues.slice(0, num);
+
+  // Calculate the sum of the data of the remaining categories
+  const othersDataSum = dataValues
+    .slice(num)
+    .reduce((acc, curr) => acc + curr, 0);
+
+  // Update labels and data arrays
+  const labels = [...topCategories];
+  const data = [...topData];
+  if (othersDataSum > 0) {
+    labels.push('Others'); // Add 'Others' category
+    data.push(othersDataSum); // Add sum of remaining data
+  }
+
+  // Map colors
+  const backgroundColor = labels.map(
+    (_, i) => colorArray[i % colorArray.length]
+  );
+
   return {
-    labels: sortedCategories,
+    labels: labels,
     datasets: [
       {
-        label: 'Polar Area Chart',
-        data: dataValues,
-        backgroundColor: sortedCategories.map(
-          (_, i) => colorArray[i % colorArray.length] // Use sortedCategories for mapping
-        ),
+        label: dataColumn,
+        data: data,
+        backgroundColor: backgroundColor,
       },
     ],
   };
