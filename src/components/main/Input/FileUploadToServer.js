@@ -20,6 +20,8 @@ function FileUploadToServer() {
 
   // 파일 업로드 시, 전송
   const handleFileUpload = async () => {
+    const finalDataName = dataName || selectedFile.name;
+
     try {
       const formData = new FormData();
       formData.append('file', selectedFile);
@@ -49,7 +51,7 @@ function FileUploadToServer() {
           const newAnalyzedFileData = {
             analyzedFileData_name: selectedFile.name,
             analyzedFileData_size: selectedFile.size, // Size in bytes
-            userCustomName: dataName, // 사용자가 지정한 데이터 이름도 같이 저장한다.
+            userCustomName: finalDataName, // 사용자가 지정한 데이터 이름도 같이 저장한다.
           };
 
           // 분석 데이터를 리스트에 저장한다.
@@ -70,7 +72,7 @@ function FileUploadToServer() {
     <div className="max-w-sm p-6 border border-gray-200 rounded-lg shadow cursor-pointer mb-3 dark:bg-gray-800 dark:border-gray-700 ">
       <p>파일명: {selectedFile.name}</p>
       <p>파일크기: {`${selectedFile.size}byte`}</p>
-      <p>데이터를 간단하게 설명해주세요.</p>
+      <p>무슨 데이터인가요?</p>
       <form
         onSubmit={(e) => {
           e.preventDefault();
