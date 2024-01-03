@@ -1,7 +1,7 @@
-import { useSelector } from "react-redux";
-import React, { useState, useEffect } from "react";
-import PrintFileCards from "./PrintFileCards";
-import DataSelect from "../Data/DataSelect";
+import { useSelector } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import PrintFileCards from './PrintFileCards';
+import DataSelect from '../Data/DataSelect';
 
 function Sidebar({ page, jsonData }) {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -13,10 +13,10 @@ function Sidebar({ page, jsonData }) {
     };
 
     // Attach window resize listener
-    window.addEventListener("resize", handleResize);
+    window.addEventListener('resize', handleResize);
 
     // Cleanup function to remove the event listener
-    return () => window.removeEventListener("resize", handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   const minWidth = 300;
@@ -34,16 +34,16 @@ function Sidebar({ page, jsonData }) {
       setWidth(newWidth);
     };
 
-    document.addEventListener("mousemove", doDrag);
-    document.addEventListener("mouseup", () => {
-      document.removeEventListener("mousemove", doDrag);
+    document.addEventListener('mousemove', doDrag);
+    document.addEventListener('mouseup', () => {
+      document.removeEventListener('mousemove', doDrag);
     });
   };
 
   return (
     <div className="flex">
       <aside
-        className="w-64 max-h-[90vh] backdrop-blur-xl bg-white/80 p-4 space-y-2 flex-shrink-0 drop-shadow-lg ml-40 mt-5 mb-2 rounded-[12px]"
+        className="max-w-64 h-80vh backdrop-blur-xl bg-white/80 space-y-2 flex-shrink-0 drop-shadow-lg rounded-[12px]"
         style={{ width: `${width}px` }}
       >
         <div>
@@ -54,7 +54,7 @@ function Sidebar({ page, jsonData }) {
       </aside>
       <div
         className="cursor-col-resize"
-        style={{ width: "5px", cursor: "col-resize" }}
+        style={{ width: '10px', cursor: 'col-resize' }}
         onMouseDown={handleMouseDown}
       ></div>
     </div>
