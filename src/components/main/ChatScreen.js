@@ -3,14 +3,12 @@ import React, { useEffect } from 'react';
 import Loader from './Loader';
 import ChatLogs from './ChatLogs';
 import UserInput from './Input/UserInput';
-import FileUploadToServer from './Input/FileUploadToServer';
 import { addToChatLog } from '../../reducers/chatScreenReducers';
 import beaver from '../../image/logo.jpg';
 
 function ChatScreen({ fileData, onFileChange }) {
   // App의 상태변수
   const currentState = useSelector((state) => state.appState.currentState);
-  const isConnected = useSelector((state) => state.connected.isConnected);
 
   // 이 컴포넌트에서 사용할 상태변수들
   const sentMessage = useSelector((state) => state.chatScreen.sentMessage);
@@ -36,8 +34,6 @@ function ChatScreen({ fileData, onFileChange }) {
   return (
     <div className="flex-grow flex flex-col bg-white dark:bg-gray-800 w-full h-full drop-shadow-lg overflow-auto rounded-[12px]">
       {/* 파일 업로드 후(아직 서버로 전송은 안한 상황), 사용자지정 이름 input 입력받기 */}
-      {/* 이후에 파일과 사용자 지정 이름을 같이 서버로 보낸다 */}
-      {isConnected && <FileUploadToServer />}
 
       {/* 파일 전송 관련 로딩 메시지 표시 */}
       <Loader currentState={currentState} />

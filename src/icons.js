@@ -7,6 +7,7 @@ import {
   faHourglass1,
   faHourglass2,
   faHourglass3,
+  faCheck,
 } from '@fortawesome/free-solid-svg-icons';
 
 import { faPaperPlane } from '@fortawesome/free-regular-svg-icons';
@@ -48,4 +49,7 @@ export function Loadicon() {
     transform: rotate ? 'rotate(180deg)' : 'none',
   };
   return <FontAwesomeIcon icon={currentIcon} size="lg" style={rotatingStyle} />;
+}
+export function Checkicon() {
+  return <FontAwesomeIcon icon={faCheck} size="lg" />;
 }

@@ -2,10 +2,12 @@ import { useSelector } from 'react-redux';
 import React, { useState, useEffect } from 'react';
 import PrintFileCards from './PrintFileCards';
 import DataSelect from '../Data/DataSelect';
+import FileUploadToServer from '../main/Input/FileUploadToServer';
 
 function Sidebar({ page, jsonData, setSidebarWidth }) {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [width, setWidth] = useState(300);
+  const isConnected = useSelector((state) => state.connected.isConnected);
 
   useEffect(() => {
     const handleResize = () => {
@@ -48,6 +50,7 @@ function Sidebar({ page, jsonData, setSidebarWidth }) {
         style={{ width: `${width}px` }}
       >
         <div>
+          {isConnected && <FileUploadToServer />}
           {page === 0 && <PrintFileCards jsonData={jsonData} />}
           {page === 1 && <DataSelect jsonData={jsonData} />}
           {page === 2 && <DataSelect jsonData={jsonData} />}
