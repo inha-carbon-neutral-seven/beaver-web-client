@@ -6,7 +6,7 @@ import Header from './components/top-side/Header';
 import DashScreen from './components/Data/DashScreen';
 import DataToTable from './components/Data/DataToTable';
 import { ExampleData } from './components/Data/Chart/ChartExample';
-import { Bellicon } from './icons';
+import { Bellicon, Exclamicon } from './icons';
 import Loader from './components/main/Loader';
 import { useSelector } from 'react-redux';
 import { faL } from '@fortawesome/free-solid-svg-icons';
@@ -67,7 +67,7 @@ function App() {
       }`}
     >
       <div className="right-0">
-        <Bellicon />
+        {currentState === 'analyzed error' ? <Exclamicon /> : <Bellicon />}
         <Loader currentState={currentState} />
       </div>
     </div>
