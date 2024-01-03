@@ -19,7 +19,7 @@ function PrintFileCards({ processAll = true, jsonData = [] }) {
       {dataListToProcess.map((analyzedFileData, index) => (
         <div
           key={index}
-          className={`max-w-sm p-6 border border-gray-200 rounded-lg shadow cursor-pointer mb-3 dark:bg-gray-800 dark:border-gray-700 ${
+          className={`max-w-full p-6 border border-gray-200 rounded-lg shadow cursor-pointer mb-3 dark:bg-gray-800 dark:border-gray-700 ${
             clickedIndex === index ? 'bg-blue-500 text-white' : 'bg-white'
           } break-words flex flex-col `}
           onClick={() => handleCardClick(index)}

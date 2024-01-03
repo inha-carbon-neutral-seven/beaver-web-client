@@ -9,6 +9,7 @@ import {
   faCheck,
   faSpinner,
   faExclamation,
+  faChevronLeft,
 } from '@fortawesome/free-solid-svg-icons';
 
 import { faPaperPlane, faBell } from '@fortawesome/free-regular-svg-icons';
@@ -69,4 +70,7 @@ export function Spinnericon() {
 }
 export function Exclamicon() {
   return <FontAwesomeIcon icon={faExclamation} size="lg" beat />;
+}
+export function Lefticon() {
+  return <FontAwesomeIcon icon={faChevronLeft} size="2xs" />;
 }

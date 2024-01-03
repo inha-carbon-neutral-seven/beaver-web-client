@@ -7,6 +7,7 @@ import FileUploadToServer from '../main/Input/FileUploadToServer';
 function Sidebar({ page, jsonData, setSidebarWidth }) {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [width, setWidth] = useState(300);
+  const [isVisible, setIsVisible] = useState(true);
   const isConnected = useSelector((state) => state.connected.isConnected);
 
   useEffect(() => {
@@ -14,15 +15,25 @@ function Sidebar({ page, jsonData, setSidebarWidth }) {
       setWindowWidth(window.innerWidth);
     };
 
-    // Attach window resize listener
-    window.addEventListener('resize', handleResize);
+    const debounce = (fn, ms) => {
+      let timer;
+      return (_) => {
+        clearTimeout(timer);
+        timer = setTimeout((_) => {
+          timer = null;
+          fn.apply(this, arguments);
+        }, ms);
+      };
+    };
+    const debouncedHandleResize = debounce(handleResize, 250);
 
-    // Cleanup function to remove the event listener
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener('resize', debouncedHandleResize);
+    return () => window.removeEventListener('resize', debouncedHandleResize);
   }, []);
 
-  const minWidth = 300;
-  const maxWidth = windowWidth * 0.5;
+  const minWidth = 200; // 최소 너비 설정
+  const maxWidth = 400; // 최대 너비 설정
+
   const handleMouseDown = (e) => {
     const startWidth = width;
     const startPosition = e.clientX;
@@ -35,27 +46,35 @@ function Sidebar({ page, jsonData, setSidebarWidth }) {
       );
       setWidth(newWidth);
       setSidebarWidth(newWidth);
-    };
 
-    document.addEventListener('mousemove', doDrag);
-    document.addEventListener('mouseup', () => {
+      if (newWidth <= minWidth) {
+        setIsVisible(false); // 너비가 최소값 이하면 사이드바 숨김
+      } else {
+        setIsVisible(true); // 그렇지 않으면 표시
+      }
+    };
+    const stopDrag = () => {
       document.removeEventListener('mousemove', doDrag);
-    });
+    };
+    document.addEventListener('mousemove', doDrag);
+    document.addEventListener('mouseup', stopDrag, { once: true });
   };
 
   return (
     <div className="flex h-full">
-      <aside
-        className="max-w-64 max-h-[90vh] p-1 backdrop-blur-xl bg-white/80 space-y-2 flex-shrink-0 drop-shadow-lg rounded-[12px]"
-        style={{ width: `${width}px` }}
-      >
-        <div>
-          {isConnected && <FileUploadToServer />}
-          {page === 0 && <PrintFileCards jsonData={jsonData} />}
-          {page === 1 && <DataSelect jsonData={jsonData} />}
-          {page === 2 && <DataSelect jsonData={jsonData} />}
-        </div>
-      </aside>
+      {isVisible && (
+        <aside
+          className="max-w-64 max-h-[90vh] p-1 backdrop-blur-xl bg-white/80 space-y-2 flex-shrink-0 drop-shadow-lg rounded-[12px]"
+          style={{ width: `${width}px` }}
+        >
+          <div>
+            {isConnected && <FileUploadToServer />}
+            {page === 0 && <PrintFileCards jsonData={jsonData} />}
+            {page === 1 && <DataSelect jsonData={jsonData} />}
+            {page === 2 && <DataSelect jsonData={jsonData} />}
+          </div>
+        </aside>
+      )}
       <div
         className="cursor-col-resize"
         style={{ width: '10px', cursor: 'col-resize' }}
