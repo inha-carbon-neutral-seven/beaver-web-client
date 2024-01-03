@@ -2,9 +2,9 @@ import { Spinnericon } from '../../icons';
 function Loader({ currentState }) {
   const messages = [
     '파일을 전송 중입니다...',
-    '파일 전송 성공!',
     '파일을 분석중입니다...',
     '파일 분석 완료!',
+    '파일을 업로드 또는 분석하는데 실패했습니다.',
   ];
   return (
     <div className="flex items-center justify-center pt-5">
@@ -16,15 +16,15 @@ function Loader({ currentState }) {
           </div>
         )}
         {currentState === 'analyzing' && (
-          <div className="items-center space-y-10">
+          <div className="flex items-center space-x-2">
             <p className="text-sm text-center">{messages[1]}</p>
-            <div className="flex space-x-2">
-              <p className="text-sm text-center">{messages[2]}</p>
-              <Spinnericon />
-            </div>
+            <Spinnericon />
           </div>
         )}
         {currentState === 'analyzed' && (
+          <p className="text-sm text-center">{messages[2]}</p>
+        )}
+        {currentState === 'analyzed error' && (
           <p className="text-sm text-center">{messages[3]}</p>
         )}
       </div>

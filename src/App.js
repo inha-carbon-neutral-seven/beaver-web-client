@@ -50,7 +50,7 @@ function App() {
     if (['response_waiting', 'analyzing', 'analyzed'].includes(currentState)) {
       setShowAlert(true);
     }
-    if (currentState === 'analyzed') {
+    if (currentState === 'analyzed' || currentState === 'analyzed error') {
       const timer = setTimeout(() => {
         setShowAlert(false);
       }, 1000);
@@ -62,12 +62,12 @@ function App() {
   // 알림창 컴포넌트
   const Alert = () => (
     <div
-      className={`fixed top-0 left-1/2 transform -translate-x-1/2 bg-white shadow-lg p-4 rounded z-50 ${
-        showAlert ? 'block' : 'hidden'
+      className={`fixed top-10 left-1/2 transform -translate-x-1/2 text-blue-100 bg-blue-800 shadow-xl p-4 rounded-lg z-50 transition duration-300 ease-in-out ${
+        showAlert ? 'opacity-100' : 'opacity-0 hidden'
       }`}
     >
-      <Bellicon />
       <div className="right-0">
+        <Bellicon />
         <Loader currentState={currentState} />
       </div>
     </div>

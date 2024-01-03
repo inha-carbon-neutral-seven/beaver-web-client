@@ -59,6 +59,7 @@ function FileUploadToServer() {
       // 서버 응답 처리
       console.log('파일 업로드 성공:', response);
     } catch (error) {
+      dispatch(updateAppState('analyzed error'));
       console.error('파일 업로드 오류:', error);
     }
   };
