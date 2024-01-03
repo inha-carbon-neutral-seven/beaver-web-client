@@ -19,7 +19,7 @@ function Header({ param }) {
     fontFamily: "sans-serif",
   };
   return (
-    <div className="h-16 bg-gradient-to-r from-beaver-2 to-beaver-1 flex justify-between items-center px-4 w-4/5 fixed rounded-[12px] drop-shadow-lg place-self-center mt-3">
+    <div className="z-50 h-16 bg-gradient-to-r from-beaver-2 to-beaver-1 flex justify-between items-center px-4 w-4/5 fixed rounded-[12px] drop-shadow-lg place-self-center mt-3">
       <div className="flex items-center space-x-4">
         <div className="flex items-center">
           <a href="/" className="flex items-center">

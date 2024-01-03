@@ -13,7 +13,7 @@ import {
 // 사용자 메시지 input 컴포넌트
 // 파일 input(FileInputButton.js), 메시지 input, 전송 버튼을 포함한다.
 // 전송 버튼은 메시지 input만 전송한다.
-function UserInput( { fileData, onFileChange } ) {
+function UserInput({ fileData, onFileChange }) {
   // App의 상태변수
   const currentState = useSelector((state) => state.appState.currentState);
   const isConnected = useSelector((state) => state.connected.isConnected);
@@ -37,18 +37,15 @@ function UserInput( { fileData, onFileChange } ) {
       dispatch(setAIAnswer(""));
 
       try {
-        const response = await fetch(
-          "https://beaver7s.duckdns.org/generate",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              message: message,
-            }),
-          }
-        )
+        const response = await fetch("https://beaver7s.duckdns.org/generate", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            message: message,
+          }),
+        })
           .then((res) => res.json())
           .then((res) => {
             dispatch(setAIAnswer(res.message));
@@ -68,7 +65,7 @@ function UserInput( { fileData, onFileChange } ) {
 
   return (
     /* 사용자 메시지 input */
-    <div className="border-t border-gray-200 dark:border-gray-700 pt-2 w-full">
+    <div className="border-t border-gray-200 pt-2 w-full absolute bottom-2 left-0">
       <div className="flex items-center space-x-2 px-4">
         {/* 파일 input은 따로 만들어놓기 */}
         <FileInput onFileChange={onFileChange} />

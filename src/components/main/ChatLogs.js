@@ -32,5 +32,3 @@ function ChatLogs() {
     </div>
   );
 }
-
-export default ChatLogs;
