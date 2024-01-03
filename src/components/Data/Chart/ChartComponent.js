@@ -164,22 +164,6 @@ export function BarChartData(
         borderWidth: 1,
       },
     ],
-    scales: {
-      x: {
-        display: true,
-        title: {
-          display: true,
-          text: categoryColumn,
-        },
-      },
-      y: {
-        display: true,
-        title: {
-          display: true,
-          text: dataColumn,
-        },
-      },
-    },
   };
 }
 
@@ -449,7 +433,10 @@ export const ChartComponent = ({ type, data, options }) => {
 
   return (
     <ChartWrapperBox>
-      <Chart data={data} options={chartOptions(options.title)} />
+      <Chart
+        data={data}
+        options={chartOptions(options.title, options.yColumn, options.xColumn)}
+      />
     </ChartWrapperBox>
   );
 };
