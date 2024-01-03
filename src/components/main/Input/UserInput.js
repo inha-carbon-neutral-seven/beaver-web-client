@@ -1,6 +1,6 @@
 import { Button } from '@mui/material';
-import React from 'react';
-import { Sendicon } from '../../../icons';
+import React, { useEffect, useState } from 'react';
+import { Sendicon, Loadicon } from '../../../icons';
 import { useDispatch, useSelector } from 'react-redux';
 import FileInput from './FileInputButton';
 import { updateAppState } from '../../../reducers/appStateReducer';
@@ -22,9 +22,14 @@ function UserInput({ fileData, onFileChange }) {
   // 이 컴포넌트에서 사용할 상태변수들
   const loading = useSelector((state) => state.chatScreen.loading);
   const message = useSelector((state) => state.chatScreen.message);
+  const [isButtonActive, setIsButtonActive] = useState(false);
 
   // dispatch
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    setIsButtonActive(message.trim().length > 0);
+  }, [message]);
 
   // 채팅 메시지 전송 시
   const messageHandler = async (e) => {
@@ -65,10 +70,8 @@ function UserInput({ fileData, onFileChange }) {
   };
 
   return (
-    /* 사용자 메시지 input */
     <div className="border-t border-gray-200 pt-2 w-full absolute bottom-2 left-0">
       <div className="flex items-center space-x-2 px-4">
-        {/* 파일 input은 따로 만들어놓기 */}
         <FileInput onFileChange={onFileChange} />
         <form
           className="flex flex-grow"
@@ -87,8 +90,15 @@ function UserInput({ fileData, onFileChange }) {
             }
             onChange={(e) => dispatch(setMessage(e.target.value))}
           />
-          <Button type="submit" variant="outline" className="ml-2">
-            <Sendicon />
+          <Button
+            type="submit"
+            variant="outline"
+            className={`ml-2 ${
+              isButtonActive ? 'active-button-class' : 'disabled-button-class'
+            }`}
+            disabled={!isButtonActive || loading}
+          >
+            {loading ? <Loadicon /> : <Sendicon />}
           </Button>
         </form>
       </div>

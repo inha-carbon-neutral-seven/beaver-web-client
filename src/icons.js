@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import {
   faExpand,
   faDownload,
   faChevronRight,
+  faHourglass1,
+  faHourglass2,
+  faHourglass3,
 } from '@fortawesome/free-solid-svg-icons';
 
 import { faPaperPlane } from '@fortawesome/free-regular-svg-icons';
@@ -19,4 +22,30 @@ export function Nexticon() {
 }
 export function Sendicon() {
   return <FontAwesomeIcon icon={faPaperPlane} size="lg" />;
+}
+export function Loadicon() {
+  const [currentIcon, setCurrentIcon] = useState(faHourglass1);
+  const [rotate, setRotate] = useState(false);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentIcon((prevIcon) => {
+        if (prevIcon === faHourglass1) return faHourglass2;
+        if (prevIcon === faHourglass2) {
+          setRotate(true);
+          return faHourglass3;
+        }
+        setRotate(false);
+        return faHourglass1;
+      });
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  const rotatingStyle = {
+    transition: rotate ? 'transform 1s linear' : 'none',
+    transform: rotate ? 'rotate(180deg)' : 'none',
+  };
+  return <FontAwesomeIcon icon={currentIcon} size="lg" style={rotatingStyle} />;
 }
