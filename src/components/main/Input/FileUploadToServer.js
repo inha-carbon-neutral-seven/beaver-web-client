@@ -12,20 +12,20 @@ function FileUploadToServer() {
   // 이 컴포넌트에서 사용할 상태변수들
   const selectedFile = useSelector((state) => state.chatScreen.selectedFile);
 
-  // 사용자 지정 데이터 이름
-  const [dataName, setDataName] = useState('');
+  // 파일 정보
+  const [dataInfo, setDataInfo] = useState('');
 
   // dispatch func
   const dispatch = useDispatch();
 
   // 파일 업로드 시, 전송
   const handleFileUpload = async () => {
-    const finalDataName = dataName || selectedFile.name;
+    const finalDataInfo = dataInfo || selectedFile.name;
 
     try {
       const formData = new FormData();
       formData.append('file', selectedFile);
-      formData.append('description', dataName);
+      formData.append('description', dataInfo);
 
       dispatch(updateAppState('response_waiting'));
 
@@ -51,7 +51,7 @@ function FileUploadToServer() {
           const newAnalyzedFileData = {
             analyzedFileData_name: selectedFile.name,
             analyzedFileData_size: selectedFile.size, // Size in bytes
-            userCustomName: finalDataName, // 사용자가 지정한 데이터 이름도 같이 저장한다.
+            userCustomName: finalDataInfo, // 사용자가 지정한 데이터 이름도 같이 저장한다.
           };
 
           // 분석 데이터를 리스트에 저장한다.
@@ -83,7 +83,7 @@ function FileUploadToServer() {
         <input
           className="border border-gray-300 dark:border-gray-700 dark:bg-gray-800 dark:text-white"
           type="text"
-          onChange={(e) => setDataName(e.target.value)}
+          onChange={(e) => setDataInfo(e.target.value)}
         ></input>
 
         <button

@@ -18,7 +18,6 @@ function App() {
   const [error, setError] = useState('');
   const [sidebarWidth, setSidebarWidth] = useState(300);
   const [showAlert, setShowAlert] = useState(false);
-  const isConnected = useSelector((state) => state.connected.isConnected);
   const currentState = useSelector((state) => state.appState.currentState);
 
   useEffect(() => {
