@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import PrintFileCards from './PrintFileCards';
 import DataSelect from '../Data/DataSelect';
 
-function Sidebar({ page, jsonData }) {
+function Sidebar({ page, jsonData, setSidebarWidth }) {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [width, setWidth] = useState(300);
 
@@ -32,6 +32,7 @@ function Sidebar({ page, jsonData }) {
         maxWidth
       );
       setWidth(newWidth);
+      setSidebarWidth(newWidth);
     };
 
     document.addEventListener('mousemove', doDrag);
@@ -41,9 +42,9 @@ function Sidebar({ page, jsonData }) {
   };
 
   return (
-    <div className="flex">
+    <div className="flex h-full">
       <aside
-        className="max-w-64 h-80vh backdrop-blur-xl bg-white/80 space-y-2 flex-shrink-0 drop-shadow-lg rounded-[12px]"
+        className="max-w-64 p-1 backdrop-blur-xl bg-white/80 space-y-2 flex-shrink-0 drop-shadow-lg rounded-[12px]"
         style={{ width: `${width}px` }}
       >
         <div>
