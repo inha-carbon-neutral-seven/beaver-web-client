@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-
 function PrintFileCards({ processAll = true, jsonData = [] }) {
   const analyzedFileDataList = useSelector(
     (state) => state.chatScreen.analyzedFileDataList
@@ -22,7 +21,7 @@ function PrintFileCards({ processAll = true, jsonData = [] }) {
           key={index}
           className={`max-w-sm p-6 border border-gray-200 rounded-lg shadow cursor-pointer mb-3 dark:bg-gray-800 dark:border-gray-700 ${
             clickedIndex === index ? 'bg-blue-500 text-white' : 'bg-white'
-          } break-words`}
+          } break-words flex flex-col `}
           onClick={() => handleCardClick(index)}
         >
           <p>파일명: {analyzedFileData?.analyzedFileData_name}</p>

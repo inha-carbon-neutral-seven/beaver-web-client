@@ -1,6 +1,7 @@
 import ServerStatusIndicator from './ServerStateIndicator';
 import Button from '@mui/material/Button';
 import beaver from '../../image/logo.jpg';
+import Loader from '../main/Loader';
 
 function Header({ param }) {
   const handleButtonClick = (p) => {
@@ -54,6 +55,7 @@ function Header({ param }) {
           데이터
         </Button>
       </div>
+
       <ServerStatusIndicator />
     </div>
   );

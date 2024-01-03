@@ -1,3 +1,4 @@
+import { Spinnericon } from '../../icons';
 function Loader({ currentState }) {
   const messages = [
     '파일을 전송 중입니다...',
@@ -7,32 +8,24 @@ function Loader({ currentState }) {
   ];
   return (
     <div className="flex items-center justify-center pt-5">
-      <div className="text-3xl text-center">
+      <div className="text-sm text-center">
         {currentState === 'response_waiting' && (
           <div className="flex items-center space-x-2">
-            <p className="text-3xl text-center">{messages[0]}</p>
-            <img
-              className="h-8 w-8"
-              src="https://icons8.com/preloaders/preloaders/1488/Iphone-spinner-2.gif"
-              alt=""
-            />
+            <p className="text-sm text-center">{messages[0]}</p>
+            <Spinnericon />
           </div>
         )}
         {currentState === 'analyzing' && (
           <div className="items-center space-y-10">
-            <p className="text-3xl text-center">{messages[1]}</p>
+            <p className="text-sm text-center">{messages[1]}</p>
             <div className="flex space-x-2">
-              <p className="text-3xl text-center">{messages[2]}</p>
-              <img
-                className="h-8 w-8"
-                src="https://icons8.com/preloaders/preloaders/1488/Iphone-spinner-2.gif"
-                alt=""
-              />
+              <p className="text-sm text-center">{messages[2]}</p>
+              <Spinnericon />
             </div>
           </div>
         )}
         {currentState === 'analyzed' && (
-          <p className="text-3xl text-center">{messages[3]}</p>
+          <p className="text-sm text-center">{messages[3]}</p>
         )}
       </div>
     </div>

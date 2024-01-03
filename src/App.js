@@ -6,6 +6,10 @@ import Header from './components/top-side/Header';
 import DashScreen from './components/Data/DashScreen';
 import DataToTable from './components/Data/DataToTable';
 import { ExampleData } from './components/Data/Chart/ChartExample';
+import { Bellicon } from './icons';
+import Loader from './components/main/Loader';
+import { useSelector } from 'react-redux';
+import { faL } from '@fortawesome/free-solid-svg-icons';
 
 function App() {
   const [showComponent, setShowComponent] = useState(0);
@@ -13,6 +17,9 @@ function App() {
   const [jsonData, setJsonData] = useState([]);
   const [error, setError] = useState('');
   const [sidebarWidth, setSidebarWidth] = useState(300);
+  const [showAlert, setShowAlert] = useState(false);
+  const isConnected = useSelector((state) => state.connected.isConnected);
+  const currentState = useSelector((state) => state.appState.currentState);
 
   useEffect(() => {
     if (!fileData) {
@@ -39,6 +46,32 @@ function App() {
     reader.readAsText(fileData);
   }, [fileData]);
 
+  useEffect(() => {
+    if (['response_waiting', 'analyzing', 'analyzed'].includes(currentState)) {
+      setShowAlert(true);
+    }
+    if (currentState === 'analyzed') {
+      const timer = setTimeout(() => {
+        setShowAlert(false);
+      }, 1000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [currentState]);
+
+  // 알림창 컴포넌트
+  const Alert = () => (
+    <div
+      className={`fixed top-0 left-1/2 transform -translate-x-1/2 bg-white shadow-lg p-4 rounded z-50 ${
+        showAlert ? 'block' : 'hidden'
+      }`}
+    >
+      <Bellicon />
+      <div className="right-0">
+        <Loader currentState={currentState} />
+      </div>
+    </div>
+  );
   const handleFileChange = (file) => {
     console.log('File selected:', file); // Log the selected file
     setFileData(file);
@@ -52,6 +85,7 @@ function App() {
   return (
     <div className="w-full h-screen bg-gradient-to-br from-beaver-3 to-beaver-lightbrown flex flex-col overflow-y-auto">
       <Header param={handlePage} />
+      {showAlert && <Alert />}
 
       <div className="flex flex-grow mt-20 mb-2 pt-1 pb-1 w-4/5 place-self-center">
         <div className="fixed-left h-full">

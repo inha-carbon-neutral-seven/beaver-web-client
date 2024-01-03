@@ -28,7 +28,7 @@ function FileUploadToServer() {
       dispatch(updateAppState('response_waiting'));
 
       // 서버로 FormData 전송, 응답 요청
-      const response = await fetch('http://165.246.21.213:10100/upload', {
+      const response = await fetch('http://localhost:10100/upload', {
         method: 'POST',
         body: formData,
       })
@@ -36,7 +36,7 @@ function FileUploadToServer() {
           console.log(res.body);
           // 응답을 받으면, 분석 요청
           dispatch(updateAppState('analyzing'));
-          return fetch('http://165.246.21.213:10100/embed');
+          return fetch('http://localhost:10100/embed');
         })
         .then((res) => {
           // 분석이 끝났다는 요청을 받는다.
@@ -69,7 +69,7 @@ function FileUploadToServer() {
     <div className="max-w-sm p-6 border border-gray-200 rounded-lg shadow cursor-pointer mb-3 dark:bg-gray-800 dark:border-gray-700 ">
       <p>파일명: {selectedFile.name}</p>
       <p>파일크기: {`${selectedFile.size}byte`}</p>
-      <p>데이터의 이름을 정해주세요.</p>
+      <p>데이터를 간단하게 설명해주세요.</p>
       <form
         onSubmit={(e) => {
           e.preventDefault();

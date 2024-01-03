@@ -32,11 +32,7 @@ function ChatScreen({ fileData, onFileChange }) {
   }, [aiAnswer]);
 
   return (
-    <div className="flex-grow flex flex-col bg-white dark:bg-gray-800 w-full h-full drop-shadow-lg overflow-auto rounded-[12px]">
-      {/* 파일 업로드 후(아직 서버로 전송은 안한 상황), 사용자지정 이름 input 입력받기 */}
-
-      {/* 파일 전송 관련 로딩 메시지 표시 */}
-      <Loader currentState={currentState} />
+    <div className="flex-grow flex flex-col bg-white dark:bg-gray-800 w-full h-full drop-shadow-lg overflow-auto max-h-[90vh] rounded-[12px]">
       <div className="mb-12 overflow-y-auto">
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
           {currentState === 'init' && (

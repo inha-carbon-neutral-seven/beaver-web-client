@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-
 import {
   faExpand,
   faDownload,
@@ -8,9 +7,10 @@ import {
   faHourglass2,
   faHourglass3,
   faCheck,
+  faSpinner,
 } from '@fortawesome/free-solid-svg-icons';
 
-import { faPaperPlane } from '@fortawesome/free-regular-svg-icons';
+import { faPaperPlane, faBell } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 export function Expandicon() {
   return <FontAwesomeIcon icon={faExpand} size="2xs" />;
@@ -52,4 +52,24 @@ export function Loadicon() {
 }
 export function Checkicon() {
   return <FontAwesomeIcon icon={faCheck} size="lg" />;
+}
+export function Bellicon() {
+  return (
+    <FontAwesomeIcon icon={faBell} size="lg" style={{ color: '#ffffff' }} />
+  );
+}
+export function Spinnericon() {
+  const [rotation, setRotation] = useState(0);
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setRotation((prevRotation) => prevRotation + 45); // 각도를 45도씩 증가시킵니다.
+    }, 100);
+
+    return () => clearInterval(intervalId);
+  }, []);
+  const spinnerStyle = {
+    transform: `rotate(${rotation}deg)`,
+  };
+  return <FontAwesomeIcon icon={faSpinner} size="sm" style={spinnerStyle} />;
 }
