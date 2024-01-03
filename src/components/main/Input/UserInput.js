@@ -37,7 +37,7 @@ function UserInput({ fileData, onFileChange }) {
       dispatch(setAIAnswer(""));
 
       try {
-        const response = await fetch("https://beaver7s.duckdns.org/generate", {
+        const response = await fetch("http://165.246.21.213:10100/generate", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
