@@ -18,7 +18,11 @@ function Download({ jsonData }) {
   };
 
   return (
-    <button className="cursor-pointer text-2xl select-none" title="다운로드" onClick={handleDownload}>
+    <button
+      className="cursor-pointer select-none"
+      title="다운로드"
+      onClick={handleDownload}
+    >
       <Downloadicon />
     </button>
   );

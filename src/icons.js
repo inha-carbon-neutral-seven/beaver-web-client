@@ -10,6 +10,7 @@ import {
   faSpinner,
   faExclamation,
   faChevronLeft,
+  faXmark,
 } from '@fortawesome/free-solid-svg-icons';
 
 import { faPaperPlane, faBell } from '@fortawesome/free-regular-svg-icons';
@@ -18,7 +19,7 @@ export function Expandicon() {
   return <FontAwesomeIcon icon={faExpand} size="2xs" />;
 }
 export function Downloadicon() {
-  return <FontAwesomeIcon icon={faDownload} size="2xs" />;
+  return <FontAwesomeIcon icon={faDownload} size="base" />;
 }
 export function Nexticon() {
   return <FontAwesomeIcon icon={faChevronRight} size="2xs" />;
@@ -73,4 +74,7 @@ export function Exclamicon() {
 }
 export function Lefticon() {
   return <FontAwesomeIcon icon={faChevronLeft} size="2xs" />;
+}
+export function Closeicon() {
+  return <FontAwesomeIcon icon={faXmark} size="xl" />;
 }

@@ -1,6 +1,4 @@
 import Download from '../Utility/Download';
-import Expand from '../Utility/Expand';
-import Next from '../Utility/Next';
 import React, { useState } from 'react';
 import PrintFileCards from '../left-side/PrintFileCards';
 import DataToTable from './DataToTable';
@@ -22,9 +20,6 @@ function DataSelect({ jsonData }) {
   return (
     <div className="pb-6 border-solid max-h-[85vh] border-gray-300">
       <div className="flex flex-col overflow-auto">
-        <div className="ml-auto space-x-2">
-          <Download jsonData={jsonData} />
-        </div>
         <PrintFileCards processAll={false} />
         <div>
           {columnOptions.map((column) => (

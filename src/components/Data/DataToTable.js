@@ -22,23 +22,23 @@ function DataToTable({ jsonData }) {
   }));
 
   return (
-    <div
-      className="table-container flex-grow flex flex-col bg-white dark:bg-gray-800 p-4 h-full drop-shadow-lg w-full rounded-[12px] mt-3"
-      style={{ height: 500, width: '100%' }}
-    >
-      <h2>Data Table</h2>
-      <DataGrid
-        rows={rows}
-        columns={columns}
-        pageSize={10}
-        rowsPerPageOptions={[5, 10]}
-        checkboxSelection
-        initialState={{
-          pagination: {
-            paginationModel: { page: 0, pageSize: 5 },
-          },
-        }}
-      />
+    <div className="flex-grow flex flex-col bg-white dark:bg-gray-800 w-full h-full drop-shadow-lg overflow-auto max-h-[90vh] ounded-[12px]">
+      <div className="mb-12 overflow-y-auto">
+        <div className="absolute top-0 transform">
+          <DataGrid
+            rows={rows}
+            columns={columns}
+            pageSize={10}
+            rowsPerPageOptions={[5, 10]}
+            checkboxSelection
+            initialState={{
+              pagination: {
+                paginationModel: { page: 0, pageSize: 5 },
+              },
+            }}
+          />
+        </div>
+      </div>
     </div>
   );
 }
