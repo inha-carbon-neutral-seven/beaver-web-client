@@ -34,6 +34,7 @@ function ChatScreen({ fileData, onFileChange }) {
   }, [aiAnswer]);
 
   return (
+
     <div className="flex-grow flex flex-col bg-white dark:bg-gray-800 p-4 h-full drop-shadow-lg overflow-auto w-full rounded-[12px] mt-3">
       {/* 파일 업로드 후(아직 서버로 전송은 안한 상황), 사용자지정 이름 input 입력받기 */}
       {/* 이후에 파일과 사용자 지정 이름을 같이 서버로 보낸다 */}
@@ -41,6 +42,17 @@ function ChatScreen({ fileData, onFileChange }) {
 
       {/* 파일 전송 관련 로딩 메시지 표시 */}
       <Loader currentState={currentState} />
+      <div className="mb-12 overflow-y-auto">
+        <div className="flex-grow flex flex-col justify-between">
+          {currentState === "init" && (
+            <div className="place-self-center">
+              <img
+                src={beaver}
+                className="h-40 w-40 rounded-full place-self-center"
+              />
+              <div className="text-center">How can I help you?</div>
+            </div>
+          )}
 
       <div className="flex-grow flex flex-col justify-between">
         {currentState === 'init' && (

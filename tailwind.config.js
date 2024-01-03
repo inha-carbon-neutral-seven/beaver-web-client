@@ -17,6 +17,9 @@ module.exports = {
         "beaver-2": "#E09582",
         "beaver-3": "#D3E3EF",
       },
+      backgroundImage: {
+        "beaver-bg": "url('/src/image/bg.png')",
+      },
     },
     borderRadius: {
       none: "0",
@@ -29,5 +32,15 @@ module.exports = {
       large: "12px",
     },
   },
-  plugins: [],
+  plugins: [
+    function ({ addUtilities }) {
+      const newUtilities = {
+        ".text-stroke-2": {
+          WebkitTextStrokeWidth: "0.4px",
+          WebkitTextStrokeColor: "gray",
+        },
+      };
+      addUtilities(newUtilities, ["responsive", "hover"]);
+    },
+  ],
 };
