@@ -48,26 +48,40 @@ const ServerStatusIndicator = () => {
       <div className="inline bg-white rounded-lg p-2">
         {isConnected === 'full-connected' && (
           <>
-            <FontAwesomeIcon icon={faCircle} style={{ color: 'green' }} />
-            <span style={{ marginLeft: '5px', color: 'green' }}>
-              SERVER CONNECTED :)
-            </span>
+            <div className="group relative inline-flex items-center overflow-hidden">
+              <FontAwesomeIcon
+                icon={faCircle}
+                className="text-green-600 ml-1"
+              />
+              <span className="transition-all duration-500 group-hover:max-w-xs max-w-0 overflow-hidden whitespace-nowrap ml-1 text-green-600 font-bold">
+                Connected :)
+              </span>
+            </div>
           </>
         )}
 
         {isConnected === 'half-connected' && (
           <>
-            <FontAwesomeIcon icon={faCircle} style={{ color: 'orange' }} />
-            <span style={{ marginLeft: '5px', color: 'orange' }}>
-              BEAVER IS GONE :(
-            </span>
+            <div className="group relative inline-flex items-center overflow-hidden">
+              <FontAwesomeIcon
+                icon={faCircle}
+                className="text-orange-600 ml-1"
+              />
+              <span className="transition-all duration-500 group-hover:max-w-xs max-w-0 overflow-hidden whitespace-nowrap ml-1 text-orange-600 font-bold">
+                Connected :)
+              </span>
+            </div>
           </>
         )}
 
         {isConnected === 'disconnected' && (
           <>
-            <FontAwesomeIcon icon={faCircle} style={{ color: 'red' }} />
-            <span style={{ marginLeft: '5px', color: 'red' }}>SERVER DEAD</span>
+            <div className="group relative inline-flex items-center overflow-hidden">
+              <FontAwesomeIcon icon={faCircle} className="text-red-600 ml-1" />{' '}
+              <span className="transition-all duration-500 group-hover:max-w-xs max-w-0 overflow-hidden whitespace-nowrap ml-1 text-red-600 font-bold">
+                SERVER DEAD
+              </span>
+            </div>
           </>
         )}
       </div>
