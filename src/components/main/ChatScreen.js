@@ -1,11 +1,11 @@
-import { useSelector, useDispatch } from "react-redux";
-import React, { useEffect } from "react";
-import Loader from "./Loader";
-import ChatLogs from "./ChatLogs";
-import UserInput from "./Input/UserInput";
-import FileUploadToServer from "./Input/FileUploadToServer";
-import { addToChatLog } from "../../reducers/chatScreenReducers";
-import beaver from "../../image/logo.jpg";
+import { useSelector, useDispatch } from 'react-redux';
+import React, { useEffect } from 'react';
+import Loader from './Loader';
+import ChatLogs from './ChatLogs';
+import UserInput from './Input/UserInput';
+import FileUploadToServer from './Input/FileUploadToServer';
+import { addToChatLog } from '../../reducers/chatScreenReducers';
+import beaver from '../../image/logo.jpg';
 
 function ChatScreen({ fileData, onFileChange }) {
   // App의 상태변수
@@ -22,19 +22,20 @@ function ChatScreen({ fileData, onFileChange }) {
   // 사용자 메시지를 chatlog에 추가
   useEffect(() => {
     if (sentMessage) {
-      dispatch(addToChatLog("user", sentMessage));
+      dispatch(addToChatLog('user', sentMessage));
     }
   }, [sentMessage]);
 
   // ai 메시지를 chatlog에 추가
   useEffect(() => {
     if (aiAnswer) {
-      dispatch(addToChatLog("ai", aiAnswer));
+      dispatch(addToChatLog('ai', aiAnswer));
     }
   }, [aiAnswer]);
 
   return (
-    <div className="flex-grow flex flex-col p-4 drop-shadow-lg w-full h-full max-h-[90vh] rounded-[12px] mt-3 backdrop-blur-xl bg-white/90">
+
+    <div className="flex-grow flex flex-col bg-white dark:bg-gray-800 p-4 h-full drop-shadow-lg overflow-auto w-full rounded-[12px] mt-3">
       {/* 파일 업로드 후(아직 서버로 전송은 안한 상황), 사용자지정 이름 input 입력받기 */}
       {/* 이후에 파일과 사용자 지정 이름을 같이 서버로 보낸다 */}
       {isConnected && <FileUploadToServer />}
@@ -53,9 +54,20 @@ function ChatScreen({ fileData, onFileChange }) {
             </div>
           )}
 
-          {/* 채팅 메시지 출력 */}
-          <ChatLogs />
-        </div>
+      <div className="flex-grow flex flex-col justify-between">
+        {currentState === 'init' && (
+          <div className="place-self-center">
+            <img
+              src={beaver}
+              className="h-40 w-40 rounded-full place-self-center"
+            />
+            <div>How can I help you?</div>
+          </div>
+        )}
+
+        {/* 채팅 메시지 출력 */}
+        <ChatLogs />
+
         {/* 사용자 메시지 input */}
         <UserInput fileData={fileData} onFileChange={onFileChange} />
       </div>

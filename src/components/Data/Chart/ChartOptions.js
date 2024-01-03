@@ -27,51 +27,139 @@ export function commonOptions(titleText) {
       colors: {
         enabled: true,
       },
+      zoom: {
+        limits: {
+          y: { min: 0, max: 100 },
+          y2: { min: -5, max: 5 },
+        },
+      },
     },
   };
 }
-export function BarChartOptions(titleText) {
+export function BarChartOptions(titleText, xColumn, yColumn) {
   const options = commonOptions(titleText);
   options.scales = {
     x: {
-      stacked: false,
+      display: true,
+      title: {
+        display: true,
+        text: xColumn,
+      },
     },
     y: {
-      stacked: false,
+      display: true,
+      title: {
+        display: true,
+        text: yColumn,
+      },
     },
   };
   return options;
 }
 
-export function HorizontalBarChartOptions(titleText) {
+export function HorizontalBarChartOptions(titleText, xColumn, yColumn) {
   const options = commonOptions(titleText);
   options.indexAxis = 'y';
-  return options;
-}
-
-export function StackedBarChartOptions(titleText) {
-  const options = commonOptions(titleText);
   options.scales = {
     x: {
-      stacked: true,
+      display: true,
+      title: {
+        display: true,
+        text: xColumn,
+      },
     },
     y: {
-      stacked: true,
+      display: true,
+      title: {
+        display: true,
+        text: yColumn,
+      },
     },
   };
   return options;
 }
 
-export function VerticalBarChartOptions(titleText) {
+export function StackedBarChartOptions(titleText, xColumn, yColumn) {
   const options = commonOptions(titleText);
+  options.scales = {
+    x: {
+      display: true,
+      stacked: true,
+      title: {
+        display: true,
+        text: xColumn,
+      },
+    },
+    y: {
+      display: true,
+      stacked: true,
+      title: {
+        display: true,
+        text: yColumn,
+      },
+    },
+  };
   return options;
 }
-export function ComboBarChartOptions(titleText) {
+
+export function VerticalBarChartOptions(titleText, xColumn, yColumn) {
   const options = commonOptions(titleText);
+  options.scales = {
+    x: {
+      display: true,
+      title: {
+        display: true,
+        text: xColumn,
+      },
+    },
+    y: {
+      display: true,
+      title: {
+        display: true,
+        text: yColumn,
+      },
+    },
+  };
   return options;
 }
-export function LineChartOptions(titleText) {
+export function ComboBarChartOptions(titleText, xColumn, yColumn) {
   const options = commonOptions(titleText);
+  options.scales = {
+    x: {
+      display: true,
+      title: {
+        display: true,
+        text: xColumn,
+      },
+    },
+    y: {
+      display: true,
+      title: {
+        display: true,
+        text: yColumn,
+      },
+    },
+  };
+  return options;
+}
+export function LineChartOptions(titleText, xColumn, yColumn) {
+  const options = commonOptions(titleText);
+  options.scales = {
+    x: {
+      display: true,
+      title: {
+        display: true,
+        text: xColumn,
+      },
+    },
+    y: {
+      display: true,
+      title: {
+        display: true,
+        text: yColumn,
+      },
+    },
+  };
   options.elements = {
     line: {
       tension: 0.4, // Smoothening line
@@ -82,57 +170,165 @@ export function LineChartOptions(titleText) {
   };
   return options;
 }
-export function MultiAxisLineChartOptions(titleText) {
-  const options = commonOptions(titleText);
-  return options;
-}
-export function PointStyleLineChartOptions(titleText) {
-  const options = commonOptions(titleText);
-  return options;
-}
-export function StackedBarLineChartOptions(titleText) {
-  const options = commonOptions(titleText);
-  return options;
-}
-export function BubbleChartOptions(titleText) {
-  const options = commonOptions(titleText);
-  return options;
-}
-
-export function DoughnutChartOptions(titleText) {
-  const options = commonOptions(titleText);
-  options.cutout = '50%';
-  return options;
-}
-
-export function PieChartOptions(titleText) {
-  const options = commonOptions(titleText);
-  options.emptyDoughnut = {
-    color: 'rgba(255, 128, 0, 0.5)',
-    width: 2,
-    radiusDecrease: 20,
-  };
-  return options;
-}
-export function PolarAreaChartOptions(titleText) {
-  const options = commonOptions(titleText);
-  return options;
-}
-export function PolarAreaCenteredChartOptions(titleText) {
-  const options = commonOptions(titleText);
-  return options;
-}
-
-export function ScatterChartOptions(titleText) {
+export function MultiAxisLineChartOptions(titleText, xColumn, yColumn) {
   const options = commonOptions(titleText);
   options.scales = {
     x: {
-      type: 'linear',
-      position: 'bottom',
+      display: true,
+      title: {
+        display: true,
+        text: xColumn,
+      },
     },
     y: {
-      type: 'linear',
+      display: true,
+      title: {
+        display: true,
+        text: yColumn,
+      },
     },
   };
+  return options;
+}
+export function PointStyleLineChartOptions(titleText, xColumn, yColumn) {
+  const options = commonOptions(titleText);
+  options.scales = {
+    x: {
+      display: true,
+      title: {
+        display: true,
+        text: xColumn,
+      },
+    },
+    y: {
+      display: true,
+      title: {
+        display: true,
+        text: yColumn,
+      },
+    },
+  };
+  return options;
+}
+export function StackedBarLineChartOptions(titleText, xColumn, yColumn) {
+  const options = commonOptions(titleText);
+  options.scales = {
+    x: {
+      display: true,
+      title: {
+        display: true,
+        text: xColumn,
+      },
+    },
+    y: {
+      display: true,
+      title: {
+        display: true,
+        text: yColumn,
+      },
+    },
+  };
+  return options;
+}
+
+export function DoughnutChartOptions(titleText, xColumn, yColumn) {
+  const options = commonOptions(titleText);
+  options.cutout = '50%';
+  options.scales = {
+    x: {
+      display: true,
+      title: {
+        display: true,
+        text: xColumn,
+      },
+    },
+    y: {
+      display: true,
+      title: {
+        display: true,
+        text: yColumn,
+      },
+    },
+  };
+  options.plugins.legend.position = 'right';
+  return options;
+}
+
+export function PieChartOptions(titleText, xColumn) {
+  const options = commonOptions(titleText);
+  options.scales = {
+    x: {
+      display: true,
+      title: {
+        display: true,
+        text: xColumn,
+      },
+    },
+  };
+  options.plugins.legend.position = 'right';
+  return options;
+}
+export function PolarAreaChartOptions(titleText, xColumn, yColumn) {
+  const options = commonOptions(titleText);
+  options.scales = {
+    x: {
+      display: true,
+      title: {
+        display: true,
+        text: xColumn,
+      },
+    },
+    y: {
+      display: true,
+      title: {
+        display: true,
+        text: yColumn,
+      },
+    },
+  };
+  options.plugins.legend.position = 'right';
+  return options;
+}
+export function PolarAreaCenteredChartOptions(titleText, xColumn, yColumn) {
+  const options = commonOptions(titleText);
+  options.scales = {
+    x: {
+      display: true,
+      title: {
+        display: true,
+        text: xColumn,
+      },
+    },
+    y: {
+      display: true,
+      title: {
+        display: true,
+        text: yColumn,
+      },
+    },
+  };
+  options.plugins.legend.position = 'right';
+  return options;
+}
+
+export function ScatterChartOptions(titleText, xColumn, yColumn) {
+  const options = commonOptions(titleText);
+  options.scales = {
+    x: {
+      display: true,
+      title: {
+        display: true,
+        text: xColumn,
+      },
+    },
+    y: {
+      display: true,
+      title: {
+        display: true,
+        text: yColumn,
+      },
+    },
+  };
+
   return options;
 }

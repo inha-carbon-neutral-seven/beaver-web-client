@@ -812,83 +812,85 @@ export const ExampleData = [
   },
 ];
 
-const sampleData1 = LineChartData(
-  ExampleData,
-  'Date',
-  'Sale (Dollars)',
-  0,
-  colorArray
-);
-const sampleData2 = BarChartData(
-  ExampleData,
-  'Category Name',
-  'Sale (Dollars)',
-  1,
-  colorArray
-);
-const sampleData3 = BarChartData(
-  ExampleData,
-  'Item Description',
-  'Sale (Dollars)',
-  2,
-  colorArray
-);
-const sampleData4 = DoughnutChartData(
-  ExampleData,
-  'Item Description',
-  10,
-  colorArray
-);
-const sampleData5 = PolarAreaChartData(
-  ExampleData,
-  'Category Name',
-  'Bottles Sold',
-  10,
-  colorArray
-);
-const sampleData6 = PieChartData(ExampleData, 'Category Name', 10, colorArray);
-const sampleData7 = ScatterChartData(
-  ExampleData,
-  'Bottles Sold',
-  'Sale (Dollars)',
-  4,
-  colorArray
-);
 const chartDataArray = [
   {
     type: 'Line',
-    data: sampleData1,
-    options: { title: 'Sample Data1' },
+    data: LineChartData(ExampleData, 'Date', 'Sale (Dollars)', 0, colorArray),
+    options: {
+      title: 'Sample Data1',
+      yColumn: 'Date',
+      xColumn: 'Sale (Dollars)',
+    },
   },
   {
     type: 'Bar',
-    data: sampleData2,
-    options: { title: 'Sample Data2' },
+    data: BarChartData(
+      ExampleData,
+      'Category Name',
+      'Sale (Dollars)',
+      1,
+      colorArray
+    ),
+    options: {
+      title: 'Sample Data2',
+      yColumn: 'Category Name',
+      xColumn: 'Sale (Dollars)',
+    },
   },
   {
     type: 'HorizontalBar',
-    data: sampleData3,
-    options: { title: 'Sample Data3' },
+    data: BarChartData(
+      ExampleData,
+      'Item Description',
+      'Sale (Dollars)',
+      2,
+      colorArray
+    ),
+    options: {
+      title: 'Sample Data3',
+      yColumn: 'Item Description',
+      xColumn: 'Sale (Dollars)',
+    },
   },
   {
     type: 'Doughnut',
-    data: sampleData4,
-    options: { title: 'Sample Data4' },
+    data: DoughnutChartData(ExampleData, 'Item Description', 10, colorArray),
+    options: { title: 'Sample Data4', yColumn: 'Item Description' },
   },
   {
     type: 'PolarArea',
-    data: sampleData5,
-    options: { title: 'Sample Data5' },
+    data: PolarAreaChartData(
+      ExampleData,
+      'Category Name',
+      'Bottles Sold',
+      10,
+      colorArray
+    ),
+    options: {
+      title: 'Sample Data5',
+      yColumn: 'Category Name',
+      xColumn: 'Bottles Sold',
+    },
   },
   {
     type: 'Pie',
-    data: sampleData6,
-    options: { title: 'Sample Data6' },
+    data: PieChartData(ExampleData, 'Category Name', 10, colorArray),
+    options: { title: 'Sample Data6', yColumn: 'Category Name' },
   },
   {
     type: 'Scatter',
-    data: sampleData7,
-    options: { title: 'Sample Data7' },
+    data: ScatterChartData(
+      ExampleData,
+      'Bottles Sold',
+      'Sale (Dollars)',
+      4,
+      colorArray
+    ),
+    options: {
+      title: 'Sample Data7',
+      yColumn: 'Bottles Sold',
+      xColumn: 'Sale (Dollars)',
+    },
   },
 ];
 
