@@ -89,6 +89,12 @@ function UserInput({ fileData, onFileChange }) {
           <Button type="submit" variant="outline" className="ml-2">
             전송
           </Button>
+          {/* <button
+            type="submit"
+            className="bg-transparent text-black font-semibold hover:text-white hover:bg-blue-500 border border-black hover:border-transparent rounded-full ml-2"
+          >
+            전송
+          </button> */}
         </form>
       </div>
     </div>
