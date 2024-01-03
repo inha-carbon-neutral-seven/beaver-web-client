@@ -1,16 +1,22 @@
 import React from 'react';
+
 import {
-  faChevronRight,
-  faDownload,
   faExpand,
+  faDownload,
+  faChevronRight,
 } from '@fortawesome/free-solid-svg-icons';
+
+import { faPaperPlane } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 export function Expandicon() {
-  return <FontAwesomeIcon icon={faExpand} />;
+  return <FontAwesomeIcon icon={faExpand} size="2xs" />;
 }
 export function Downloadicon() {
-  return <FontAwesomeIcon icon={faDownload} />;
+  return <FontAwesomeIcon icon={faDownload} size="2xs" />;
 }
 export function Nexticon() {
-  return <FontAwesomeIcon icon={faChevronRight} />;
+  return <FontAwesomeIcon icon={faChevronRight} size="2xs" />;
+}
+export function Sendicon() {
+  return <FontAwesomeIcon icon={faPaperPlane} size="lg" />;
 }
