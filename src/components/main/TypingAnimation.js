@@ -3,20 +3,56 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
 // Custom CodeBlock 컴포넌트
-const CodeBlock = ({ children }) => {
+const CodeBlock = ({ inline, className, children }) => {
+  const match = /language-(\w+)/.exec(className || '');
+  const style = !inline && match ? {
+    border: "0.5px solid #ddd",
+    padding: "2px",
+    borderRadius: "5px",
+    background: "#333", // 어두운 배경색으로 변경
+    color: "#fff", // 글자색을 흰색으로 변경
+    overflowX: "scroll",
+  } : {
+    border: "0.5px solid #ddd",
+    padding: "2px",
+    borderRadius: "5px",
+    background: "#333", // 어두운 배경색으로 변경
+    color: "#fff", // 글자색을 흰색으로 변경
+    overflowX: "scroll",
+    marginBottom: "-4px",
+    display: "inline-block",
+  };
+
   return (
-    <div
-      style={{
-        border: "1px solid #ddd",
-        padding: "10px",
-        borderRadius: "5px",
-        background: "#333", // 어두운 배경색으로 변경
-        color: "#fff", // 글자색을 흰색으로 변경
-      }}
+    <div 
+    style={style}
     >
       <pre>
         <code>{children}</code>
       </pre>
+    </div>
+  );
+};
+const TableBlock = ({ children }) => {
+
+  /**
+   * TODO: 테이블 블록을 위한 마크다운 만들기 (타 소스 적극 활용 가능)
+   */ 
+  const style = {
+    border: "0.5px solid #ddd",
+    padding: "2px",
+    borderRadius: "5px",
+    background: "#333", // 어두운 배경색으로 변경
+    color: "#fff", // 글자색을 흰색으로 변경
+    overflowX: "scroll",
+  };
+
+  return (
+    <div 
+    style={style}
+    >
+      {children}
+      
     </div>
   );
 };
@@ -47,7 +83,7 @@ function TypingAnimation({ text }) {
 
   return (
     <div className="overflow-x-scroll">
-      <ReactMarkdown components={{ code: CodeBlock }} remarkPlugins={[remarkGfm]}>
+      <ReactMarkdown components={{ code: CodeBlock, table: TableBlock }} remarkPlugins={[remarkGfm]}>
         {visibleText}
       </ReactMarkdown>
     </div>
