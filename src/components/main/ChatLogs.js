@@ -1,5 +1,5 @@
-import { useSelector } from 'react-redux';
-import TypingAnimation from './TypingAnimation';
+import { useSelector } from "react-redux";
+import TypingAnimation from "./TypingAnimation";
 
 // 채팅 log 컴포넌트
 function ChatLogs() {
@@ -15,9 +15,9 @@ function ChatLogs() {
           <li
             key={index}
             className={`p-3 m-5 rounded-md max-w-2/3 max-h-200 overflow-hidden ${
-              message.user === 'user'
-                ? 'bg-blue-200 ml-auto mr-0'
-                : 'bg-gray-200 ml-0'
+              message.user === "user"
+                ? "bg-blue-200 ml-auto mr-0"
+                : "bg-gray-200 ml-0"
             }`}
           >
             {<TypingAnimation text={message.message} />}
@@ -25,7 +25,7 @@ function ChatLogs() {
         ))}
         {loading && (
           <li className="p-3 m-5 rounded-md max-w-2/3 overflow-hidden bg-gray-200 ml-0">
-            {<TypingAnimation text={'메시지를 생성 중입니다...'} />}
+            {<TypingAnimation text={"메시지를 생성 중입니다..."} />}
           </li>
         )}
       </ul>
