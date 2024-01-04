@@ -46,9 +46,11 @@ function TypingAnimation({ text }) {
   }, [text]);
 
   return (
-    <ReactMarkdown components={{ code: CodeBlock }} remarkPlugins={[remarkGfm]}>
-      {visibleText}
-    </ReactMarkdown>
+    <div className="overflow-x-scroll">
+      <ReactMarkdown components={{ code: CodeBlock }} remarkPlugins={[remarkGfm]}>
+        {visibleText}
+      </ReactMarkdown>
+    </div>
   );
 }
 

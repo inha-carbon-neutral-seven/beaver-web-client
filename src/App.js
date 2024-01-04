@@ -95,7 +95,7 @@ function App() {
           />
         </div>
 
-        <div className="flex-grow">
+        <div className="flex-grow" style={{ maxWidth: '73%' }}>
           <div className="w-full h-full pl-0 space y-2 rounded-[12px]">
             {showComponent === 0 && (
               <ChatScreen fileData={fileData} onFileChange={handleFileChange} />
